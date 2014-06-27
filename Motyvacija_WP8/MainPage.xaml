@@ -7,7 +7,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,149 +15,201 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-
-        <!-- LOCALIZATION NOTE:
-            To localize the displayed strings copy their values to appropriately named
-            keys in the app's neutral language resource file (AppResources.resx) then
-            replace the hard-coded text value between the attributes' quotation marks
-            with the binding clause whose path points to that string name.
-
-            For example:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            This binding points to the template's string resource named "ApplicationTitle".
-
-            Adding supported languages in the Project Properties tab will create a
-            new resx file per language that can carry the translated values of your
-            UI strings. The binding in these examples will cause the value of the
-            attributes to be drawn from the .resx file that matches the
-            CurrentUICulture of the app at run time.
-         -->
-
         <!--Pivot Control-->
-        <phone:Pivot Title="Goals, Rezults, Salary">
+        <phone:Pivot x:Name="PIVOT" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" SelectionChanged="PIVOT_SelectionChanged">
             <!--Pivot item one-->
-            <phone:PivotItem Header="Employees">
-                <!--Double line list with text wrapping-->
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                    <phone:LongListSelector.ItemTemplate>
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.Employees, Source={StaticResource LocalizedStrings}}">
+                <ListBox x:Name="Employees" Margin="0,0,-12,0" ItemsSource="{Binding EmployeeClass}" SelectionChanged="Employees_SelectionChanged">
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <CheckBox Grid.Column="0" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="30"/>
-                                            <RowDefinition Height="30"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock x:Name="BA"   Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0"/>
-                                        <TextBlock x:Name="ROD"  Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
-                                        <TextBlock x:Name="UZD"  Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
-                                        <TextBlock x:Name="Viso" Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
+                            <StackPanel Tag="{Binding index}" ManipulationStarted="StackPanel_ManipulationStarted" ManipulationDelta="StackPanel_ManipulationDelta" ManipulationCompleted="StackPanel_ManipulationCompleted">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Grid.Column="0" VerticalAlignment="Center" Tag="{Binding index}" IsChecked="{Binding IsChecked}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock x:Name="VAR" Text="{Binding NameLine}" TextWrapping="Wrap" FontSize="50"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"/>
+                                                <RowDefinition Height="30"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock x:Name="BA"   Text="{Binding Path=LocalizedResources.BA, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0"/>
+                                            <TextBlock x:Name="ROD"  Text="{Binding Path=LocalizedResources.ROD, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
+                                            <TextBlock x:Name="UZD"  Text="{Binding Path=LocalizedResources.UZD, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
+                                            <TextBlock x:Name="Viso" Text="{Binding Path=LocalizedResources.VISO, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3"/>
+                                            <TextBlock x:Name="BA1" Text="{Binding BALine}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
+                                            <TextBlock x:Name="ROD1" Text="{Binding RODLine}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
+                                            <TextBlock x:Name="UZD1" Text="{Binding UZDLine}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
+                                            <TextBlock x:Name="Viso1" Text="{Binding VisoLine}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
                         </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem Header="Indicators">
+            <phone:PivotItem  Header="{Binding Path=LocalizedResources.Indicators, Source={StaticResource LocalizedStrings}}">
                 <!--Double line list no text wrapping-->
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                    <phone:LongListSelector.ItemTemplate>
+                <ListBox x:Name="Indicators" Margin="0,0,-12,0" ItemsSource="{Binding IndicatorsClass}" SelectionChanged="Indicators_SelectionChanged">
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <CheckBox Grid.Column="0" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="30"/>
-                                            <RowDefinition Height="30"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
+                            <StackPanel Tag="{Binding index}" ManipulationStarted="StackPanel_ManipulationStarted_1" ManipulationDelta="StackPanel_ManipulationDelta_1" ManipulationCompleted="StackPanel_ManipulationCompleted_1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Grid.Column="0" VerticalAlignment="Center" Tag="{Binding index}" IsChecked="{Binding IsChecked}" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1"/>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock x:Name="INDPAV" Text="{Binding INDPAVLine}" TextWrapping="Wrap" FontSize="50"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"/>
+                                                <RowDefinition Height="30"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock x:Name="BR" Text="{Binding Path=LocalizedResources.BR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0"/>
+                                            <TextBlock x:Name="FR" Text="{Binding Path=LocalizedResources.FR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
+                                            <TextBlock x:Name="TR" Text="{Binding Path=LocalizedResources.TR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
+                                            <TextBlock x:Name="MKD" Text="{Binding Path=LocalizedResources.MKD, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3"/>
+                                            <TextBlock x:Name="BR1" Text="{Binding BRLine}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
+                                            <TextBlock x:Name="FR1" Text="{Binding FRLine}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
+                                            <TextBlock x:Name="TR1" Text="{Binding TRLine}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
+                                            <TextBlock x:Name="MKD1" Text="{Binding MKDLine}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
                         </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </phone:PivotItem>
 
             <!--Pivot item three-->
-            <phone:PivotItem Header="Tasks">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.Tasks, Source={StaticResource LocalizedStrings}}">
                 <!--Double line list no text wrapping-->
-                <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                    <phone:LongListSelector.ItemTemplate>
+                <ListBox x:Name="Tasks" Margin="0,0,-12,0" ItemsSource="{Binding TasksClass}" FontSize="50" SelectionChanged="Tasks_SelectionChanged">
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <CheckBox Grid.Column="0" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
-                            </Grid>
+                            <StackPanel Tag="{Binding index}" ManipulationStarted="StackPanel_ManipulationStarted_2" ManipulationDelta="StackPanel_ManipulationDelta_2" ManipulationCompleted="StackPanel_ManipulationCompleted_2">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Grid.Column="0" VerticalAlignment="Center" Tag="{Binding index}" IsChecked="{Binding IsChecked}" Checked="CheckBox_Checked_2" Unchecked="CheckBox_Unchecked_2"/>
+                                    <StackPanel Grid.Column="1" >
+                                        <TextBlock x:Name="UZDPAV" Text="{Binding UZDPAVLine}" TextWrapping="NoWrap" Margin="12,0,0,0" FontSize="40"/>
+                                        <TextBlock x:Name="IVERT" Text="{Binding IVERTLine}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
                         </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </phone:PivotItem>
         </phone:Pivot>
 
-        
-        <!--Uncomment to see an alignment grid to help ensure your controls are
-            aligned on common boundaries.  The image has a top margin of -32px to
-            account for the System Tray. Set this to 0 (or remove the margin altogether)
-            if the System Tray is hidden.
-
-            Before shipping remove this XAML and the image itself.-->
-        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" IsHitTestVisible="False" />-->
+        <StackPanel x:Name="MeniuBar" HorizontalAlignment="Left" Width="236" Margin="84,386,0,0" Background="Black" Visibility="Collapsed">
+            <Button x:Name="Archive" Content="{Binding Path=LocalizedResources.Archive, Source={StaticResource LocalizedStrings}}" Click="Archyvas_Click"/>
+            <Button x:Name="About" Content="{Binding Path=LocalizedResources.About, Source={StaticResource LocalizedStrings}}" Click="About_Click"/>
+            <Button x:Name="Help" Content="{Binding Path=LocalizedResources.Help, Source={StaticResource LocalizedStrings}}" Click="Help_Click"/>
+            <Button x:Name="Language" Content="{Binding Path=LocalizedResources.Language, Source={StaticResource LocalizedStrings}}" Click="Language_Click"/>
+        </StackPanel>
+        <StackPanel x:Name="LanguageBar" Margin="102,414,98,0" Background="Black" Visibility="Collapsed">
+            <Button x:Name="LT" Content="Lietuviškai" Click="LT_Click"/>
+            <Button x:Name="EN" Content="English" Click="EN_Click"/>
+            <Button x:Name="RU" Content="Pусский" Click="RU_Click"/>
+            <Button x:Name="LanguageBarBack" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="LanguageBarBack_Click"/>
+        </StackPanel>
+        <StackPanel x:Name="AddBarEmployee" Margin="23,414,10,0" Background="Black" Visibility="Collapsed">
+            <TextBlock Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="NameBox"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.BA, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="BABox" InputScope="Number"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="CreateNewEmployee" Grid.Column="0" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployee_Click" />
+                <Button x:Name="CreateNewEmployeeBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel x:Name="AddBarIndicator" Margin="23,138,10,0" Background="Black" Visibility="Collapsed">
+            <TextBlock Text="{Binding Path=LocalizedResources.Pav, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="PavBoxIND"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.BR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="BRBox" InputScope="Number"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.FR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="FRBox" InputScope="Number"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.TR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="TRBox" InputScope="Number"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.MKD, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="MKDBox" InputScope="Number"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="CreateNewIndicator" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewIndicator_Click"/>
+                <Button x:Name="CreateNewIndicatorBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel x:Name="AddBarTask" Margin="23,328,10,0" Background="Black" Visibility="Collapsed">
+            <TextBlock Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="PavBoxTSK"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.MaxIV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="MAXIVBox" InputScope="Number"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.IV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="IVBox" InputScope="Number"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="CreateNewTask" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewTask_Click"/>
+                <Button x:Name="CreateNewTaskBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
+            </Grid>
+        </StackPanel>
+        <Button x:Name="Edit" Margin="0,624,234,0" Content="{Binding Path=LocalizedResources.EDIT, Source={StaticResource LocalizedStrings}}" Click="Edit_Click" Background="Black" Visibility="Collapsed"/>
+        <StackPanel x:Name="MAxKDP" Margin="0,414,0,0" Background="Black" Visibility="Collapsed">
+            <TextBlock Text="{Binding Path=LocalizedResources.MAXKDP, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="MAXKDPBox" InputScope="Number"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="MAXKDPBoxOk" Grid.Column="0" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="MAXKDPBoxOk_Click"/>
+                <Button x:Name="MAXKDPBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Resources/add.png" Text="Add"/>
-            <shell:ApplicationBarIconButton IconUri="/Resources/feature.settings.png" Text="Meniu"/>
-            <shell:ApplicationBarIconButton IconUri="/Resources/save.png" Text="Save"/>
-            <shell:ApplicationBarIconButton IconUri="/Resources/check.png" Text="Calculate"/>
+            <shell:ApplicationBarIconButton x:Name="Add"       IconUri="/Resources/add.png"              Text="Test"       Click="ApplicationBarIconButton_Click_2"/>
+            <shell:ApplicationBarIconButton x:Name="Meniu"     IconUri="/Resources/feature.settings.png" Text="Test"      Click="ApplicationBarIconButton_Click"/>
+            <shell:ApplicationBarIconButton x:Name="Save"      IconUri="/Resources/save.png"             Text="Test"      Click="ApplicationBarIconButton_Click_1"/>
+            <shell:ApplicationBarIconButton x:Name="Calculate" IconUri="/Resources/check.png"            Text="Test"    Click="ApplicationBarIconButton_Click_3"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

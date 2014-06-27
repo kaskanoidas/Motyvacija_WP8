@@ -131,4 +131,85 @@
   <data name="SampleProperty" xml:space="preserve">
     <value>Sample Runtime Property Value</value>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>Apie</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Dėti</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>Archyvas</value>
+  </data>
+  <data name="BA" xml:space="preserve">
+    <value>Bazinis atlyginimas</value>
+  </data>
+  <data name="BR" xml:space="preserve">
+    <value>Bazinė reikšmė</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Skaičiuoti</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Darbuotojai</value>
+  </data>
+  <data name="FR" xml:space="preserve">
+    <value>Faktinė reikšmė</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Pagalba</value>
+  </data>
+  <data name="Indicators" xml:space="preserve">
+    <value>Rodikliai</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Pasirinkti kalbą</value>
+  </data>
+  <data name="LanguageBarBack" xml:space="preserve">
+    <value>Atgal</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Meniu</value>
+  </data>
+  <data name="MKD" xml:space="preserve">
+    <value>Maksimali kintama dalis</value>
+  </data>
+  <data name="ROD" xml:space="preserve">
+    <value>Rodikliai</value>
+  </data>
+  <data name="SaveTA" xml:space="preserve">
+    <value>Saugoti</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Užduotys</value>
+  </data>
+  <data name="TR" xml:space="preserve">
+    <value>Tikslinė reikšmė</value>
+  </data>
+  <data name="UZD" xml:space="preserve">
+    <value>Užduotys</value>
+  </data>
+  <data name="VISO" xml:space="preserve">
+    <value>Viso</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Gerai</value>
+  </data>
+  <data name="EDIT" xml:space="preserve">
+    <value>Redaguoti</value>
+  </data>
+  <data name="EmployeeName" xml:space="preserve">
+    <value>Vardas</value>
+  </data>
+  <data name="IV" xml:space="preserve">
+    <value>Įvertinimas</value>
+  </data>
+  <data name="MaxIV" xml:space="preserve">
+    <value>Maks. įvertinimas</value>
+  </data>
+  <data name="Pav" xml:space="preserve">
+    <value>Pavadinimas</value>
+  </data>
+  <data name="MAXKDP" xml:space="preserve">
+    <value>Maksimali kintama dalis pagal užduotis</value>
+  </data>
 </root>

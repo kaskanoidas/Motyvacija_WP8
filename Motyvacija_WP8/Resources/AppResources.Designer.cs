@@ -61,6 +61,15 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] add {
@@ -71,11 +80,56 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Goals, Rezults, Salary&quot;.
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string AddNew {
+            get {
+                return ResourceManager.GetString("AddNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goals, Rezults, Salary.
         /// </summary>
         public static string ApplicationTitle {
             get {
                 return ResourceManager.GetString("ApplicationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive.
+        /// </summary>
+        public static string Archive {
+            get {
+                return ResourceManager.GetString("Archive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic Salary.
+        /// </summary>
+        public static string BA {
+            get {
+                return ResourceManager.GetString("BA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Baseline value.
+        /// </summary>
+        public static string BR {
+            get {
+                return ResourceManager.GetString("BR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculate.
+        /// </summary>
+        public static string Calculate {
+            get {
+                return ResourceManager.GetString("Calculate", resourceCulture);
             }
         }
         
@@ -90,12 +144,147 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Done {
+            get {
+                return ResourceManager.GetString("Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string EDIT {
+            get {
+                return ResourceManager.GetString("EDIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string EmployeeName {
+            get {
+                return ResourceManager.GetString("EmployeeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees.
+        /// </summary>
+        public static string Employees {
+            get {
+                return ResourceManager.GetString("Employees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] feature_settings {
             get {
                 object obj = ResourceManager.GetObject("feature_settings", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual outcome.
+        /// </summary>
+        public static string FR {
+            get {
+                return ResourceManager.GetString("FR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indicators.
+        /// </summary>
+        public static string Indicators {
+            get {
+                return ResourceManager.GetString("Indicators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evaluation.
+        /// </summary>
+        public static string IV {
+            get {
+                return ResourceManager.GetString("IV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string LanguageBarBack {
+            get {
+                return ResourceManager.GetString("LanguageBarBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max evaluation.
+        /// </summary>
+        public static string MaxIV {
+            get {
+                return ResourceManager.GetString("MaxIV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum task-related variable part.
+        /// </summary>
+        public static string MAXKDP {
+            get {
+                return ResourceManager.GetString("MAXKDP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menu.
+        /// </summary>
+        public static string Menu {
+            get {
+                return ResourceManager.GetString("Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum variable part.
+        /// </summary>
+        public static string MKD {
+            get {
+                return ResourceManager.GetString("MKD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Pav {
+            get {
+                return ResourceManager.GetString("Pav", resourceCulture);
             }
         }
         
@@ -118,6 +307,15 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indicators.
+        /// </summary>
+        public static string ROD {
+            get {
+                return ResourceManager.GetString("ROD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sample Runtime Property Value.
         /// </summary>
         public static string SampleProperty {
@@ -133,6 +331,51 @@ namespace Motyvacija_WP8.Resources {
             get {
                 object obj = ResourceManager.GetObject("save", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SaveTA {
+            get {
+                return ResourceManager.GetString("SaveTA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tasks.
+        /// </summary>
+        public static string Tasks {
+            get {
+                return ResourceManager.GetString("Tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target value.
+        /// </summary>
+        public static string TR {
+            get {
+                return ResourceManager.GetString("TR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tasks.
+        /// </summary>
+        public static string UZD {
+            get {
+                return ResourceManager.GetString("UZD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sum.
+        /// </summary>
+        public static string VISO {
+            get {
+                return ResourceManager.GetString("VISO", resourceCulture);
             }
         }
     }

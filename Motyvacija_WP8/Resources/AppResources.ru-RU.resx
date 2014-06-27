@@ -131,4 +131,85 @@
   <data name="SampleProperty" xml:space="preserve">
     <value>Sample Runtime Property Value</value>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Добавлять</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>Архив</value>
+  </data>
+  <data name="BA" xml:space="preserve">
+    <value>Баз. зарплата</value>
+  </data>
+  <data name="BR" xml:space="preserve">
+    <value>Базовое значение</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Cчитать</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Cотрудники</value>
+  </data>
+  <data name="FR" xml:space="preserve">
+    <value>Фактический результат</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="Indicators" xml:space="preserve">
+    <value>Показатели</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Выберите язык</value>
+  </data>
+  <data name="LanguageBarBack" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Mеню</value>
+  </data>
+  <data name="MKD" xml:space="preserve">
+    <value>Максимальная переменная часть</value>
+  </data>
+  <data name="ROD" xml:space="preserve">
+    <value>Показатели</value>
+  </data>
+  <data name="SaveTA" xml:space="preserve">
+    <value>Экономить</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Задании</value>
+  </data>
+  <data name="TR" xml:space="preserve">
+    <value>Целевое значение</value>
+  </data>
+  <data name="UZD" xml:space="preserve">
+    <value>Задании</value>
+  </data>
+  <data name="VISO" xml:space="preserve">
+    <value>Количество</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Ладно</value>
+  </data>
+  <data name="EDIT" xml:space="preserve">
+    <value>Pедактировать</value>
+  </data>
+  <data name="EmployeeName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="IV" xml:space="preserve">
+    <value>Oценка</value>
+  </data>
+  <data name="MaxIV" xml:space="preserve">
+    <value>Макс. оценка</value>
+  </data>
+  <data name="Pav" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="MAXKDP" xml:space="preserve">
+    <value>Максимальная переменная часть в соответствии с заданиями</value>
+  </data>
 </root>

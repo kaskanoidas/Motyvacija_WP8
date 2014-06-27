@@ -126,9 +126,90 @@
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>"Goals, Rezults, Salary"</value>
+    <value>Goals, Rezults, Salary</value>
   </data>
   <data name="SampleProperty" xml:space="preserve">
     <value>Sample Runtime Property Value</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="BA" xml:space="preserve">
+    <value>Basic Salary</value>
+  </data>
+  <data name="BR" xml:space="preserve">
+    <value>Baseline value</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="FR" xml:space="preserve">
+    <value>Actual outcome</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Indicators" xml:space="preserve">
+    <value>Indicators</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Select language</value>
+  </data>
+  <data name="LanguageBarBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="MKD" xml:space="preserve">
+    <value>Maximum variable part</value>
+  </data>
+  <data name="ROD" xml:space="preserve">
+    <value>Indicators</value>
+  </data>
+  <data name="SaveTA" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="TR" xml:space="preserve">
+    <value>Target value</value>
+  </data>
+  <data name="UZD" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="VISO" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="EDIT" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EmployeeName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="IV" xml:space="preserve">
+    <value>Evaluation</value>
+  </data>
+  <data name="MaxIV" xml:space="preserve">
+    <value>Max evaluation</value>
+  </data>
+  <data name="Pav" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="MAXKDP" xml:space="preserve">
+    <value>Maximum task-related variable part</value>
   </data>
 </root>
