@@ -212,4 +212,67 @@
   <data name="MAXKDP" xml:space="preserve">
     <value>Maksimali kintama dalis pagal užduotis</value>
   </data>
+  <data name="AboutString" xml:space="preserve">
+    <value>VEIKLA,  TIKSLAS,  MOTYVACIJA,  REZULTATAS,  ATLYGINIMAS - tai penkios sąvokos, kurios paliečia kiekvieną žmogų. Kiekvienas, kuris vykdo veiklą, turi tikslą, vidinę motyvaciją, pasiekia rezultatus ir už tai jam būna atlyginta. Vidinė motyvacija - pagrindinis tikslo siekimo variklis.
+
+Tam, kad įmonės ar komandos tikslai taptų kiekvieno jos nario tikslais, būtina, kad kiekvienas dalyvautų šių tikslų formavime, nustatyme. Tuomet, įgyvendinant užsibrėžtus tikslus, atsiranda vidinė motyvacija, kuri padeda pasiekti geriausių rezultatų, o taip pat visi gauna atlyginimą pagal pasiektus rezultatus.
+
+Šios programos paskirtis - apskaičiuoti darbuotojų kintamą atlyginimo dalį, kuri priklauso nuo įmonės ar komandos tikslų ir gautų rezultatų, įgyvendinant šiuos tikslus, o taip pat papildomą kintamą atlyginimo dalį, kuri priklauso nuo darbuotojo užduočių vykdymo, vartotojų vertinimo ar testų rezultatų.
+
+Visa tai leidžia išvengti "Žmogiškojo faktoriaus" apskaičiuojant darbuotojų atlyginimus, nes visiems atlyginama pagal pasiektus rezultatus ir įmonės galimybes.
+
+Šios programos pagrindą sudaro tikslo siekimo efektyvumo įvertinimo algoritmas, kuriame tikslai aprašomi pagrindiniais įmonės veiklos rodikliais.
+
+Vertinant darbuotojų užduočių vykdymą arba vykdant vartotojų apklausą, kada vartotojai vertina įmonės darbuotojus, bei tikrinant kompetenciją ir žinias testų pagalba, apskaičiuojamas gauto įvertinimo efektyvumas maksimalaus galimo įvertinimo atžvilgiu.
+
+Atsižvelgiant į tai, atlyginimas apskaičiuojamas taip:
+
+ATLYGINIMAS  =  BAZINIS ATLYGINIMAS  +  KINTAMA DALIS PAGAL RODIKLIUS  +  KINTAMA DALIS PAGAL UŽDUOTIS
+
+BAZINIS ATLYGINIMAS - tai fiksuota atlyginimo dalis, kuri nustatoma kiekvienam darbuotojui pagal įmonės galimybes, darbuotojo kompetenciją, pareigas, atsakomybes ir t.t. Kiekviena įmonė turi savo metodiką. Galima remtis ir valstybės nustatytu minimaliu atlyginimu.
+
+KINTAMA DALIS PAGAL RODIKLIUS - tai svarbiausia atlyginimo dedamoji. Dauguma įmonių yra įdiegusios verslo veiklos valdymo sistemas, kurios paremtos rodiklių visuma. Prie tokių galima priskirti BSC (Balanced Score Card), Lean, TOC ir kitas. Visiems žinomi tokie rodikliai kaip PELNAS, KAŠTAI, GAMYBOS APIMTYS ir kiti, kuriuos tiesiog vadinsime RODIKLIS A,  RODIKLIS B,  RODIKLIS C ir t.t.
+
+Įmonės, planuodamos savo veiklą, nustato savo tikslus ir tikslines rodiklių reikšmes: TIKSLINĖ A, TIKSLINĖ B,  TIKSLINĖ C ir t.t. ( padidinti PELNĄ , sumažinti KAŠTUS, padidinti GAMYBOS APIMTIS  ir panašiai). Turėdami šią informaciją, galime apskaičiuoti, koks gali būti maksimalus atlyginimų fondas, jei tikslai bus pasiekti, t.y. MAKSIMALIĄ KINTAMĄ DALĮ PAGAL RODIKLIUS (MaxKD RODIKLIŲ), o taip pat pagal rodiklių svarbą šią suma padaliname proporcingai rodikliams: MaxKD A,  MaxKD B,  MaxKD C ir t.t.
+
+MaxKD RODIKLIŲ = MaxKD A +  MaxKD B  +  MaxKD C  + …
+
+Analogiškai, kiekvienam darbuotojui, pagal pasirinktus rodiklius nustatome maksimalias kintamas dalis. Žinodami BAZINES (pradines) rodiklių reikšmes: BAZINĖ A,  BAZINĖ B,  BAZINĖ C ir t.t., TIKSLINES: TIKSLINĖ A,  TIKSLINĖ B,  TIKSLINĖ C  ir t.t., ir pasirinktu momentu pamatavę FAKTINES RODIKLIŲ REIKŠMES:  FAKTINĖ A,  FAKTINĖ B,  FAKTINĖ C ir t.t., apskaičiuojame kintamas atlyginimo dalis pagal rodiklius: KINTAMA  A,  KINTAMA B,  KINTAMA C ir t.t. Tokiu būdu:
+
+KINTAMA DALIS PAGAL RODIKLIUS = KINTAMA  A  +  KINTAMA B  +  KINTAMA C  + …
+
+KINTAMA DALIS PAGAL UŽDUOTIS - jeigu įmonių darbuotojai vykdo įvairias užduotis, tenka vertinti šių užduočių atlikimo efektyvumą. Darbuotojas gali vykdyti keletą užduočių:  UŽDUOTIS X,  UŽDUOTIS Y,  UŽDUOTIS Z  ir t.t. Užduotys pagal savo svarbą gali būti vertinamos skirtingose balų skalėse ( sistemose), t.y. maksimalus įvertinimas kiekvienos užduoties gali būti skirtingas. Mokykloje mes įpratę, kad visi dalykai vertinami vienoje balų skalėje, pvz. maksimalus įvertinimas visų dalykų yra 10. Maksimalius užduočių vertinimus žymėkime: MaxVERT  X,  MaxVERT  Y,  MaxVERT  Z ir t.t. Jei darbuotojas pilnai įvykdo visas užduotis ir gauna maksimalius įvertinimus, tai jis gaus MAKSIMALIĄ KINTAMĄ DALĮ PAGAL UŽDUOTIS ( MaxKDU), kuri nustatoma pagal įmonės galimybes ir užduočių svarbą įmonės tikslų įgyvendinime.
+
+PAVYZDYS : elementariu pvyzdžiu pailiustruosime programos veikimą. Tegul įmonės tikslai aprašomi dviem rodikliais : A - PELNAS ir B - KAŠTAI.
+
+Vyr. vadybininkas MARKO  (įvedame programoje į darbuotojų sąrašą), atlikdamas jam pavestus darbus, įtakoja šiuos rodiklius. BAZINIS ATLYGINIMAS MARKO įvedamas : BAZINIS = 1000. įvedame rodiklių reikšmes:
+
+PELNAS :  BAZINĖ 100000;  TIKSLINĖ  130000;  FAKTINĖ 121000;
+KAŠTAI  :  BAZINĖ 500000;  TIKSLINĖ 450000;  FAKTINĖ 480000;
+
+MARKO dar yra motyvuojamas pagal UŽDUOČIŲ vykdymą:
+
+X- SANTYKIS SU KLIENTAIS   MaxVERT = 11  Įvertintas  9;
+Y- PREKIŲ GRAŽINIMŲ MINIMIZAVIMAS  MaxVERT  = 9  Įvertintas  5;
+Z- KVALIFIKACIJOS KĖLIMAS  MaxVERT = 7; Įvertintas 6;
+
+Jei įmonė pasiektų tikslus pagal šiuos rodiklius ir MARKO gautų aukščiausius įvertinimus pagal užduočių vykdymą, tai įmonė papildomai išmokėtų jam MAKSIMALIĄ KINTAMĄ DALĮ  2700:
+
+Pagal PELNO rodiklį įvedame MaxKD 1200;
+Pagal KAŠTŲ rodiklį įvedame MaxKD 800;
+Pagal UŽDUOČIŲ vykdymą MaxKDU 700;
+
+Tačiau suskaičiavę prie faktinių rodiklių reikšmių ir faktinių užduočių įvertinimų gauname, kad KINTAMA ATLYGINIMO DALIS  yra 1679:
+
+KINTAMA DALIS PAGAL RODIKLIUS  1160;
+KINTAMA DALIS PAGAL UŽDUOTIS  519;
+
+Iš viso šį mėnesį uždirbo:
+
+ATLYGINIMAS = 1000 + 1160 + 519 = 2679;
+Maksimaliai galėjo uždirbti 3700.</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Puslapis</value>
+  </data>
 </root>

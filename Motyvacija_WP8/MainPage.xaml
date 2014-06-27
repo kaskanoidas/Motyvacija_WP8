@@ -140,7 +140,7 @@
             <Button x:Name="LanguageBarBack" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="LanguageBarBack_Click"/>
         </StackPanel>
         <StackPanel x:Name="AddBarEmployee" Margin="23,414,10,0" Background="Black" Visibility="Collapsed">
-            <TextBlock Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBlock Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="NameBox"/>
             <TextBlock Text="{Binding Path=LocalizedResources.BA, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="BABox" InputScope="Number"/>
@@ -153,8 +153,8 @@
                 <Button x:Name="CreateNewEmployeeBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
             </Grid>
         </StackPanel>
-        <StackPanel x:Name="AddBarIndicator" Margin="23,138,10,0" Background="Black" Visibility="Collapsed">
-            <TextBlock Text="{Binding Path=LocalizedResources.Pav, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+        <StackPanel x:Name="AddBarIndicator" Margin="23,134,10,0" Background="Black" Visibility="Collapsed">
+            <TextBlock Margin="0,0,0,0" Text="{Binding Path=LocalizedResources.Pav, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="PavBoxIND"/>
             <TextBlock Text="{Binding Path=LocalizedResources.BR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="BRBox" InputScope="Number"/>
@@ -173,8 +173,8 @@
                 <Button x:Name="CreateNewIndicatorBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
             </Grid>
         </StackPanel>
-        <StackPanel x:Name="AddBarTask" Margin="23,328,10,0" Background="Black" Visibility="Collapsed">
-            <TextBlock Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+        <StackPanel x:Name="AddBarTask" Margin="23,310,10,0" Background="Black" Visibility="Collapsed">
+            <TextBlock Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="PavBoxTSK"/>
             <TextBlock Text="{Binding Path=LocalizedResources.MaxIV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="MAXIVBox" InputScope="Number"/>
@@ -190,8 +190,8 @@
             </Grid>
         </StackPanel>
         <Button x:Name="Edit" Margin="0,624,234,0" Content="{Binding Path=LocalizedResources.EDIT, Source={StaticResource LocalizedStrings}}" Click="Edit_Click" Background="Black" Visibility="Collapsed"/>
-        <StackPanel x:Name="MAxKDP" Margin="0,414,0,0" Background="Black" Visibility="Collapsed">
-            <TextBlock Text="{Binding Path=LocalizedResources.MAXKDP, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+        <StackPanel x:Name="MAxKDPST" Margin="0,414,0,0" Background="Black" Visibility="Collapsed">
+            <TextBlock Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.MAXKDP, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="MAXKDPBox" InputScope="Number"/>
             <Grid>
                 <Grid.ColumnDefinitions>

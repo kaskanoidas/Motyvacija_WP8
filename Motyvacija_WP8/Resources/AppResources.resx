@@ -225,4 +225,76 @@
   <data name="MAXKDP" xml:space="preserve">
     <value>Maximum task-related variable part</value>
   </data>
+  <data name="AboutString" xml:space="preserve">
+    <value>There are five concepts related to each other in the life of any human being - THE GOAL ITSELF, GOAL-ORIENTED ACTIVITY, MOTIVATION, OUTCOME AND REWARD.
+
+If a person has set a goal for himself/herself and is well motivated while performing a goal-oriented activity, he/she will achieve results and will be awarded for this. Inner motivation is the main driving force which helps achieve the desired goal.
+
+It is absolutely necessary that the goals of a team or a company also become the personal goals of its members or employees through broad participation in the process of setting and achieving these goals. It is only then that goal-oriented activity would lead to the desired results. And the inner motivation would help to get them with everybody earning a certain amount of money for the results achieved.
+
+This program is designed to help calculate components of employee ' s salary (gratification), i.e. a variable part, which depends on team or company goals and the achieved goal-oriented results. There is still another component, another variable part which depends on task execution by the said employee, feedback from consumers reports or results of the market research.
+
+This program allows to neglect the so called "human factor" when calculating salaries of the employees who earn result-related wages that depend on the achieved results of the said company as well as on its salary fund.
+
+This program is based on an algorithm which evaluates goal achieving effectiveness. The goals are defined by key performance indicators of the company.
+
+When evaluating employee task execution or carrying out a consumer feedback research, the consumers evaluate the task performance of the company employees of the company and check their competence and knowledge through a range of tests. Thus effectiveness of the evaluation obtained can reach its potential maximum.
+
+Taking this into account, the salary should be calculated as follows:
+
+SALARY = BASIC SALARY + PERFORMANCE-RELATED VARIABLE PART + TASK-RELATED VARIABLE PART
+
+BASIC SALARY is a fixed component of the payment, which is to be determined for each employee separately and depends on company ' s strategy, cost-effectiveness and the salary funds as well as on employee ' s competence, his/her position, responsibilities etc. Each company develops its own methodology for a basic salary calculations. Also, a minimum wage set by an individual state authority may be used.
+
+PERFORMANCE-RELATED VARIABLE PART is the most important component of the salary. The majority of companies implement various business activity management systems based on a set of key performance indicators. One may refer to the following systems: BSC (Balanced Score Card), Lean, TOC and others. Well known are such indicators as PROFIT, COSTS, PRODUCTION VOLUME and others, which we intend to refer to as INDICATOR A, INDICATOR B, INDICATOR C etc.
+
+When planning its activity, a company sets goals and target values of indicators: TARGET A, TARGET B, TARGET C etc. (increase the PROFIT , reduce the COSTS, expand PRODUCTION VOLUME etc.) After such information was obtained a company is able to calculate what maximum salary funds should be if the goals were met, i.e. MAXIMUM PERFORMANCE-RELATED VARIABLE PART (MaxVP for PERFORMANCE) , and also we divide this amount according to the importance of the indicators proportionally to the indicators: MaxVP A, MaxVP B, MaxVP C etc.
+
+MaxVP for PERFORMANCE = MaxVP A + MaxVP B + MaxVP C + ...
+
+A company determines for each employee a maximum performance-related variable part based on selected indicators. Knowing the BASELINE (initial) values of indicators: BASELINE A, BASELINE B, BASELINE C etc . , TARGET values : TARGET A, TARGET B, TARGET C etc., and after measuring at a given period of time the ACTUAL OUTCOME values of indicators : ACTUAL A, ACTUAL B, ACTUAL C etc., performance-related variable parts can be calculated: VARIABLE A, VARIABLE B, VARIABLE C etc. Thus:
+
+PERFORMANCE-RELATED VARIABLE PART = VARIABLE A + VARIABLE B + VARIABLE C + ...
+
+TASK-RELATED VARIABLE PART - if the company employees execute various tasks a need to evaluate the effectiveness of these tasks execution arises. An employee can carry out several tasks: TASK X, TASK Y, TASK Z etc. The tasks classified as their importance increase can be evaluated using different point scales (systems), i.e. maximum evaluation of each task can be different. One gets used to the same evaluation scales taught at school where all subjects are assessed using the same point scales with 10 points maximum for all subjects. Suppose, the maximum task evaluations are as follows: MaxVAL X, MaxVAL Y, MaxVAL Z etc. If an employee has completed all tasks in full and got the maximum evaluations marks, he/she gets MAXIMUM TASK-RELATED VARIABLE PART (MaxVPT), which is to be determined in accordance with possibilities of a company and task importance for the said company ' s goal achievement.
+
+A SAMPLE: this is an elementary example to demonstrate how the program functions. For example, the goals of a company are described by two indicators : A - PROFIT and B - COSTS .
+
+MARKO, a senior manager (let us place his name on the list of employees of the program), through realization of the tasks allocated to him, will influence the abovementioned indicators. BASIC PART FOR MARKO to be entered: BASIC = 1000 . Enter the following values of indicators:
+
+PROFIT: BASELINE 100000; TARGET 130000; ACTUAL 121000;
+
+COSTS: BASELINE 500000; TARGET 450000; ACTUAL 480000;
+
+MARKO is motivated for TASK execution as well:
+
+X- RELATIONSHIP WITH THE CLIENTS MaxVAL = 11 Evaluation = 9 points;
+
+Y- CUTTING ON THE RETURN OF GOODS BY CLIENTS MaxVAL = 9 Evaluation = 5 points;
+
+Z- IMPROVING PROFESSIONAL SKILLS MaxVAL = 7; Evaluation = 6 points;
+
+If the company achieved its goals according to these indicators, and MARKO received the highest evaluations for the task execution, the company would pay to him an extra MAXIMUM VARIABLE PART 2700:
+
+Enter PROFIT- related MaxVP 1200;
+
+Enter COSTS- related MaxVP 800;
+
+Enter TASK -related MaxVPT 700;
+
+Still, having made calculations using actual values of indicators and evaluations of the actual tasks, we obtain that VARIABLE PART is equal to 1679:
+
+PERFORMANCE-RELATED VARIABLE PART 1160;
+
+TASK-RELATED VARIABLE PART 519;
+
+In total this month MARKO earned:
+
+SALARY = 1000 + 1160 + 519 = 2679;
+
+He could earn maximum SALARY of 3700.</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
 </root>

@@ -40,6 +40,7 @@ namespace Motyvacija_WP8
             {
                 NavigationService.RemoveBackEntry();
             }
+            KillAll();
         }
         private void LoadData()
         {
@@ -114,7 +115,7 @@ namespace Motyvacija_WP8
             AddBarIndicator.Visibility = System.Windows.Visibility.Collapsed;
             AddBarTask.Visibility = System.Windows.Visibility.Collapsed;
             Edit.Visibility = System.Windows.Visibility.Collapsed;
-            MAxKDP.Visibility = System.Windows.Visibility.Collapsed;
+            MAxKDPST.Visibility = System.Windows.Visibility.Collapsed;
         }
         private void ApplicationBarIconButton_Click(object sender, EventArgs e) // Meniu
         {
@@ -177,11 +178,14 @@ namespace Motyvacija_WP8
         }
         private void ApplicationBarIconButton_Click_3(object sender, EventArgs e) // Calc
         {
-            if (MAxKDP.Visibility == System.Windows.Visibility.Visible)
+            if (MAxKDPST.Visibility == System.Windows.Visibility.Visible)
             {
-                MAxKDP.Visibility = System.Windows.Visibility.Collapsed;
+                MAxKDPST.Visibility = System.Windows.Visibility.Collapsed;
             }
-            MAxKDP.Visibility = System.Windows.Visibility.Visible;
+            else
+            {
+                MAxKDPST.Visibility = System.Windows.Visibility.Visible;
+            }
         }
         private Boolean TikrintiArPazymeti()
         {
@@ -255,7 +259,7 @@ namespace Motyvacija_WP8
         }
         private void About_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
         }
         private void Help_Click(object sender, RoutedEventArgs e)
         {

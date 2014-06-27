@@ -70,6 +70,19 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are five concepts related to each other in the life of any human being - THE GOAL ITSELF, GOAL-ORIENTED ACTIVITY, MOTIVATION, OUTCOME AND REWARD.
+        ///
+        ///If a person has set a goal for himself/herself and is well motivated while performing a goal-oriented activity, he/she will achieve results and will be awarded for this. Inner motivation is the main driving force which helps achieve the desired goal.
+        ///
+        ///It is absolutely necessary that the goals of a team or a company also become the personal goals of its  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string AboutString {
+            get {
+                return ResourceManager.GetString("AboutString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] add {
@@ -276,6 +289,15 @@ namespace Motyvacija_WP8.Resources {
         public static string MKD {
             get {
                 return ResourceManager.GetString("MKD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page.
+        /// </summary>
+        public static string Page {
+            get {
+                return ResourceManager.GetString("Page", resourceCulture);
             }
         }
         
