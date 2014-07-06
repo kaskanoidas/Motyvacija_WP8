@@ -223,7 +223,7 @@
     <value>Title</value>
   </data>
   <data name="MAXKDP" xml:space="preserve">
-    <value>Maximum task-related variable part</value>
+    <value>Maximum task-related variable part:</value>
   </data>
   <data name="AboutString" xml:space="preserve">
     <value>There are five concepts related to each other in the life of any human being - THE GOAL ITSELF, GOAL-ORIENTED ACTIVITY, MOTIVATION, OUTCOME AND REWARD.
@@ -296,5 +296,35 @@ He could earn maximum SALARY of 3700.</value>
   </data>
   <data name="Page" xml:space="preserve">
     <value>Page</value>
+  </data>
+  <data name="BAT" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="BRT" xml:space="preserve">
+    <value>Baseline</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="FRT" xml:space="preserve">
+    <value>Actual</value>
+  </data>
+  <data name="MKDT" xml:space="preserve">
+    <value>Max. v. p.</value>
+  </data>
+  <data name="RODT" xml:space="preserve">
+    <value>Indicators</value>
+  </data>
+  <data name="SHOW" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="TRT" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="UZDT" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="VISOT" xml:space="preserve">
+    <value>Sum</value>
   </data>
 </root>

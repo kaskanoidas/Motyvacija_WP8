@@ -210,7 +210,7 @@
     <value>Pavadinimas</value>
   </data>
   <data name="MAXKDP" xml:space="preserve">
-    <value>Maksimali kintama dalis pagal užduotis</value>
+    <value>Maksimali kintama dalis pagal užduotis:</value>
   </data>
   <data name="AboutString" xml:space="preserve">
     <value>VEIKLA,  TIKSLAS,  MOTYVACIJA,  REZULTATAS,  ATLYGINIMAS - tai penkios sąvokos, kurios paliečia kiekvieną žmogų. Kiekvienas, kuris vykdo veiklą, turi tikslą, vidinę motyvaciją, pasiekia rezultatus ir už tai jam būna atlyginta. Vidinė motyvacija - pagrindinis tikslo siekimo variklis.
@@ -274,5 +274,35 @@ Maksimaliai galėjo uždirbti 3700.</value>
   </data>
   <data name="Page" xml:space="preserve">
     <value>Puslapis</value>
+  </data>
+  <data name="BAT" xml:space="preserve">
+    <value>Bazinis</value>
+  </data>
+  <data name="BRT" xml:space="preserve">
+    <value>Bazinė</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="FRT" xml:space="preserve">
+    <value>Faktinė</value>
+  </data>
+  <data name="MKDT" xml:space="preserve">
+    <value>Max. k. d.</value>
+  </data>
+  <data name="RODT" xml:space="preserve">
+    <value>Rodikliai</value>
+  </data>
+  <data name="SHOW" xml:space="preserve">
+    <value>Rodyti</value>
+  </data>
+  <data name="TRT" xml:space="preserve">
+    <value>Tikslinė</value>
+  </data>
+  <data name="UZDT" xml:space="preserve">
+    <value>Užduotys</value>
+  </data>
+  <data name="VISOT" xml:space="preserve">
+    <value>Viso</value>
   </data>
 </root>

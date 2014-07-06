@@ -22,13 +22,175 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.Archive, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ListBox x:Name="ArchivedEmployees" ItemsSource="{Binding ArchyvedEmployeeClass}" SelectionChanged="ArchivedEmployees_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Tag="{Binding index}" ManipulationStarted="StackPanel_ManipulationStarted" ManipulationDelta="StackPanel_ManipulationDelta" ManipulationCompleted="StackPanel_ManipulationCompleted">
+                            <StackPanel Grid.Column="1">
+                                <Border BorderBrush="White" BorderThickness="1">
+                                    <Grid ShowGridLines="True">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="45"/>
+                                            <RowDefinition Height="55"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" x:Name="VAR" Text="{Binding NameLine}" FontSize="30"/>
+                                        <Grid Grid.Row="1" ShowGridLines="True">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"/>
+                                                <RowDefinition Height="30"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock x:Name="BA"   Text="{Binding Path=LocalizedResources.BAT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0"/>
+                                            <TextBlock x:Name="ROD"  Text="{Binding Path=LocalizedResources.RODT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
+                                            <TextBlock x:Name="UZD"  Text="{Binding Path=LocalizedResources.UZDT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
+                                            <TextBlock x:Name="Viso" Text="{Binding Path=LocalizedResources.VISOT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3"/>
+                                            <TextBlock x:Name="Date" Text="{Binding Path=LocalizedResources.Date, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="4"/>
+                                            <TextBlock x:Name="BA1" Text="{Binding BALine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
+                                            <TextBlock x:Name="ROD1" Text="{Binding RODLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
+                                            <TextBlock x:Name="UZD1" Text="{Binding UZDLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
+                                            <TextBlock x:Name="Viso1" Text="{Binding VisoLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
+                                            <TextBlock x:Name="Date1" Text="{Binding Date}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="4" Grid.Row="1"/>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid x:Name="EditShowGrid" Height="70" Background="Black" VerticalAlignment="Bottom" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Show" Content="{Binding Path=LocalizedResources.SHOW, Source={StaticResource LocalizedStrings}}" Click="Show_Click"  Background="Black" Grid.Column="1" Visibility="Collapsed"/>
+            </Grid>
+            <Grid x:Name="EmployeeDetailPanel" Background="Black" ShowGridLines="True" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="0">
+                    <StackPanel>
+                        <Border BorderBrush="White" BorderThickness="1">
+                            <TextBlock Text="{Binding Path=LocalizedResources.Employees, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        </Border>
+                        <StackPanel Tag="{Binding index}">
+                            <Border BorderBrush="White" BorderThickness="1">
+                                <Grid ShowGridLines="True">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="45"/>
+                                        <RowDefinition Height="55"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" x:Name="ShowVAR" FontSize="30"/>
+                                    <Grid Grid.Row="1" ShowGridLines="True">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding Path=LocalizedResources.BAT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" Grid.Column="0"/>
+                                        <TextBlock Text="{Binding Path=LocalizedResources.RODT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding Path=LocalizedResources.UZDT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" Grid.Column="2"/>
+                                        <TextBlock Text="{Binding Path=LocalizedResources.VISOT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" Grid.Column="3"/>
+                                        <TextBlock Text="{Binding Path=LocalizedResources.Date, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" Grid.Column="4"/>
+                                        <TextBlock x:Name="ShowBA" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
+                                        <TextBlock x:Name="ShowROD"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
+                                        <TextBlock x:Name="ShowUZD"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
+                                        <TextBlock x:Name="ShowViso"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
+                                        <TextBlock x:Name="ShowDate"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="4" Grid.Row="1"/>
 
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                        <Border BorderBrush="White" BorderThickness="1">
+                            <TextBlock Text="{Binding Path=LocalizedResources.Indicators, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        </Border>
+                        <ListBox x:Name="ShowIndicators" ItemsSource="{Binding IndicatorsClass}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Tag="{Binding index}">
+                                        <StackPanel>
+                                            <Border BorderBrush="White" BorderThickness="1">
+                                                <Grid ShowGridLines="True">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="45"/>
+                                                        <RowDefinition Height="55"/>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Grid.Row="0" x:Name="INDPAV" Text="{Binding INDPAVLine}" FontSize="30"/>
+                                                    <Grid Grid.Row="1" ShowGridLines="True">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="30"/>
+                                                            <RowDefinition Height="30"/>
+                                                        </Grid.RowDefinitions>
+                                                        <TextBlock x:Name="BR" Text="{Binding Path=LocalizedResources.BRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0"/>
+                                                        <TextBlock x:Name="FR" Text="{Binding Path=LocalizedResources.FRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
+                                                        <TextBlock x:Name="TR" Text="{Binding Path=LocalizedResources.TRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
+                                                        <TextBlock x:Name="MKD" Text="{Binding Path=LocalizedResources.MKDT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3"/>
+                                                        <TextBlock x:Name="BR1" Text="{Binding BRLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
+                                                        <TextBlock x:Name="FR1" Text="{Binding FRLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
+                                                        <TextBlock x:Name="TR1" Text="{Binding TRLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
+                                                        <TextBlock x:Name="MKD1" Text="{Binding MKDLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
+                                                    </Grid>
+                                                </Grid>
+                                            </Border>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Border BorderBrush="White" BorderThickness="1">
+                            <TextBlock Text="{Binding Path=LocalizedResources.Tasks, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        </Border>
+                        <ListBox x:Name="ShowTasks" ItemsSource="{Binding TasksClass}" FontSize="50" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Tag="{Binding index}">
+                                        <Border BorderBrush="White" BorderThickness="1">
+                                            <StackPanel>
+                                                <TextBlock x:Name="UZDPAV" Text="{Binding UZDPAVLine}" FontSize="30"/>
+                                                <TextBlock x:Name="IVERT" Text="{Binding IVERTLine}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel>
+                            <Border BorderBrush="White" BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.MAXKDP, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="SHowMAxKDP" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <Button x:Name="BackDetaiPanel" Grid.Row="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="BackDetaiPanel_Click"/>
+            </Grid>
         </Grid>
     </Grid>
 

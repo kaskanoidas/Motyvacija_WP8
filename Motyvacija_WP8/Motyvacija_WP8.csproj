@@ -175,6 +175,7 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Duom.txt" />
     <Content Include="ic_launcher6.png" />
     <Content Include="Resources\check.png" />
     <Content Include="Resources\feature.settings.png" />

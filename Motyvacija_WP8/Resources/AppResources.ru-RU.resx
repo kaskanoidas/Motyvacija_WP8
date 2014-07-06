@@ -210,7 +210,7 @@
     <value>Название</value>
   </data>
   <data name="MAXKDP" xml:space="preserve">
-    <value>Максимальная переменная часть в соответствии с заданиями</value>
+    <value>Максимальная переменная часть в соответствии с заданиями:</value>
   </data>
   <data name="AboutString" xml:space="preserve">
     <value>ДЕЯТЕЛЬНОСТЬ, ЦЕЛЬ, МОТИВАЦИЯ, РЕЗУЛЬТАТ, ВОЗНАГРАЖДЕНИЕ – это пять понятий, которые касаются каждого человека. Каждый, кто осуществляет деятельность, имеет цель, внутреннюю мотивацию, достигает результатов и получает за это вознаграждение. Внутренняя мотивация – основной двигатель достижения цели.
@@ -300,5 +300,35 @@ r</value>
   </data>
   <data name="Page" xml:space="preserve">
     <value>Cтраница</value>
+  </data>
+  <data name="BAT" xml:space="preserve">
+    <value>Баз. </value>
+  </data>
+  <data name="BRT" xml:space="preserve">
+    <value>Базовое</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="FRT" xml:space="preserve">
+    <value>Фактический</value>
+  </data>
+  <data name="MKDT" xml:space="preserve">
+    <value>Макс. п. ч.</value>
+  </data>
+  <data name="RODT" xml:space="preserve">
+    <value>Показатели</value>
+  </data>
+  <data name="SHOW" xml:space="preserve">
+    <value>Показывать</value>
+  </data>
+  <data name="TRT" xml:space="preserve">
+    <value>Целевое</value>
+  </data>
+  <data name="UZDT" xml:space="preserve">
+    <value>Задании</value>
+  </data>
+  <data name="VISOT" xml:space="preserve">
+    <value>Сумма</value>
   </data>
 </root>

@@ -23,6 +23,8 @@ namespace Motyvacija_WP8
         double x, x2, y, y2;
         Boolean scrolLock;
         Boolean AddNewItem;
+        List<ArchyvedEmployeeClass> AEC;
+        Boolean CanExit;
         public MainPage()
         {
             InitializeComponent();
@@ -32,7 +34,8 @@ namespace Motyvacija_WP8
             ((ApplicationBarIconButton)ApplicationBar.Buttons[3]).Text = AppResources.Calculate;
             LoadData();
             lastEmployeeChecked = -1; AddNewItem = false;
-            x = 0; x2 = 0; y = 0; y2 = 0; scrolLock = false; 
+            x = 0; x2 = 0; y = 0; y2 = 0; scrolLock = false;
+            CanExit = true;
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -41,71 +44,263 @@ namespace Motyvacija_WP8
                 NavigationService.RemoveBackEntry();
             }
             KillAll();
+            if (PhoneApplicationService.Current.State.ContainsKey("AEC"))
+            {
+                AEC = (List<ArchyvedEmployeeClass>)PhoneApplicationService.Current.State["AEC"];
+                SaveAll();
+            }
+            LoadKalba();
+            LoadData();
+        }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            PhoneApplicationService.Current.State["AEC"] = AEC;
+            base.OnNavigatedFrom(e);
+        }
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {   
+            base.OnBackKeyPress(e);
+            e.Cancel = true;
+            SaveAll();
+            SaveKalba(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
+            Application.Current.Terminate();
+        }
+        private void LoadKalba()
+        {
+            System.IO.StreamReader file = new System.IO.StreamReader(new System.IO.IsolatedStorage.IsolatedStorageFileStream("Kalba.txt", System.IO.FileMode.OpenOrCreate, System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication()));
+            string eilute = file.ReadLine();
+            if (eilute != System.Threading.Thread.CurrentThread.CurrentCulture.ToString())
+            {
+                if (eilute == "en-US" || eilute == "en")
+                {
+                    CultureInfo cult = new CultureInfo("en");
+                    System.Threading.Thread.CurrentThread.CurrentCulture = cult;
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = cult;
+                    Motyvacija_WP8.Resources.AppResources.Culture = cult;
+                    App.RootFrame.Language = XmlLanguage.GetLanguage("en");
+                    App.Current.RootVisual.UpdateLayout();
+                    App.RootFrame.UpdateLayout();
+                    var ReloadUri = (App.RootFrame.Content as PhoneApplicationPage).NavigationService.CurrentSource;
+                    (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri(ReloadUri + "?no-cache=" + Guid.NewGuid(), UriKind.Relative));
+                }
+                else if (eilute == "lt-LT")
+                {
+                    CultureInfo cult = new CultureInfo("lt-LT");
+                    System.Threading.Thread.CurrentThread.CurrentCulture = cult;
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = cult;
+                    Motyvacija_WP8.Resources.AppResources.Culture = cult;
+                    App.RootFrame.Language = XmlLanguage.GetLanguage("lt-LT");
+                    App.Current.RootVisual.UpdateLayout();
+                    App.RootFrame.UpdateLayout();
+                    var ReloadUri = (App.RootFrame.Content as PhoneApplicationPage).NavigationService.CurrentSource;
+                    (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri(ReloadUri + "?no-cache=" + Guid.NewGuid(), UriKind.Relative));
+                }
+                else if (eilute == "ru-RU")
+                {
+                    CultureInfo cult = new CultureInfo("ru-RU");
+                    System.Threading.Thread.CurrentThread.CurrentCulture = cult;
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = cult;
+                    Motyvacija_WP8.Resources.AppResources.Culture = cult;
+                    App.RootFrame.Language = XmlLanguage.GetLanguage("ru-RU");
+                    App.Current.RootVisual.UpdateLayout();
+                    App.RootFrame.UpdateLayout();
+                    var ReloadUri = (App.RootFrame.Content as PhoneApplicationPage).NavigationService.CurrentSource;
+                    (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri(ReloadUri + "?no-cache=" + Guid.NewGuid(), UriKind.Relative));
+                }
+            }
+            file.Close();
+        }
+        private void SaveKalba(string kalba)
+        {
+            System.IO.StreamWriter file = new System.IO.StreamWriter(new System.IO.IsolatedStorage.IsolatedStorageFileStream("Kalba.txt", System.IO.FileMode.Create, System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication()));
+            file.WriteLine(kalba);
+            file.Close();
         }
         private void LoadData()
         {
-            int i = 0;
-            EmployeeClass EC = new EmployeeClass();
-            EC.NameLine = "MARKO"; EC.BALine = 1000.00; EC.RODLine = 0; EC.UZDLine = 0; EC.VisoLine = EC.BALine + EC.RODLine + EC.UZDLine; EC.IsChecked = false;
-            EC.index = i++;
-            Employees.Items.Add(EC);
+            System.IO.StreamReader file = new System.IO.StreamReader( new System.IO.IsolatedStorage.IsolatedStorageFileStream("Duom.txt",System.IO.FileMode.OpenOrCreate, System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication()));
+            Employees.Items.Clear();
+            Indicators.Items.Clear();
+            Tasks.Items.Clear();
+            if (AEC == null)
+            {
+                AEC = new List<ArchyvedEmployeeClass>();
+            }
+            else
+            {
+                AEC.Clear();
+            }
+            while (file.EndOfStream != true)
+            {
+                string eilute = file.ReadLine();
+                if (eilute == "Darbuotoju lentele:")
+                {
+                    int index = Convert.ToInt32(file.ReadLine());
+                    for (int i = 0; i < index; i++)
+                    {
+                        string[] reiksmes = file.ReadLine().Split(',');
+                        EmployeeClass EC = new EmployeeClass();
+                        EC.NameLine = reiksmes[0]; EC.BALine = Convert.ToDouble(reiksmes[1]); EC.RODLine = Convert.ToDouble(reiksmes[2]); EC.UZDLine = Convert.ToDouble(reiksmes[3]); EC.VisoLine = Convert.ToDouble(reiksmes[4]); EC.IsChecked = false;
+                        EC.index = i;
+                        reiksmes = file.ReadLine().Split(',');
+                        int rod = Convert.ToInt32(reiksmes[0]);
+                        int uzd = Convert.ToInt32(reiksmes[1]);
+                        EC.MaxKDP = Convert.ToDouble(reiksmes[2]);
+                        EC.RodList = new List<IndicatorsClass>();
+                        EC.UzdList = new List<TasksClass>();
+                        for (int j = 0; j < rod; j++)
+                        {
+                            reiksmes = file.ReadLine().Split(',');
+                            IndicatorsClass ind = new IndicatorsClass();
+                            ind.INDPAVLine = reiksmes[0]; ind.BRLine = Convert.ToDouble(reiksmes[1]); ind.FRLine = Convert.ToDouble(reiksmes[2]); ind.TRLine = Convert.ToDouble(reiksmes[3]); ind.MKDLine = Convert.ToDouble(reiksmes[4]); ind.IsChecked = false;
+                            ind.index = j;
+                            EC.RodList.Add(ind);
+                        }
+                        for (int j = 0; j < uzd; j++)
+                        {
+                            reiksmes = file.ReadLine().Split(',');
+                            TasksClass tsk = new TasksClass();
+                            tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = Convert.ToDouble(reiksmes[1]); tsk.Ivert = Convert.ToDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
+                            tsk.index = j;
+                            EC.UzdList.Add(tsk);
+                        }
+                        Employees.Items.Add(EC);
+                    }
+                }
+                else if (eilute == "Rodikliu lentele:")
+                {
+                    int index = Convert.ToInt32(file.ReadLine());
+                    for (int i = 0; i < index; i++)
+                    {
+                        string[] reiksmes = file.ReadLine().Split(',');
+                        IndicatorsClass ind = new IndicatorsClass();
+                        ind.INDPAVLine = reiksmes[0]; ind.BRLine = Convert.ToDouble(reiksmes[1]); ind.FRLine = Convert.ToDouble(reiksmes[2]); ind.TRLine = Convert.ToDouble(reiksmes[3]); ind.MKDLine = Convert.ToDouble(reiksmes[4]); ind.IsChecked = false;
+                        ind.index = i;
+                        Indicators.Items.Add(ind);
+                    }
+                }
+                else if (eilute == "Uzduociu lentele:")
+                {
+                    int index = Convert.ToInt32(file.ReadLine());
+                    for (int i = 0; i < index; i++)
+                    {
+                        string[] reiksmes = file.ReadLine().Split(',');
+                        TasksClass tsk = new TasksClass();
+                        tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = Convert.ToDouble(reiksmes[1]); tsk.Ivert = Convert.ToDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
+                        tsk.index = i;
+                        Tasks.Items.Add(tsk);
+                    }
+                }
+                else if (eilute == "Archyvo lentele:")
+                {
+                    int index = Convert.ToInt32(file.ReadLine());
+                    AEC = new List<ArchyvedEmployeeClass>();
+                    for (int i = 0; i < index; i++)
+                    {
+                        string[] reiksmes = file.ReadLine().Split(',');
+                        ArchyvedEmployeeClass EC = new ArchyvedEmployeeClass();
+                        EC.NameLine = reiksmes[0]; EC.BALine = Convert.ToDouble(reiksmes[1]); EC.RODLine = Convert.ToDouble(reiksmes[2]); EC.UZDLine = Convert.ToDouble(reiksmes[3]); EC.VisoLine = Convert.ToDouble(reiksmes[4]); EC.Date = reiksmes[5]; EC.IsChecked = false;
+                        EC.index = i;
+                        reiksmes = file.ReadLine().Split(',');
+                        int rod = Convert.ToInt32(reiksmes[0]);
+                        int uzd = Convert.ToInt32(reiksmes[1]);
+                        EC.MaxKDP = Convert.ToDouble(reiksmes[2]);
+                        EC.RodList = new List<IndicatorsClass>();
+                        EC.UzdList = new List<TasksClass>();
+                        for (int j = 0; j < rod; j++)
+                        {
+                            reiksmes = file.ReadLine().Split(',');
+                            IndicatorsClass ind = new IndicatorsClass();
+                            ind.INDPAVLine = reiksmes[0]; ind.BRLine = Convert.ToDouble(reiksmes[1]); ind.FRLine = Convert.ToDouble(reiksmes[2]); ind.TRLine = Convert.ToDouble(reiksmes[3]); ind.MKDLine = Convert.ToDouble(reiksmes[4]); ind.IsChecked = false;
+                            ind.index = j;
+                            EC.RodList.Add(ind);
+                        }
+                        for (int j = 0; j < uzd; j++)
+                        {
+                            reiksmes = file.ReadLine().Split(',');
+                            TasksClass tsk = new TasksClass();
+                            tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = Convert.ToDouble(reiksmes[1]); tsk.Ivert = Convert.ToDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
+                            tsk.index = j;
+                            EC.UzdList.Add(tsk);
+                        }
+                        AEC.Add(EC);
+                    }
+                }
+            }
+            file.Close();
+        }
+        private void SaveAll()
+        {
+            System.IO.StreamWriter file = new System.IO.StreamWriter(new System.IO.IsolatedStorage.IsolatedStorageFileStream("Duom.txt", System.IO.FileMode.Create, System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication()));
+            file.WriteLine("Darbuotoju lentele:");
+            file.WriteLine(Employees.Items.Count);
+            for (int i = 0; i < Employees.Items.Count; i++)
+            {
+                EmployeeClass emp = (EmployeeClass)Employees.Items[i];
+                file.WriteLine(emp.NameLine + "," + emp.BALine.ToString() + "," + emp.RODLine.ToString() + "," + emp.UZDLine.ToString() + "," + emp.VisoLine.ToString());
+                if (emp.RodList == null)
+                {
+                    emp.RodList = new List<IndicatorsClass>();
+                }
+                if (emp.UzdList == null)
+                {
+                    emp.UzdList = new List<TasksClass>();
+                }
+                file.WriteLine(emp.RodList.Count.ToString() + "," + emp.UzdList.Count.ToString() + "," + emp.MaxKDP.ToString());
+                for (int j = 0; j < emp.RodList.Count; j++)
+                {
+                    file.WriteLine(emp.RodList[j].INDPAVLine + "," + emp.RodList[j].BRLine.ToString() + "," + emp.RodList[j].FRLine.ToString() + "," + emp.RodList[j].TRLine.ToString() + "," + emp.RodList[j].MKDLine.ToString());
+                }
+                for (int j = 0; j < emp.UzdList.Count; j++)
+                {
+                    file.WriteLine(emp.UzdList[j].UZDPAVLine + "," + emp.UzdList[j].MaxIvert.ToString() + "," + emp.UzdList[j].Ivert.ToString());
+                }
+            }
 
-            EC = new EmployeeClass();
-            EC.NameLine = "Employee 2"; EC.BALine = 2000.00; EC.RODLine = 0; EC.UZDLine = 0; EC.VisoLine = EC.BALine + EC.RODLine + EC.UZDLine; EC.IsChecked = false;
-            EC.index = i++;
-            Employees.Items.Add(EC);
+            file.WriteLine("Rodikliu lentele:");
+            file.WriteLine(Indicators.Items.Count.ToString());
+            for (int i = 0; i < Indicators.Items.Count; i++)
+            {
+                IndicatorsClass ind = (IndicatorsClass)Indicators.Items[i];
+                file.WriteLine(ind.INDPAVLine + "," + ind.BRLine.ToString() + "," + ind.FRLine.ToString() + "," + ind.TRLine.ToString() + "," + ind.MKDLine.ToString());
+            }
 
-            EC = new EmployeeClass();
-            EC.NameLine = "Employee 3"; EC.BALine = 3000.00; EC.RODLine = 0; EC.UZDLine = 0; EC.VisoLine = EC.BALine + EC.RODLine + EC.UZDLine; EC.IsChecked = false;
-            EC.index = i++;
-            Employees.Items.Add(EC);
-
-            i = 0;
-            IndicatorsClass IC = new IndicatorsClass();
-            IC.INDPAVLine = "PROFIT"; IC.BRLine = 100000.00; IC.TRLine = 130000.00; IC.FRLine = 121000.00; IC.MKDLine = 1200.00; IC.IsChecked = false;
-            IC.index = i++;
-            Indicators.Items.Add(IC);
-
-            IC = new IndicatorsClass();
-            IC.INDPAVLine = "COSTS"; IC.BRLine = 500000.00; IC.TRLine = 450000.00; IC.FRLine = 480000.00; IC.MKDLine = 800.00; IC.IsChecked = false;
-            IC.index = i++;
-            Indicators.Items.Add(IC);
-
-            IC = new IndicatorsClass();
-            IC.INDPAVLine = "Indicator 3"; IC.BRLine = 2.0; IC.TRLine = 2.4; IC.FRLine = 4.0; IC.MKDLine = 2.0; IC.IsChecked = false;
-            IC.index = i++;
-            Indicators.Items.Add(IC);
-
-            IC = new IndicatorsClass();
-            IC.INDPAVLine = "Indicator 4"; IC.BRLine = 3.0; IC.TRLine = 3.6; IC.FRLine = 6.0; IC.MKDLine = 3.0; IC.IsChecked = false;
-            IC.index = i++;
-            Indicators.Items.Add(IC);
-
-            i = 0;
-            TasksClass TC = new TasksClass();
-            TC.UZDPAVLine = "RELATIONSHIP WITH..."; TC.Ivert = 9.0; TC.MaxIvert = 11.0; TC.IVERTLine = (TC.Ivert + " / " + TC.MaxIvert).ToString(); TC.IsChecked = false;
-            TC.index = i++;
-            Tasks.Items.Add(TC);
-
-            TC = new TasksClass();
-            TC.UZDPAVLine = "CUTTING ON THE RET..."; TC.Ivert = 5.0; TC.MaxIvert = 9.0; TC.IVERTLine = (TC.Ivert + " / " + TC.MaxIvert).ToString(); TC.IsChecked = false;
-            TC.index = i++;
-            Tasks.Items.Add(TC);
-
-            TC = new TasksClass();
-            TC.UZDPAVLine = "IMPROVING PROFESS..."; TC.Ivert = 6.0; TC.MaxIvert = 7.0; TC.IVERTLine = (TC.Ivert + " / " + TC.MaxIvert).ToString(); TC.IsChecked = false;
-            TC.index = i++;
-            Tasks.Items.Add(TC);
-
-            TC = new TasksClass();
-            TC.UZDPAVLine = "Task 4"; TC.Ivert = 7.0; TC.MaxIvert = 8.0; TC.IVERTLine = (TC.Ivert + " / " + TC.MaxIvert).ToString(); TC.IsChecked = false;
-            TC.index = i++;
-            Tasks.Items.Add(TC);
-
-            TC = new TasksClass();
-            TC.UZDPAVLine = "Task 5"; TC.Ivert = 8.0; TC.MaxIvert = 9.0; TC.IVERTLine = (TC.Ivert + " / " + TC.MaxIvert).ToString(); TC.IsChecked = false;
-            TC.index = i++;
-            Tasks.Items.Add(TC);
+            file.WriteLine("Uzduociu lentele:");
+            file.WriteLine(Tasks.Items.Count.ToString());
+            for (int i = 0; i < Tasks.Items.Count; i++)
+            {
+                TasksClass tsk = (TasksClass)Tasks.Items[i];
+                file.WriteLine(tsk.UZDPAVLine + "," + tsk.MaxIvert.ToString() + "," + tsk.Ivert.ToString());
+            }
+            if (AEC == null)
+            {
+                AEC = new List<ArchyvedEmployeeClass>();
+            }
+            file.WriteLine("Archyvo lentele:");
+            file.WriteLine(AEC.Count);
+            for (int i = 0; i < AEC.Count; i++)
+            {
+                file.WriteLine(AEC[i].NameLine + "," + AEC[i].BALine.ToString() + "," + AEC[i].RODLine.ToString() + "," + AEC[i].UZDLine.ToString() + "," + AEC[i].VisoLine.ToString() + "," + AEC[i].Date);
+                if (AEC[i].RodList == null)
+                {
+                    AEC[i].RodList = new List<IndicatorsClass>();
+                }
+                if (AEC[i].UzdList == null)
+                {
+                    AEC[i].UzdList = new List<TasksClass>();
+                }
+                file.WriteLine(AEC[i].RodList.Count.ToString() + "," + AEC[i].UzdList.Count.ToString() + "," + AEC[i].MaxKDP.ToString());
+                for (int j = 0; j < AEC[i].RodList.Count; j++)
+                {
+                    file.WriteLine(AEC[i].RodList[j].INDPAVLine + "," + AEC[i].RodList[j].BRLine.ToString() + "," + AEC[i].RodList[j].FRLine.ToString() + "," + AEC[i].RodList[j].TRLine.ToString() + "," + AEC[i].RodList[j].MKDLine.ToString());
+                }
+                for (int j = 0; j < AEC[i].UzdList.Count; j++)
+                {
+                    file.WriteLine(AEC[i].UzdList[j].UZDPAVLine + "," + AEC[i].UzdList[j].MaxIvert.ToString() + "," + AEC[i].UzdList[j].Ivert.ToString());
+                }
+            }
+            file.Close();
+            CanExit = true;
         }
         private void KillAll()
         {
@@ -114,14 +309,18 @@ namespace Motyvacija_WP8
             AddBarEmployee.Visibility = System.Windows.Visibility.Collapsed;
             AddBarIndicator.Visibility = System.Windows.Visibility.Collapsed;
             AddBarTask.Visibility = System.Windows.Visibility.Collapsed;
-            Edit.Visibility = System.Windows.Visibility.Collapsed;
             MAxKDPST.Visibility = System.Windows.Visibility.Collapsed;
+            EditShowGrid.Visibility = System.Windows.Visibility.Collapsed;
+            Edit.Visibility = System.Windows.Visibility.Collapsed;
+            Show.Visibility = System.Windows.Visibility.Collapsed;
+            EmployeeDetailPanel.Visibility = System.Windows.Visibility.Collapsed;
         }
         private void ApplicationBarIconButton_Click(object sender, EventArgs e) // Meniu
         {
+
             if (MeniuBar.Visibility == System.Windows.Visibility.Collapsed)
             {
-                LanguageBar.Visibility = System.Windows.Visibility.Collapsed;
+                KillAll();
                 MeniuBar.Visibility = System.Windows.Visibility.Visible;
             }
             else
@@ -131,7 +330,53 @@ namespace Motyvacija_WP8
         }
         private void ApplicationBarIconButton_Click_1(object sender, EventArgs e) // Save
         {
-
+            for (int i = 0; i < Employees.Items.Count; i++)
+            {
+                EmployeeClass emp = (EmployeeClass)Employees.Items[i];
+                if (emp.IsChecked == true)
+                {
+                    ArchyvedEmployeeClass A = new ArchyvedEmployeeClass();
+                    A.BALine = emp.BALine;
+                    DateTime dateTime = DateTime.UtcNow.Date;
+                    string data = dateTime.ToString("yyyy.MM.dd");
+                    A.Date = data;
+                    A.index = AEC.Count;
+                    A.IsChecked = false;
+                    A.MaxKDP = emp.MaxKDP;
+                    A.NameLine = emp.NameLine;
+                    A.RODLine = emp.RODLine;
+                    A.UZDLine = emp.UZDLine;
+                    A.VisoLine = emp.VisoLine;
+                    A.RodList = new List<IndicatorsClass>();
+                    A.UzdList = new List<TasksClass>();
+                    if (emp.RodList == null)
+                    {
+                        emp.RodList = new List<IndicatorsClass>();
+                    }
+                    if (emp.UzdList == null)
+                    {
+                        emp.UzdList = new List<TasksClass>();
+                    }
+                    for (int j = 0; j < emp.RodList.Count; j++)
+                    {
+                        IndicatorsClass ind = (IndicatorsClass)emp.RodList[j];
+                        IndicatorsClass newind = new IndicatorsClass();
+                        newind.FRLine = ind.FRLine; newind.BRLine = ind.BRLine; newind.index = A.RodList.Count; newind.INDPAVLine = ind.INDPAVLine; newind.IsChecked = false; newind.MKDLine = ind.MKDLine; newind.TRLine = ind.TRLine;
+                        A.RodList.Add(newind);
+                    }
+                    for (int j = 0; j < emp.UzdList.Count; j++)
+                    {
+                        TasksClass tsk = (TasksClass)emp.UzdList[j];
+                        TasksClass newtsk = new TasksClass();
+                        newtsk.index = A.UzdList.Count; newtsk.IsChecked = false; newtsk.Ivert = tsk.Ivert; newtsk.IVERTLine = tsk.IVERTLine; newtsk.MaxIvert = tsk.MaxIvert; newtsk.UZDPAVLine = tsk.UZDPAVLine;
+                        A.UzdList.Add(newtsk);
+                    }
+                    AEC.Add(A);
+                }
+            }
+            KillAll();
+            SaveAll();
+            SaveKalba(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
         }
         private void ApplicationBarIconButton_Click_2(object sender, EventArgs e) // Add
         {
@@ -184,6 +429,7 @@ namespace Motyvacija_WP8
             }
             else
             {
+                KillAll();
                 MAxKDPST.Visibility = System.Windows.Visibility.Visible;
             }
         }
@@ -255,7 +501,8 @@ namespace Motyvacija_WP8
         }
         private void Archyvas_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveAll();
+            NavigationService.Navigate(new Uri("/Archyvas.xaml", UriKind.Relative));
         }
         private void About_Click(object sender, RoutedEventArgs e)
         {
@@ -272,6 +519,8 @@ namespace Motyvacija_WP8
         }
         private void LT_Click(object sender, RoutedEventArgs e)
         {
+            SaveKalba("lt-LT");
+            SaveAll();
             CultureInfo cult = new CultureInfo("lt-LT");
             System.Threading.Thread.CurrentThread.CurrentCulture = cult;
             System.Threading.Thread.CurrentThread.CurrentUICulture = cult;
@@ -284,8 +533,9 @@ namespace Motyvacija_WP8
         }
         private void EN_Click(object sender, RoutedEventArgs e)
         {
+            SaveKalba("en");
+            SaveAll();
             CultureInfo cult = new CultureInfo("en");
-            //
             System.Threading.Thread.CurrentThread.CurrentCulture = cult;
             System.Threading.Thread.CurrentThread.CurrentUICulture = cult;
             Motyvacija_WP8.Resources.AppResources.Culture = cult;
@@ -297,6 +547,8 @@ namespace Motyvacija_WP8
         }
         private void RU_Click(object sender, RoutedEventArgs e)
         {
+            SaveKalba("ru-RU");
+            SaveAll();
             CultureInfo cult = new CultureInfo("ru-RU");
             System.Threading.Thread.CurrentThread.CurrentCulture = cult;
             System.Threading.Thread.CurrentThread.CurrentUICulture = cult;
@@ -314,16 +566,22 @@ namespace Motyvacija_WP8
         private void Employees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             KillAll();
+            EditShowGrid.Visibility = System.Windows.Visibility.Visible;
+            Show.Visibility = System.Windows.Visibility.Visible;
             Edit.Visibility = System.Windows.Visibility.Visible;
         }
         private void Tasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             KillAll();
+            EditShowGrid.Visibility = System.Windows.Visibility.Visible;
+            Show.Visibility = System.Windows.Visibility.Collapsed;
             Edit.Visibility = System.Windows.Visibility.Visible;
         }
         private void Indicators_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             KillAll();
+            EditShowGrid.Visibility = System.Windows.Visibility.Visible;
+            Show.Visibility = System.Windows.Visibility.Collapsed;
             Edit.Visibility = System.Windows.Visibility.Visible;
         }
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -586,6 +844,14 @@ namespace Motyvacija_WP8
         }
         private void CreateNewEmployee_Click(object sender, RoutedEventArgs e)
         {
+            if (NameBox.Text == "")
+            {
+                NameBox.Text = "*";
+            }
+            if (BABox.Text == "")
+            {
+                BABox.Text = "0";
+            }
             if (AddNewItem == true)
             {
                 EmployeeClass EC = new EmployeeClass();
@@ -604,6 +870,26 @@ namespace Motyvacija_WP8
         }
         private void CreateNewIndicator_Click(object sender, RoutedEventArgs e)
         {
+            if (PavBoxIND.Text == "")
+            {
+                PavBoxIND.Text = "*";
+            }
+            if (BRBox.Text == "")
+            {
+                BRBox.Text = "0";
+            }
+            if (TRBox.Text == "")
+            {
+                TRBox.Text = "0";
+            }
+            if (FRBox.Text == "")
+            {
+                FRBox.Text = "0";
+            }
+            if (MKDBox.Text == "")
+            {
+                MKDBox.Text = "0";
+            }
             if (AddNewItem == true)
             {
                 IndicatorsClass IC = new IndicatorsClass();
@@ -622,6 +908,18 @@ namespace Motyvacija_WP8
         }
         private void CreateNewTask_Click(object sender, RoutedEventArgs e)
         {
+            if (PavBoxTSK.Text == "")
+            {
+                PavBoxTSK.Text = "*";
+            }
+            if (IVBox.Text == "")
+            {
+                IVBox.Text = "0";
+            }
+            if (MAXIVBox.Text == "")
+            {
+                MAXIVBox.Text = "0";
+            }
             if (AddNewItem == true)
             {
                 TasksClass TC = new TasksClass();
@@ -702,7 +1000,6 @@ namespace Motyvacija_WP8
         }
         private void CreateNewEmployeeBack_Click(object sender, RoutedEventArgs e)
         {
-            KillAll();
             int index = PIVOT.SelectedIndex;
             if (index == 0)
             {
@@ -720,6 +1017,7 @@ namespace Motyvacija_WP8
             PavBoxIND.Text = ""; BRBox.Text = ""; TRBox.Text = ""; FRBox.Text = ""; MKDBox.Text = "";
             PavBoxTSK.Text = ""; IVBox.Text = ""; MAXIVBox.Text = "";
             MAXKDPBox.Text = "";
+            KillAll();
         }
         private void MAXKDPBoxOk_Click(object sender, RoutedEventArgs e)
         {
@@ -736,20 +1034,35 @@ namespace Motyvacija_WP8
                         emp.VisoLine = emp.BALine + Convert.ToDouble(result.Item1 + result.Item2);
                         emp.IsChecked = false;
                         lastEmployeeChecked = -1;
+                        emp.RodList = new List<IndicatorsClass>();
+                        emp.UzdList = new List<TasksClass>();
+                        for (int j = 0; j < Indicators.Items.Count; j++)
+                        {
+                            IndicatorsClass ind = (IndicatorsClass)Indicators.Items[j];
+                            if (ind.IsChecked == true)
+                            {
+                                IndicatorsClass newind = new IndicatorsClass();
+                                newind.FRLine = ind.FRLine; newind.BRLine = ind.BRLine; newind.index = emp.RodList.Count; newind.INDPAVLine = ind.INDPAVLine; newind.IsChecked = false; newind.MKDLine = ind.MKDLine; newind.TRLine = ind.TRLine;
+                                emp.RodList.Add(newind);
+                                ind.IsChecked = false;
+                                Indicators.Items[j] = ind;
+                            }
+                        }
+                        for (int j = 0; j < Tasks.Items.Count; j++)
+                        {
+                            TasksClass tsk = (TasksClass)Tasks.Items[j];
+                            if (tsk.IsChecked == true)
+                            {
+                                TasksClass newtsk = new TasksClass();
+                                newtsk.index = emp.UzdList.Count; newtsk.IsChecked = false; newtsk.Ivert = tsk.Ivert; newtsk.IVERTLine = tsk.IVERTLine; newtsk.MaxIvert = tsk.MaxIvert; newtsk.UZDPAVLine = tsk.UZDPAVLine;
+                                emp.UzdList.Add(newtsk);
+                                tsk.IsChecked = false;
+                                Tasks.Items[j] = tsk;
+                            }
+                        }
+                        emp.MaxKDP = Double.Parse(MAXKDPBox.Text);
                         Employees.Items[i] = emp;
                     }
-                }
-                for (int i = 0; i < Indicators.Items.Count; i++)
-                {
-                    IndicatorsClass ind = (IndicatorsClass)Indicators.Items[i];
-                    ind.IsChecked = false;
-                    Indicators.Items[i] = ind;
-                }
-                for (int i = 0; i < Tasks.Items.Count; i++)
-                {
-                    TasksClass tsk = (TasksClass)Tasks.Items[i];
-                    tsk.IsChecked = false;
-                    Tasks.Items[i] = tsk;
                 }
             }
             KillAll();
@@ -815,6 +1128,33 @@ namespace Motyvacija_WP8
             }
             return new Tuple<int, int>(indicatorsSalary, tasksSalary);
         }
+        private void Show_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeDetailPanel.Visibility = System.Windows.Visibility.Visible;
+            EmployeeClass emp = (EmployeeClass) Employees.Items[Employees.SelectedIndex];
+            ShowVAR.Text = emp.NameLine;
+            ShowBA.Text = emp.BALine.ToString();
+            ShowROD.Text = emp.RODLine.ToString();
+            ShowUZD.Text = emp.UZDLine.ToString();
+            ShowViso.Text = emp.VisoLine.ToString();
+            SHowMAxKDP.Text = emp.MaxKDP.ToString();
+            ShowIndicators.Items.Clear();
+            ShowTasks.Items.Clear();
+            if (emp.RodList != null)
+            {
+                for (int i = 0; i < emp.RodList.Count; i++)
+                {
+                    ShowIndicators.Items.Add(emp.RodList[i]);
+                }
+            }
+            if (emp.UzdList != null)
+            {
+                for (int i = 0; i < emp.UzdList.Count; i++)
+                {
+                    ShowTasks.Items.Add(emp.UzdList[i]);
+                }
+            }
+        }
     }
     public class EmployeeClass
     {
@@ -827,6 +1167,7 @@ namespace Motyvacija_WP8
         public int index { get; set; }
         public List<IndicatorsClass> RodList { get; set; }
         public List<TasksClass> UzdList { get; set; }
+        public double MaxKDP { get; set; }
     }
     public class IndicatorsClass
     {
@@ -859,5 +1200,6 @@ namespace Motyvacija_WP8
         public int index { get; set; }
         public List<IndicatorsClass> RodList { get; set; }
         public List<TasksClass> UzdList { get; set; }
+        public double MaxKDP { get; set; }
     }
 }

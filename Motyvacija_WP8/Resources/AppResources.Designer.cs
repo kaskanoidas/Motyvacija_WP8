@@ -129,11 +129,29 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basic.
+        /// </summary>
+        public static string BAT {
+            get {
+                return ResourceManager.GetString("BAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Baseline value.
         /// </summary>
         public static string BR {
             get {
                 return ResourceManager.GetString("BR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Baseline.
+        /// </summary>
+        public static string BRT {
+            get {
+                return ResourceManager.GetString("BRT", resourceCulture);
             }
         }
         
@@ -153,6 +171,15 @@ namespace Motyvacija_WP8.Resources {
             get {
                 object obj = ResourceManager.GetObject("check", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
             }
         }
         
@@ -212,6 +239,15 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actual.
+        /// </summary>
+        public static string FRT {
+            get {
+                return ResourceManager.GetString("FRT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string Help {
@@ -266,7 +302,7 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum task-related variable part.
+        ///   Looks up a localized string similar to Maximum task-related variable part:.
         /// </summary>
         public static string MAXKDP {
             get {
@@ -289,6 +325,15 @@ namespace Motyvacija_WP8.Resources {
         public static string MKD {
             get {
                 return ResourceManager.GetString("MKD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max. v. p..
+        /// </summary>
+        public static string MKDT {
+            get {
+                return ResourceManager.GetString("MKDT", resourceCulture);
             }
         }
         
@@ -338,6 +383,15 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indicators.
+        /// </summary>
+        public static string RODT {
+            get {
+                return ResourceManager.GetString("RODT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sample Runtime Property Value.
         /// </summary>
         public static string SampleProperty {
@@ -366,6 +420,15 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        public static string SHOW {
+            get {
+                return ResourceManager.GetString("SHOW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tasks.
         /// </summary>
         public static string Tasks {
@@ -384,6 +447,15 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target.
+        /// </summary>
+        public static string TRT {
+            get {
+                return ResourceManager.GetString("TRT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tasks.
         /// </summary>
         public static string UZD {
@@ -393,11 +465,29 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tasks.
+        /// </summary>
+        public static string UZDT {
+            get {
+                return ResourceManager.GetString("UZDT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sum.
         /// </summary>
         public static string VISO {
             get {
                 return ResourceManager.GetString("VISO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sum.
+        /// </summary>
+        public static string VISOT {
+            get {
+                return ResourceManager.GetString("VISOT", resourceCulture);
             }
         }
     }
