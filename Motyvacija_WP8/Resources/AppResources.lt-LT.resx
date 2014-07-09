@@ -305,4 +305,22 @@ Maksimaliai galėjo uždirbti 3700.</value>
   <data name="VISOT" xml:space="preserve">
     <value>Viso</value>
   </data>
+  <data name="EmployeeAddToArchive" xml:space="preserve">
+    <value>Norint suarchyvuoti darbuotoją, jį reikia pažymėti varnele ir paspausti mygtuką „saugoti“. Taip pat, paspaudus mygtuką „saugoti“, yra išsaugomi visi programos duomenys.</value>
+  </data>
+  <data name="EmployeeCalculate" xml:space="preserve">
+    <value>Norint įvertinti darbuotoją, reikia jį pažymėti varnele, sužymėti rodiklius ir užduotis, pagal kuriuos jį vertinsite, ir paspausti mygtuką „skaičiuoti“ (pažymėtą varnele).</value>
+  </data>
+  <data name="EmployeeDelete" xml:space="preserve">
+    <value>Norint ištrinti darbuotoją, rodiklį arba užduotį, reikia jį pastumti į dešinę.</value>
+  </data>
+  <data name="EmployeeEdit" xml:space="preserve">
+    <value>Norint redaguoti informaciją apie darbuotoją, reikia jį pažymėti ir paspausti mygtuką „redaguoti”. Norint peržiūrėti informaciją apie darbuotoją, paspauskite mygtuką „rodyti”.</value>
+  </data>
+  <data name="EmployeeMake" xml:space="preserve">
+    <value>Norint sukurti naują darbuotoją, rodiklį arba užduotį, paspauskite pliusą.</value>
+  </data>
+  <data name="MeniuText" xml:space="preserve">
+    <value>Norint peržiūrėti išsaugotus darbuotojus, informaciją apie programą, keisti kalbą, paspauskite mygtuką "meniu".</value>
+  </data>
 </root>

@@ -133,7 +133,7 @@
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <CheckBox Grid.Column="0" Margin="0,-12,0,0" Tag="{Binding index}" IsChecked="{Binding IsChecked}" Checked="CheckBox_Checked_2" Unchecked="CheckBox_Unchecked_2" Width="100" Height="100"/>
-                                            <TextBlock Grid.Column="1" x:Name="UZDPAV" Text="{Binding UZDPAVLine}" FontSize="40"/>
+                                            <TextBlock Grid.Column="1" x:Name="UZDPAV" Text="{Binding UZDPAVLine}" FontSize="30"/>
                                         </Grid>
                                         <TextBlock Grid.Row="1" x:Name="IVERT" Text="{Binding IVERTLine}" Style="{StaticResource PhoneTextSubtleStyle}"/>
                                     </Grid>

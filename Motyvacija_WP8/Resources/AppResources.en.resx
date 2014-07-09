@@ -314,4 +314,22 @@ He could earn maximum SALARY of 3700.</value>
   <data name="VISOT" xml:space="preserve">
     <value>Sum</value>
   </data>
+  <data name="EmployeeAddToArchive" xml:space="preserve">
+    <value>To archive an employee, you have to mark the employee’s check box and press the “save” button. Also, pressing the „save“ button saves all the application's data.</value>
+  </data>
+  <data name="EmployeeCalculate" xml:space="preserve">
+    <value>To evaluate an employee, you need to mark the employee’s check box, mark the indicators and tasks by which you evaluate the employee, and press the “calculate” button (marked with a tick).</value>
+  </data>
+  <data name="EmployeeDelete" xml:space="preserve">
+    <value>To delete an employee, indicator, or task, swipe it to the right.</value>
+  </data>
+  <data name="EmployeeEdit" xml:space="preserve">
+    <value>To edit an employee’s information, you need to mark the employee and press the button “edit”. To view an employee’s information, you need to press the button “show”.</value>
+  </data>
+  <data name="EmployeeMake" xml:space="preserve">
+    <value>To create a new employee, indicator, or task, press the button with a plus on it.</value>
+  </data>
+  <data name="MeniuText" xml:space="preserve">
+    <value>To view the archived employees, information about the program, or change the language, press the button “menu”.</value>
+  </data>
 </root>

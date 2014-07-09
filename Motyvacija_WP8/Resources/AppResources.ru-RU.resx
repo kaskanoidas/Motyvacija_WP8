@@ -177,7 +177,7 @@
     <value>Показатели</value>
   </data>
   <data name="SaveTA" xml:space="preserve">
-    <value>Экономить</value>
+    <value>Сохранить</value>
   </data>
   <data name="Tasks" xml:space="preserve">
     <value>Задании</value>
@@ -317,7 +317,7 @@ r</value>
     <value>Макс. п. ч.</value>
   </data>
   <data name="RODT" xml:space="preserve">
-    <value>Показатели</value>
+    <value>Показ.</value>
   </data>
   <data name="SHOW" xml:space="preserve">
     <value>Показывать</value>
@@ -330,5 +330,23 @@ r</value>
   </data>
   <data name="VISOT" xml:space="preserve">
     <value>Сумма</value>
+  </data>
+  <data name="EmployeeAddToArchive" xml:space="preserve">
+    <value>Для того чтобы архивировать сотрудника, нужно отмечать флажок работника и нажать на кнопку "сохранить". Кроме того, кнопкa „сохранить“ сохраняет все данные программы.</value>
+  </data>
+  <data name="EmployeeCalculate" xml:space="preserve">
+    <value>Для того чтобы оценить сотрудника, нужно отмечать флажок работника, отмечать показатели и задачи которые Вы оцениваете сотрудника, и нажмите кнопку "Рассчитать" (cгалочкой).</value>
+  </data>
+  <data name="EmployeeDelete" xml:space="preserve">
+    <value>Для удаления сотрудника, индикатор, или задачи, нужно передвинуть его вправо.</value>
+  </data>
+  <data name="EmployeeEdit" xml:space="preserve">
+    <value>Для того чтобы оценить сотрудника, нужно пометить сотрудника и нажать кнопку „редактировать“. Для того чтобы просматривать информацию о сотруднике, нужно нажать кнопку „показывать“.</value>
+  </data>
+  <data name="EmployeeMake" xml:space="preserve">
+    <value>Для того чтобы создать новый сотрудник, показатель или задачу, нажмите плюс.</value>
+  </data>
+  <data name="MeniuText" xml:space="preserve">
+    <value>Для того чтобы просмотреть сохраненные сотрудников, информацию о программе, изменить язык, нужно нажать кнопку „меню“.</value>
   </data>
 </root>

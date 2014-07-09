@@ -65,6 +65,16 @@ namespace Motyvacija_WP8
             SaveKalba(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
             Application.Current.Terminate();
         }
+        private void Application_Deactivated(object sender, DeactivatedEventArgs e)
+        {
+            SaveKalba(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
+            SaveAll();
+        }
+        private void Application_Closing(object sender, ClosingEventArgs e)
+        {
+            SaveKalba(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
+            SaveAll();
+        }
         private void LoadKalba()
         {
             System.IO.StreamReader file = new System.IO.StreamReader(new System.IO.IsolatedStorage.IsolatedStorageFileStream("Kalba.txt", System.IO.FileMode.OpenOrCreate, System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication()));
@@ -314,6 +324,11 @@ namespace Motyvacija_WP8
             Edit.Visibility = System.Windows.Visibility.Collapsed;
             Show.Visibility = System.Windows.Visibility.Collapsed;
             EmployeeDetailPanel.Visibility = System.Windows.Visibility.Collapsed;
+
+            NameBox.Text = ""; BABox.Text = "";
+            PavBoxIND.Text = ""; BRBox.Text = ""; TRBox.Text = ""; FRBox.Text = ""; MKDBox.Text = "";
+            PavBoxTSK.Text = ""; IVBox.Text = ""; MAXIVBox.Text = "";
+            MAXKDPBox.Text = "";
         }
         private void ApplicationBarIconButton_Click(object sender, EventArgs e) // Meniu
         {
@@ -444,7 +459,7 @@ namespace Motyvacija_WP8
             }
             catch (Exception)
             {
-                MAXKDPBox.Text = "0.0";
+                MAXKDPBox.Text = "0";
             }
 
             Boolean rado = false;
@@ -510,7 +525,7 @@ namespace Motyvacija_WP8
         }
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Help.xaml", UriKind.Relative));
         }
         private void Language_Click(object sender, RoutedEventArgs e)
         {
@@ -852,6 +867,15 @@ namespace Motyvacija_WP8
             {
                 BABox.Text = "0";
             }
+            double rezult = 0;
+            try
+            {
+                rezult = double.Parse(BABox.Text);
+            }
+            catch (Exception)
+            {
+                BABox.Text = "0";
+            }
             if (AddNewItem == true)
             {
                 EmployeeClass EC = new EmployeeClass();
@@ -878,7 +902,24 @@ namespace Motyvacija_WP8
             {
                 BRBox.Text = "0";
             }
+            double rezult = 0;
+            try
+            {
+                rezult = double.Parse(BRBox.Text);
+            }
+            catch (Exception)
+            {
+                BRBox.Text = "0";
+            }
             if (TRBox.Text == "")
+            {
+                TRBox.Text = "0";
+            }
+            try
+            {
+                rezult = double.Parse(TRBox.Text);
+            }
+            catch (Exception)
             {
                 TRBox.Text = "0";
             }
@@ -886,7 +927,23 @@ namespace Motyvacija_WP8
             {
                 FRBox.Text = "0";
             }
+            try
+            {
+                rezult = double.Parse(FRBox.Text);
+            }
+            catch (Exception)
+            {
+                FRBox.Text = "0";
+            }
             if (MKDBox.Text == "")
+            {
+                MKDBox.Text = "0";
+            }
+            try
+            {
+                rezult = double.Parse(MKDBox.Text);
+            }
+            catch (Exception)
             {
                 MKDBox.Text = "0";
             }
@@ -916,7 +973,24 @@ namespace Motyvacija_WP8
             {
                 IVBox.Text = "0";
             }
+            double rezult = 0;
+            try
+            {
+                rezult = double.Parse(IVBox.Text);
+            }
+            catch (Exception)
+            {
+                IVBox.Text = "0";
+            }
             if (MAXIVBox.Text == "")
+            {
+                MAXIVBox.Text = "0";
+            }
+            try
+            {
+                rezult = double.Parse(MAXIVBox.Text);
+            }
+            catch (Exception)
             {
                 MAXIVBox.Text = "0";
             }

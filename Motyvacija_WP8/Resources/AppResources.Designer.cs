@@ -202,6 +202,51 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To archive an employee, you have to mark the employee’s check box and press the “save” button. Also, pressing the „save“ button saves all the application&apos;s data..
+        /// </summary>
+        public static string EmployeeAddToArchive {
+            get {
+                return ResourceManager.GetString("EmployeeAddToArchive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To evaluate an employee, you need to mark the employee’s check box, mark the indicators and tasks by which you evaluate the employee, and press the “calculate” button (marked with a tick)..
+        /// </summary>
+        public static string EmployeeCalculate {
+            get {
+                return ResourceManager.GetString("EmployeeCalculate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To delete an employee, indicator, or task, swipe it to the right..
+        /// </summary>
+        public static string EmployeeDelete {
+            get {
+                return ResourceManager.GetString("EmployeeDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To edit an employee’s information, you need to mark the employee and press the button “edit”. To view an employee’s information, you need to press the button “show”..
+        /// </summary>
+        public static string EmployeeEdit {
+            get {
+                return ResourceManager.GetString("EmployeeEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To create a new employee, press the button with a plus on it..
+        /// </summary>
+        public static string EmployeeMake {
+            get {
+                return ResourceManager.GetString("EmployeeMake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string EmployeeName {
@@ -307,6 +352,15 @@ namespace Motyvacija_WP8.Resources {
         public static string MAXKDP {
             get {
                 return ResourceManager.GetString("MAXKDP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To view the archived employees, information about the program, or change the language, press the button “menu”..
+        /// </summary>
+        public static string MeniuText {
+            get {
+                return ResourceManager.GetString("MeniuText", resourceCulture);
             }
         }
         

@@ -47,6 +47,7 @@ namespace Motyvacija_WP8
                 
                 ArchyvedEmployeeClass EC = new ArchyvedEmployeeClass();
                 EC.NameLine = AEC[i].NameLine; EC.BALine = AEC[i].BALine; EC.RODLine = AEC[i].RODLine; EC.UZDLine = AEC[i].UZDLine; EC.VisoLine = AEC[i].VisoLine; EC.Date = AEC[i].Date; EC.IsChecked = false;
+                EC.MaxKDP = AEC[i].MaxKDP;
                 EC.index = i;
                 EC.RodList = new List<IndicatorsClass>();
                 EC.UzdList = new List<TasksClass>();

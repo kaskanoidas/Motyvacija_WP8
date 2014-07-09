@@ -154,6 +154,8 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Resources\EmployeeMakeEN.png" />
+    <Content Include="Resources\EmployeeMakeLT.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
@@ -178,7 +180,23 @@
     <Resource Include="Duom.txt" />
     <Content Include="ic_launcher6.png" />
     <Content Include="Resources\check.png" />
+    <Content Include="Resources\EmployeeAddToArchiveEN.png" />
+    <Content Include="Resources\EmployeeAddToArchiveLT.png" />
+    <Content Include="Resources\EmployeeAddToArchiveRU.png" />
+    <Content Include="Resources\EmployeeCalculateEN.png" />
+    <Content Include="Resources\EmployeeCalculateLT.png" />
+    <Content Include="Resources\EmployeeCalculateRU.png" />
+    <Content Include="Resources\EmployeeDeleteEN.png" />
+    <Content Include="Resources\EmployeeDeleteLT.png" />
+    <Content Include="Resources\EmployeeDeleteRU.png" />
+    <Content Include="Resources\EmployeeEditEN.png" />
+    <Content Include="Resources\EmployeeEditLT.png" />
+    <Content Include="Resources\EmployeeEditRU.png" />
+    <Content Include="Resources\EmployeeMakeRU.png" />
     <Content Include="Resources\feature.settings.png" />
+    <Content Include="Resources\MeniuEN.png" />
+    <Content Include="Resources\MeniuLT.png" />
+    <Content Include="Resources\MeniuRU.png" />
     <Content Include="Resources\save.png" />
     <Content Include="Resources\add.png" />
   </ItemGroup>

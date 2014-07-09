@@ -6,30 +6,114 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
-        </Grid>
+        <!--Pivot Control-->
+        <phone:Pivot x:Name="PIVOT" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
+            <phone:PivotItem Header="item1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN1" Stretch="Fill" Source="/Resources/EmployeeMakeEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT1" Stretch="Fill" Source="/Resources/EmployeeMakeLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU1" Stretch="Fill" Source="/Resources/EmployeeMakeRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeMake, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="item2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN2" Stretch="Fill" Source="/Resources/EmployeeEditEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT2" Stretch="Fill" Source="/Resources/EmployeeEditLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU2" Stretch="Fill" Source="/Resources/EmployeeEditRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeEdit, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="item3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN3" Stretch="Fill" Source="/Resources/MeniuEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT3" Stretch="Fill" Source="/Resources/MeniuLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU3" Stretch="Fill" Source="/Resources/MeniuRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.MeniuText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="item4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN4" Stretch="Fill" Source="/Resources/EmployeeDeleteEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT4" Stretch="Fill" Source="/Resources/EmployeeDeleteLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU4" Stretch="Fill" Source="/Resources/EmployeeDeleteRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeDelete, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="item5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN5" Stretch="Fill" Source="/Resources/EmployeeCalculateEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT5" Stretch="Fill" Source="/Resources/EmployeeCalculateLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU5" Stretch="Fill" Source="/Resources/EmployeeCalculateRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeCalculate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="item6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN6" Stretch="Fill" Source="/Resources/EmployeeAddToArchiveEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT6" Stretch="Fill" Source="/Resources/EmployeeAddToArchiveLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU6" Stretch="Fill" Source="/Resources/EmployeeAddToArchiveRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeAddToArchive, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
     </Grid>
-
+    
 </phone:PhoneApplicationPage>
