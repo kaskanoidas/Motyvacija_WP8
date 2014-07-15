@@ -98,12 +98,12 @@
                                                 <RowDefinition Height="30"/>
                                             </Grid.RowDefinitions>
                                             <TextBlock x:Name="BR" Text="{Binding Path=LocalizedResources.BRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0"/>
-                                            <TextBlock x:Name="FR" Text="{Binding Path=LocalizedResources.FRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
-                                            <TextBlock x:Name="TR" Text="{Binding Path=LocalizedResources.TRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
+                                            <TextBlock x:Name="TR" Text="{Binding Path=LocalizedResources.TRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
+                                            <TextBlock x:Name="FR" Text="{Binding Path=LocalizedResources.FRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
                                             <TextBlock x:Name="MKD" Text="{Binding Path=LocalizedResources.MKDT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3"/>
                                             <TextBlock x:Name="BR1" Text="{Binding BRLine}"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
-                                            <TextBlock x:Name="FR1" Text="{Binding FRLine}"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
-                                            <TextBlock x:Name="TR1" Text="{Binding TRLine}"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
+                                            <TextBlock x:Name="TR1" Text="{Binding TRLine}"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
+                                            <TextBlock x:Name="FR1" Text="{Binding FRLine}"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
                                             <TextBlock x:Name="MKD1" Text="{Binding MKDLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
                                         </Grid>
                                     </Grid>
@@ -176,10 +176,10 @@
             <TextBox x:Name="PavBoxIND"/>
             <TextBlock Text="{Binding Path=LocalizedResources.BR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="BRBox" InputScope="Number"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.FR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="FRBox" InputScope="Number"/>
             <TextBlock Text="{Binding Path=LocalizedResources.TR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="TRBox" InputScope="Number"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.FR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+            <TextBox x:Name="FRBox" InputScope="Number"/>
             <TextBlock Text="{Binding Path=LocalizedResources.MKD, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
             <TextBox x:Name="MKDBox" InputScope="Number"/>
             <Grid>
@@ -283,12 +283,12 @@
                                                         <RowDefinition Height="30"/>
                                                     </Grid.RowDefinitions>
                                                     <TextBlock x:Name="BR" Text="{Binding Path=LocalizedResources.BRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0"/>
-                                                    <TextBlock x:Name="FR" Text="{Binding Path=LocalizedResources.FRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
-                                                    <TextBlock x:Name="TR" Text="{Binding Path=LocalizedResources.TRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
+                                                    <TextBlock x:Name="FR" Text="{Binding Path=LocalizedResources.FRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
+                                                    <TextBlock x:Name="TR" Text="{Binding Path=LocalizedResources.TRT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
                                                     <TextBlock x:Name="MKD" Text="{Binding Path=LocalizedResources.MKDT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3"/>
                                                     <TextBlock x:Name="BR1" Text="{Binding BRLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
-                                                    <TextBlock x:Name="FR1" Text="{Binding FRLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
-                                                    <TextBlock x:Name="TR1" Text="{Binding TRLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
+                                                    <TextBlock x:Name="FR1" Text="{Binding FRLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
+                                                    <TextBlock x:Name="TR1" Text="{Binding TRLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
                                                     <TextBlock x:Name="MKD1" Text="{Binding MKDLine}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
                                                 </Grid>
                                             </Grid>
