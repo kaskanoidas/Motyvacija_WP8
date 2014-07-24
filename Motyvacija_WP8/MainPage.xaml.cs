@@ -336,7 +336,7 @@ namespace Motyvacija_WP8
             MAXKDPBox.Text = "";
 
             SpacingGrid.Height = 0;
-            SpacingGridInd.Height = 0;
+            //SpacingGridInd.Height = 0;
             SpacingGridTSK.Height = 0;
             InAddPanel = false;
             AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
@@ -1311,7 +1311,8 @@ namespace Motyvacija_WP8
             if (InAddPanel == false)
             {
                 AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-                SpacingGridInd.Height = AddBarIndicator.Height;
+                AddBarIndicator.Margin = new Thickness(0, 0, 0, 330);
+                AddBarIndicator.UpdateLayout();
                 InAddPanel = true;
                 TextBox tb = (TextBox)sender;
                 tb.Focus();
@@ -1326,7 +1327,8 @@ namespace Motyvacija_WP8
             if (PanelTaped == true)
             {
                 AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGridInd.Height = 0;
+                AddBarIndicator.Margin = new Thickness(0, 0, 0, 0);
+                AddBarIndicator.UpdateLayout();
                 InAddPanel = false;
             }
             PanelTaped = false;
@@ -1337,7 +1339,8 @@ namespace Motyvacija_WP8
             if (InAddPanel == false)
             {
                 AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGridInd.Height = 0;
+                AddBarIndicator.Margin = new Thickness(0, 0, 0, 0);
+                AddBarIndicator.UpdateLayout();
                 InAddPanel = false;
             }
         }
@@ -1346,7 +1349,8 @@ namespace Motyvacija_WP8
             if (InAddPanel == false)
             {
                 AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGridInd.Height = 0;
+                AddBarIndicator.Margin = new Thickness(0, 0, 0, 0);
+                AddBarIndicator.UpdateLayout();
                 InAddPanel = false;
             }
         }
@@ -1356,7 +1360,8 @@ namespace Motyvacija_WP8
             if (InAddPanel == false)
             {
                 AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-                SpacingGridInd.Height = AddBarIndicator.Height;
+                AddBarIndicator.Margin = new Thickness(0, 0, 0, 330);
+                AddBarIndicator.UpdateLayout();
                 InAddPanel = true;
                 TextBox tb = (TextBox)sender;
                 GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
@@ -1364,6 +1369,66 @@ namespace Motyvacija_WP8
                 AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
             }
         }
+
+        //private void PavBoxIND_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    PanelTaped = false;
+        //    if (InAddPanel == false)
+        //    {
+        //        AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+        //        SpacingGridInd.Height = AddBarIndicator.Height;
+        //        InAddPanel = true;
+        //        TextBox tb = (TextBox)sender;
+        //        tb.Focus();
+        //        //GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
+        //        //Point textBoxPosition = transform.Transform(new Point(0, 0));
+        //        //AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
+        //    }
+        //}
+        //private void PavBoxIND_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    InAddPanel = false;
+        //    if (PanelTaped == true)
+        //    {
+        //        AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        //        SpacingGridInd.Height = 0;
+        //        InAddPanel = false;
+        //    }
+        //    PanelTaped = false;
+        //}
+        //private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    PanelTaped = true;
+        //    if (InAddPanel == false)
+        //    {
+        //        AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        //        SpacingGridInd.Height = 0;
+        //        InAddPanel = false;
+        //    }
+        //}
+        //private void TextBlock_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    if (InAddPanel == false)
+        //    {
+        //        AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+        //        SpacingGridInd.Height = 0;
+        //        InAddPanel = false;
+        //    }
+        //}
+        //private void PavBoxIND_GotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    PanelTaped = false;
+        //    if (InAddPanel == false)
+        //    {
+        //        AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+        //        SpacingGridInd.Height = AddBarIndicator.Height;
+        //        InAddPanel = true;
+        //        TextBox tb = (TextBox)sender;
+        //        GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
+        //        Point textBoxPosition = transform.Transform(new Point(0, 0));
+        //        AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
+        //    }
+        //}
 
         private void PavBoxTSK_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
