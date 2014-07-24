@@ -194,6 +194,7 @@
                         <Button x:Name="CreateNewIndicator" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewIndicator_Click"/>
                         <Button x:Name="CreateNewIndicatorBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
                     </Grid>
+                    <Grid x:Name="SpacingGridInd" Background="Transparent" Height="0"/>
                 </StackPanel>
             </ScrollViewer>
             <ScrollViewer x:Name="AddBarTask" VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" Height="{Binding ActualHeight, ElementName=Employees}" Visibility="Collapsed">
