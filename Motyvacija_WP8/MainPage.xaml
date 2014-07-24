@@ -144,7 +144,6 @@
                 </ListBox>
             </phone:PivotItem>
         </phone:Pivot>
-
         <StackPanel x:Name="MeniuBar" HorizontalAlignment="Left" Width="236" Margin="84,386,0,0" Background="Black" Visibility="Collapsed">
             <Button x:Name="Archive" Content="{Binding Path=LocalizedResources.Archive, Source={StaticResource LocalizedStrings}}" Click="Archyvas_Click"/>
             <Button x:Name="About" Content="{Binding Path=LocalizedResources.About, Source={StaticResource LocalizedStrings}}" Click="About_Click"/>
@@ -157,56 +156,67 @@
             <Button x:Name="RU" Content="Pусский" Click="RU_Click"/>
             <Button x:Name="LanguageBarBack" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="LanguageBarBack_Click"/>
         </StackPanel>
-        <StackPanel x:Name="AddBarEmployee" Margin="23,414,10,0" Background="Black" Visibility="Collapsed">
-            <TextBlock Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="NameBox"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.BA, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="BABox" InputScope="Number"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button x:Name="CreateNewEmployee" Grid.Column="0" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployee_Click" />
-                <Button x:Name="CreateNewEmployeeBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
-            </Grid>
-        </StackPanel>
-        <StackPanel x:Name="AddBarIndicator" Margin="23,134,10,0" Background="Black" Visibility="Collapsed">
-            <TextBlock Margin="0,0,0,0" Text="{Binding Path=LocalizedResources.Pav, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="PavBoxIND"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.BR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="BRBox" InputScope="Number"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.TR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="TRBox" InputScope="Number"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.FR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="FRBox" InputScope="Number"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.MKD, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="MKDBox" InputScope="Number"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button x:Name="CreateNewIndicator" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewIndicator_Click"/>
-                <Button x:Name="CreateNewIndicatorBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
-            </Grid>
-        </StackPanel>
-        <StackPanel x:Name="AddBarTask" Margin="23,310,10,0" Background="Black" Visibility="Collapsed">
-            <TextBlock Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="PavBoxTSK"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.MaxIV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="MAXIVBox" InputScope="Number"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.IV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="IVBox" InputScope="Number"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button x:Name="CreateNewTask" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewTask_Click"/>
-                <Button x:Name="CreateNewTaskBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
-            </Grid>
-        </StackPanel>
+        <Grid x:Name="HelperGrid" Height="{Binding ActualHeight, ElementName=Employees}" Margin="0,165,0,0" Background="Transparent" Visibility="Collapsed">
+            <ScrollViewer x:Name="AddBarEmployee" VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top"  Height="{Binding ActualHeight, ElementName=Employees}" Visibility="Collapsed">
+                <StackPanel x:Name="AddBarPanell" Background="Black" VerticalAlignment="Bottom" Tap="AddBarPanell_Tap">
+                    <TextBlock Tap="TextBlock_Tap" Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="NameBox" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" GotFocus="NameBox_GotFocus"/>
+                    <TextBlock Tap="TextBlock_Tap" Text="{Binding Path=LocalizedResources.BA, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="BABox" InputScope="Number" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" GotFocus="NameBox_GotFocus"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="CreateNewEmployee" Grid.Column="0" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployee_Click" />
+                        <Button x:Name="CreateNewEmployeeBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
+                    </Grid>
+                    <Grid x:Name="SpacingGrid" Background="Transparent" Height="0"/>
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer x:Name="AddBarIndicator"  VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" Height="{Binding ActualHeight, ElementName=Employees}" Visibility="Collapsed">
+                <StackPanel VerticalAlignment="Bottom" Background="Black" Tap="StackPanel_Tap">
+                    <TextBlock Tap="TextBlock_Tap_1"  Margin="0,0,0,0" Text="{Binding Path=LocalizedResources.Pav, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="PavBoxIND" FontSize="20"/>
+                    <TextBlock Tap="TextBlock_Tap_1" Text="{Binding Path=LocalizedResources.BR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="BRBox" InputScope="Number" FontSize="20"/>
+                    <TextBlock Tap="TextBlock_Tap_1" Text="{Binding Path=LocalizedResources.TR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="TRBox" InputScope="Number" FontSize="20"/>
+                    <TextBlock Tap="TextBlock_Tap_1" Text="{Binding Path=LocalizedResources.FR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="FRBox" InputScope="Number" FontSize="20"/>
+                    <TextBlock Tap="TextBlock_Tap_1" Text="{Binding Path=LocalizedResources.MKD, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="MKDBox" InputScope="Number" FontSize="20"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="CreateNewIndicator" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewIndicator_Click"/>
+                        <Button x:Name="CreateNewIndicatorBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
+                    </Grid>
+                    <Grid x:Name="SpacingGridInd" Background="Transparent" Height="0"/>
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer x:Name="AddBarTask" VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" Height="{Binding ActualHeight, ElementName=Employees}" Visibility="Collapsed">
+                <StackPanel  VerticalAlignment="Bottom" Background="Black" Tap="StackPanel_Tap_1" >
+                    <TextBlock Tap="TextBlock_Tap_2" Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox Tap="PavBoxTSK_Tap" GotFocus="PavBoxTSK_GotFocus" LostFocus="PavBoxTSK_LostFocus" x:Name="PavBoxTSK"/>
+                    <TextBlock Tap="TextBlock_Tap_2" Text="{Binding Path=LocalizedResources.MaxIV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox Tap="PavBoxTSK_Tap" GotFocus="PavBoxTSK_GotFocus" LostFocus="PavBoxTSK_LostFocus" x:Name="MAXIVBox" InputScope="Number"/>
+                    <TextBlock Tap="TextBlock_Tap_2" Text="{Binding Path=LocalizedResources.IV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
+                    <TextBox Tap="PavBoxTSK_Tap" GotFocus="PavBoxTSK_GotFocus" LostFocus="PavBoxTSK_LostFocus" x:Name="IVBox" InputScope="Number"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="CreateNewTask" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewTask_Click"/>
+                        <Button x:Name="CreateNewTaskBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
+                    </Grid>
+                    <Grid x:Name="SpacingGridTSK" Background="Transparent" Height="0"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
         <Grid x:Name="EditShowGrid" Margin="0,624,0,0" Background="Black" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

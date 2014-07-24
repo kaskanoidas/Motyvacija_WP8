@@ -24,6 +24,8 @@ namespace Motyvacija_WP8
         Boolean scrolLock;
         Boolean AddNewItem;
         List<ArchyvedEmployeeClass> AEC;
+        Boolean InAddPanel;
+        Boolean PanelTaped;
         Boolean CanExit;
         public MainPage()
         {
@@ -36,6 +38,8 @@ namespace Motyvacija_WP8
             lastEmployeeChecked = -1; AddNewItem = false;
             x = 0; x2 = 0; y = 0; y2 = 0; scrolLock = false;
             CanExit = true;
+            InAddPanel = false;
+            PanelTaped = false;
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -319,6 +323,7 @@ namespace Motyvacija_WP8
             AddBarEmployee.Visibility = System.Windows.Visibility.Collapsed;
             AddBarIndicator.Visibility = System.Windows.Visibility.Collapsed;
             AddBarTask.Visibility = System.Windows.Visibility.Collapsed;
+            HelperGrid.Visibility = System.Windows.Visibility.Collapsed;
             MAxKDPST.Visibility = System.Windows.Visibility.Collapsed;
             EditShowGrid.Visibility = System.Windows.Visibility.Collapsed;
             Edit.Visibility = System.Windows.Visibility.Collapsed;
@@ -329,6 +334,15 @@ namespace Motyvacija_WP8
             PavBoxIND.Text = ""; BRBox.Text = ""; TRBox.Text = ""; FRBox.Text = ""; MKDBox.Text = "";
             PavBoxTSK.Text = ""; IVBox.Text = ""; MAXIVBox.Text = "";
             MAXKDPBox.Text = "";
+
+            SpacingGrid.Height = 0;
+            SpacingGridInd.Height = 0;
+            SpacingGridTSK.Height = 0;
+            InAddPanel = false;
+            AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+            AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+            AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+            this.Focus();
         }
         private void ApplicationBarIconButton_Click(object sender, EventArgs e) // Meniu
         {
@@ -397,29 +411,30 @@ namespace Motyvacija_WP8
         {
             int index = PIVOT.SelectedIndex;
             AddNewItem = true;
-
             if (index == 0)
             {
                 if (AddBarEmployee.Visibility == System.Windows.Visibility.Visible)
                 {
-                    AddBarEmployee.Visibility = System.Windows.Visibility.Collapsed;
+                    KillAll();
                 }
                 else
                 {
                     KillAll();
                     AddBarEmployee.Visibility = System.Windows.Visibility.Visible;
+                    HelperGrid.Visibility = System.Windows.Visibility.Visible;
                 }
             }
             else if (index == 1)
             {
                 if (AddBarIndicator.Visibility == System.Windows.Visibility.Visible)
                 {
-                    AddBarIndicator.Visibility = System.Windows.Visibility.Collapsed;
+                    KillAll();
                 }
                 else
                 {
                     KillAll();
                     AddBarIndicator.Visibility = System.Windows.Visibility.Visible;
+                    HelperGrid.Visibility = System.Windows.Visibility.Visible;
                 }
             }
             else if (index == 2) // tasks
@@ -427,12 +442,13 @@ namespace Motyvacija_WP8
 
                 if (AddBarTask.Visibility == System.Windows.Visibility.Visible)
                 {
-                    AddBarTask.Visibility = System.Windows.Visibility.Collapsed;
+                    KillAll();
                 }
                 else
                 {
                     KillAll();
                     AddBarTask.Visibility = System.Windows.Visibility.Visible;
+                    HelperGrid.Visibility = System.Windows.Visibility.Visible;
                 }
             }
         }
@@ -1227,6 +1243,184 @@ namespace Motyvacija_WP8
                 {
                     ShowTasks.Items.Add(emp.UzdList[i]);
                 }
+            }
+        }
+
+        private void NameBox_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PanelTaped = false;
+            if (InAddPanel == false)
+            {
+                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                SpacingGrid.Height = AddBarEmployee.Height;
+                InAddPanel = true;
+                TextBox tb = (TextBox)sender;
+                GeneralTransform transform = tb.TransformToVisual(AddBarEmployee);
+                Point textBoxPosition = transform.Transform(new Point(0, -100));
+                AddBarEmployee.ScrollToVerticalOffset(textBoxPosition.Y);
+            }
+        }
+        private void NameBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            InAddPanel = false;
+            if (PanelTaped == true)
+            {
+                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                SpacingGrid.Height = 0;
+                InAddPanel = false;
+            }
+            PanelTaped = false;
+        }
+        private void AddBarPanell_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PanelTaped = true;
+            if (InAddPanel == false)
+            {
+                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                SpacingGrid.Height = 0;
+                InAddPanel = false;
+            }
+        }
+        private void TextBlock_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (InAddPanel == false)
+            {
+                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                SpacingGrid.Height = 0;
+                InAddPanel = false;
+            }
+        }
+        private void NameBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PanelTaped = false;
+            if (InAddPanel == false)
+            {
+                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                SpacingGrid.Height = AddBarEmployee.Height;
+                InAddPanel = true;
+                TextBox tb = (TextBox)sender;
+                GeneralTransform transform = tb.TransformToVisual(AddBarEmployee);
+                Point textBoxPosition = transform.Transform(new Point(0, -100));
+                AddBarEmployee.ScrollToVerticalOffset(textBoxPosition.Y);
+            }
+        }
+
+        private void PavBoxIND_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PanelTaped = false;
+            if (InAddPanel == false)
+            {
+                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                SpacingGridInd.Height = AddBarIndicator.Height;
+                InAddPanel = true;
+                TextBox tb = (TextBox)sender;
+                tb.Focus();
+                //GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
+                //Point textBoxPosition = transform.Transform(new Point(0, 0));
+                //AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
+            }
+        }
+        private void PavBoxIND_LostFocus(object sender, RoutedEventArgs e)
+        {
+            InAddPanel = false;
+            if (PanelTaped == true)
+            {
+                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                SpacingGridInd.Height = 0;
+                InAddPanel = false;
+            }
+            PanelTaped = false;
+        }
+        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PanelTaped = true;
+            if (InAddPanel == false)
+            {
+                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                SpacingGridInd.Height = 0;
+                InAddPanel = false;
+            }
+        }
+        private void TextBlock_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (InAddPanel == false)
+            {
+                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                SpacingGridInd.Height = 0;
+                InAddPanel = false;
+            }
+        }
+        private void PavBoxIND_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PanelTaped = false;
+            if (InAddPanel == false)
+            {
+                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                SpacingGridInd.Height = AddBarIndicator.Height;
+                InAddPanel = true;
+                TextBox tb = (TextBox)sender;
+                GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
+                Point textBoxPosition = transform.Transform(new Point(0, 0));
+                AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
+            }
+        }
+
+        private void PavBoxTSK_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PanelTaped = false;
+            if (InAddPanel == false)
+            {
+                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                SpacingGridTSK.Height = AddBarTask.Height;
+                InAddPanel = true;
+                TextBox tb = (TextBox)sender;
+                GeneralTransform transform = tb.TransformToVisual(AddBarTask);
+                Point textBoxPosition = transform.Transform(new Point(0, -100));
+                AddBarTask.ScrollToVerticalOffset(textBoxPosition.Y);
+            }
+        }
+        private void PavBoxTSK_LostFocus(object sender, RoutedEventArgs e)
+        {
+            InAddPanel = false;
+            if (PanelTaped == true)
+            {
+                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                SpacingGridTSK.Height = 0;
+                InAddPanel = false;
+            }
+            PanelTaped = false;
+        }
+        private void StackPanel_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            PanelTaped = true;
+            if (InAddPanel == false)
+            {
+                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                SpacingGridTSK.Height = 0;
+                InAddPanel = false;
+            }
+        }
+        private void TextBlock_Tap_2(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (InAddPanel == false)
+            {
+                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                SpacingGridTSK.Height = 0;
+                InAddPanel = false;
+            }
+        }
+        private void PavBoxTSK_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PanelTaped = false;
+            if (InAddPanel == false)
+            {
+                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                SpacingGridTSK.Height = AddBarTask.Height;
+                InAddPanel = true;
+                TextBox tb = (TextBox)sender;
+                GeneralTransform transform = tb.TransformToVisual(AddBarTask);
+                Point textBoxPosition = transform.Transform(new Point(0, -100));
+                AddBarTask.ScrollToVerticalOffset(textBoxPosition.Y);
             }
         }
     }
