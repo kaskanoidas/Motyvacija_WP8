@@ -1315,9 +1315,9 @@ namespace Motyvacija_WP8
                 InAddPanel = true;
                 TextBox tb = (TextBox)sender;
                 tb.Focus();
-                //GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
-                //Point textBoxPosition = transform.Transform(new Point(0, 0));
-                //AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
+                GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
+                Point textBoxPosition = transform.Transform(new Point(0, -100));
+                AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
             }
         }
         private void PavBoxIND_LostFocus(object sender, RoutedEventArgs e)
@@ -1360,7 +1360,7 @@ namespace Motyvacija_WP8
                 InAddPanel = true;
                 TextBox tb = (TextBox)sender;
                 GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
-                Point textBoxPosition = transform.Transform(new Point(0, 0));
+                Point textBoxPosition = transform.Transform(new Point(0, -100));
                 AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
             }
         }

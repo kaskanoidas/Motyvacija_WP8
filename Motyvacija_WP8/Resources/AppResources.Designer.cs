@@ -102,7 +102,7 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Goals, Results, Salary    V: 1.1.
+        ///   Looks up a localized string similar to Goals, Results, Salary    V: 1.2.
         /// </summary>
         public static string ApplicationTitle {
             get {

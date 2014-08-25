@@ -174,7 +174,7 @@
                     <Grid x:Name="SpacingGrid" Background="Transparent" Height="0"/>
                 </StackPanel>
             </ScrollViewer>
-            <ScrollViewer x:Name="AddBarIndicator"  VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" Height="{Binding ActualHeight, ElementName=Employees}" Visibility="Collapsed">
+            <ScrollViewer x:Name="AddBarIndicator"  VerticalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Height="{Binding ActualHeight, ElementName=Employees}" Visibility="Collapsed">
                 <StackPanel VerticalAlignment="Bottom" Background="Black" Tap="StackPanel_Tap">
                     <TextBlock Tap="TextBlock_Tap_1"  Margin="0,0,0,0" Text="{Binding Path=LocalizedResources.Pav, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
                     <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="PavBoxIND" FontSize="20"/>

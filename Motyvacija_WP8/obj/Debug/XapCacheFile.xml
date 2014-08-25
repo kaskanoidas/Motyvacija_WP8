@@ -1,8 +1,8 @@
-﻿<xapCache source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\Motyvacija_WP8_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="25/07/2014 00:04:37">
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\Motyvacija.dll" archivePath="Motyvacija.dll" lastWriteTime="25/07/2014 00:04:36" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\en\Motyvacija.resources.dll" archivePath="en\Motyvacija.resources.dll" lastWriteTime="25/07/2014 00:04:36" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\lt-LT\Motyvacija.resources.dll" archivePath="lt-LT\Motyvacija.resources.dll" lastWriteTime="25/07/2014 00:04:36" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\ru-RU\Motyvacija.resources.dll" archivePath="ru-RU\Motyvacija.resources.dll" lastWriteTime="25/07/2014 00:04:36" />
+﻿<xapCache source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\Motyvacija_WP8_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="31/07/2014 23:47:01">
+  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\Motyvacija.dll" archivePath="Motyvacija.dll" lastWriteTime="31/07/2014 23:47:00" />
+  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\en\Motyvacija.resources.dll" archivePath="en\Motyvacija.resources.dll" lastWriteTime="31/07/2014 23:47:01" />
+  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\lt-LT\Motyvacija.resources.dll" archivePath="lt-LT\Motyvacija.resources.dll" lastWriteTime="31/07/2014 23:47:01" />
+  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\ru-RU\Motyvacija.resources.dll" archivePath="ru-RU\Motyvacija.resources.dll" lastWriteTime="31/07/2014 23:47:01" />
   <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeMakeEN.png" archivePath="Resources\EmployeeMakeEN.png" lastWriteTime="06/07/2014 14:15:17" />
   <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeMakeLT.png" archivePath="Resources\EmployeeMakeLT.png" lastWriteTime="06/07/2014 14:16:36" />
   <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="19/06/2014 11:49:06" />
@@ -31,9 +31,9 @@
   <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\MeniuRU.png" archivePath="Resources\MeniuRU.png" lastWriteTime="06/07/2014 20:23:29" />
   <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\save.png" archivePath="Resources\save.png" lastWriteTime="19/06/2014 12:31:26" />
   <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\add.png" archivePath="Resources\add.png" lastWriteTime="19/06/2014 12:30:05" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="24/07/2014 23:52:20" />
+  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="25/07/2014 04:06:57" />
   <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="19/06/2014 11:49:06" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Windows Phone\v8.0\Libraries\Microsoft.Phone.Controls.dll" archivePath="Microsoft.Phone.Controls.dll" lastWriteTime="02/01/2013 04:57:00" />
   <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\ic_launcher6.png" archivePath="ic_launcher6.png" lastWriteTime="16/06/2014 09:56:35" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="24/07/2014 23:52:20" />
+  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="25/07/2014 04:06:57" />
 </xapCache>
