@@ -14,12 +14,12 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent" Tap="HelperGrid_Tap" d:IsHidden="True">
         <!--Pivot Control-->
-        <phone:Pivot x:Name="PIVOT" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" SelectionChanged="PIVOT_SelectionChanged">
+        <phone:Pivot x:Name="PIVOT" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" SelectionChanged="PIVOT_SelectionChanged" d:IsHidden="True">
             <!--Pivot item one-->
-            <phone:PivotItem Header="{Binding Path=LocalizedResources.Employees, Source={StaticResource LocalizedStrings}}">
-                <ListBox x:Name="Employees"  ItemsSource="{Binding EmployeeClass}" SelectionChanged="Employees_SelectionChanged">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.Employees, Source={StaticResource LocalizedStrings}}" d:IsHidden="True">
+                <ListBox x:Name="Employees"  ItemsSource="{Binding EmployeeClass}" SelectionChanged="Employees_SelectionChanged" d:IsHidden="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Tag="{Binding index}" ManipulationStarted="StackPanel_ManipulationStarted" ManipulationDelta="StackPanel_ManipulationDelta" ManipulationCompleted="StackPanel_ManipulationCompleted">
@@ -66,9 +66,9 @@
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem  Header="{Binding Path=LocalizedResources.Indicators, Source={StaticResource LocalizedStrings}}">
+            <phone:PivotItem  Header="{Binding Path=LocalizedResources.Indicators, Source={StaticResource LocalizedStrings}}" d:IsHidden="True">
                 <!--Double line list no text wrapping-->
-                <ListBox x:Name="Indicators" ItemsSource="{Binding IndicatorsClass}" SelectionChanged="Indicators_SelectionChanged">
+                <ListBox x:Name="Indicators" ItemsSource="{Binding IndicatorsClass}" SelectionChanged="Indicators_SelectionChanged" d:IsHidden="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Tag="{Binding index}" ManipulationStarted="StackPanel_ManipulationStarted_1" ManipulationDelta="StackPanel_ManipulationDelta_1" ManipulationCompleted="StackPanel_ManipulationCompleted_1">
@@ -115,9 +115,9 @@
             </phone:PivotItem>
 
             <!--Pivot item three-->
-            <phone:PivotItem Header="{Binding Path=LocalizedResources.Tasks, Source={StaticResource LocalizedStrings}}">
+            <phone:PivotItem Header="{Binding Path=LocalizedResources.Tasks, Source={StaticResource LocalizedStrings}}" d:IsHidden="True">
                 <!--Double line list no text wrapping-->
-                <ListBox x:Name="Tasks" ItemsSource="{Binding TasksClass}" FontSize="50" SelectionChanged="Tasks_SelectionChanged">
+                <ListBox x:Name="Tasks" ItemsSource="{Binding TasksClass}" FontSize="50" SelectionChanged="Tasks_SelectionChanged" d:IsHidden="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Tag="{Binding index}" ManipulationStarted="StackPanel_ManipulationStarted_2" ManipulationDelta="StackPanel_ManipulationDelta_2" ManipulationCompleted="StackPanel_ManipulationCompleted_2">
@@ -144,106 +144,112 @@
                 </ListBox>
             </phone:PivotItem>
         </phone:Pivot>
-        <StackPanel x:Name="MeniuBar" HorizontalAlignment="Left" Width="236" Margin="84,386,0,0" Background="Black" Visibility="Collapsed">
-            <Button x:Name="Archive" Content="{Binding Path=LocalizedResources.Archive, Source={StaticResource LocalizedStrings}}" Click="Archyvas_Click"/>
-            <Button x:Name="About" Content="{Binding Path=LocalizedResources.About, Source={StaticResource LocalizedStrings}}" Click="About_Click"/>
-            <Button x:Name="Help" Content="{Binding Path=LocalizedResources.Help, Source={StaticResource LocalizedStrings}}" Click="Help_Click"/>
-            <Button x:Name="Language" Content="{Binding Path=LocalizedResources.Language, Source={StaticResource LocalizedStrings}}" Click="Language_Click"/>
+        <StackPanel x:Name="MeniuBar" Visibility="Collapsed" HorizontalAlignment="Center" Width="236" VerticalAlignment="Bottom" Background="Black" d:IsHidden="True" >
+            <Button x:Name="Archive" Content="{Binding Path=LocalizedResources.Archive, Source={StaticResource LocalizedStrings}}" Click="Archyvas_Click" d:IsHidden="True"/>
+            <Button x:Name="About" Content="{Binding Path=LocalizedResources.About, Source={StaticResource LocalizedStrings}}" Click="About_Click" d:IsHidden="True"/>
+            <Button x:Name="Help" Content="{Binding Path=LocalizedResources.Help, Source={StaticResource LocalizedStrings}}" Click="Help_Click" d:IsHidden="True"/>
+            <Button x:Name="Language" Content="{Binding Path=LocalizedResources.Language, Source={StaticResource LocalizedStrings}}" Click="Language_Click" d:IsHidden="True"/>
         </StackPanel>
-        <StackPanel x:Name="LanguageBar" Margin="102,414,98,0" Background="Black" Visibility="Collapsed">
-            <Button x:Name="LT" Content="Lietuviškai" Click="LT_Click"/>
-            <Button x:Name="EN" Content="English" Click="EN_Click"/>
-            <Button x:Name="RU" Content="Pусский" Click="RU_Click"/>
-            <Button x:Name="LanguageBarBack" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="LanguageBarBack_Click"/>
+        <StackPanel x:Name="SaveBar" Visibility="Collapsed" HorizontalAlignment="Center" Width="306" VerticalAlignment="Bottom" Background="Black" d:IsHidden="True" >
+            <Button x:Name="SaveButton" Width="236" HorizontalAlignment="Left" Content="{Binding Path=LocalizedResources.SaveTA, Source={StaticResource LocalizedStrings}}" Click="SaveButton_Click"  d:IsHidden="True"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="236"/>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Share" Grid.Column="0" Content="{Binding Path=LocalizedResources.Share, Source={StaticResource LocalizedStrings}}" Click="Share_Click" d:IsHidden="True"/>
+                <Button x:Name="ExcelClear" Grid.Column="1" Content="X" Click="ExcelClear_Click"  d:IsHidden="True"/>
+            </Grid>
         </StackPanel>
-        <Grid x:Name="HelperGrid" Height="{Binding ActualHeight, ElementName=Employees}" Margin="0,165,0,0" Background="Transparent" Visibility="Collapsed">
-            <ScrollViewer x:Name="AddBarEmployee" VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top"  Height="{Binding ActualHeight, ElementName=Employees}" Visibility="Collapsed">
-                <StackPanel x:Name="AddBarPanell" Background="Black" VerticalAlignment="Bottom" Tap="AddBarPanell_Tap">
-                    <TextBlock Tap="TextBlock_Tap" Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox x:Name="NameBox" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" GotFocus="NameBox_GotFocus"/>
-                    <TextBlock Tap="TextBlock_Tap" Text="{Binding Path=LocalizedResources.BA, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox x:Name="BABox" InputScope="Number" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" GotFocus="NameBox_GotFocus"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="CreateNewEmployee" Grid.Column="0" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployee_Click" />
-                        <Button x:Name="CreateNewEmployeeBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
-                    </Grid>
-                    <Grid x:Name="SpacingGrid" Background="Transparent" Height="0"/>
-                </StackPanel>
-            </ScrollViewer>
-            <ScrollViewer x:Name="AddBarIndicator"  VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" Height="{Binding ActualHeight, ElementName=Employees}" Visibility="Collapsed">
-                <StackPanel VerticalAlignment="Bottom" Background="Black" Tap="StackPanel_Tap">
-                    <TextBlock Tap="TextBlock_Tap_1"  Margin="0,0,0,0" Text="{Binding Path=LocalizedResources.Pav, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="PavBoxIND" FontSize="20"/>
-                    <TextBlock Tap="TextBlock_Tap_1" Text="{Binding Path=LocalizedResources.BR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="BRBox" InputScope="Number" FontSize="20"/>
-                    <TextBlock Tap="TextBlock_Tap_1" Text="{Binding Path=LocalizedResources.TR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="TRBox" InputScope="Number" FontSize="20"/>
-                    <TextBlock Tap="TextBlock_Tap_1" Text="{Binding Path=LocalizedResources.FR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="FRBox" InputScope="Number" FontSize="20"/>
-                    <TextBlock Tap="TextBlock_Tap_1" Text="{Binding Path=LocalizedResources.MKD, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox Tap="PavBoxIND_Tap" LostFocus="PavBoxIND_LostFocus" GotFocus="PavBoxIND_GotFocus" x:Name="MKDBox" InputScope="Number" FontSize="20"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="CreateNewIndicator" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewIndicator_Click"/>
-                        <Button x:Name="CreateNewIndicatorBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
-                    </Grid>
-                    <Grid x:Name="SpacingGridInd" Background="Transparent" Height="0"/>
-                </StackPanel>
-            </ScrollViewer>
-            <ScrollViewer x:Name="AddBarTask" VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top" Height="{Binding ActualHeight, ElementName=Employees}" Visibility="Collapsed">
-                <StackPanel  VerticalAlignment="Bottom" Background="Black" Tap="StackPanel_Tap_1" >
-                    <TextBlock Tap="TextBlock_Tap_2" Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox Tap="PavBoxTSK_Tap" GotFocus="PavBoxTSK_GotFocus" LostFocus="PavBoxTSK_LostFocus" x:Name="PavBoxTSK"/>
-                    <TextBlock Tap="TextBlock_Tap_2" Text="{Binding Path=LocalizedResources.MaxIV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox Tap="PavBoxTSK_Tap" GotFocus="PavBoxTSK_GotFocus" LostFocus="PavBoxTSK_LostFocus" x:Name="MAXIVBox" InputScope="Number"/>
-                    <TextBlock Tap="TextBlock_Tap_2" Text="{Binding Path=LocalizedResources.IV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-                    <TextBox Tap="PavBoxTSK_Tap" GotFocus="PavBoxTSK_GotFocus" LostFocus="PavBoxTSK_LostFocus" x:Name="IVBox" InputScope="Number"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="CreateNewTask" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewTask_Click"/>
-                        <Button x:Name="CreateNewTaskBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
-                    </Grid>
-                    <Grid x:Name="SpacingGridTSK" Background="Transparent" Height="0"/>
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
-        <Grid x:Name="EditShowGrid" Margin="0,624,0,0" Background="Black" Visibility="Collapsed">
+        <StackPanel x:Name="LanguageBar" VerticalAlignment="Bottom" Width="300" Visibility="Collapsed" Background="Black" d:IsHidden="True" >
+            <Button x:Name="LT" Content="Lietuviškai" Click="LT_Click" d:IsHidden="True"/>
+            <Button x:Name="EN" Content="English" Click="EN_Click" d:IsHidden="True"/>
+            <Button x:Name="RU" Content="Pусский" Click="RU_Click" d:IsHidden="True"/>
+            <Button x:Name="LanguageBarBack" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="LanguageBarBack_Click" d:IsHidden="True"/>
+        </StackPanel>
+        <ScrollViewer Tap="HelperGrid_Tap" Visibility="Collapsed" x:Name="AddBarEmployee" VerticalAlignment="Bottom" Margin="0,150,0,0" Height="280" d:IsHidden="True">
+            <StackPanel Background="Black" VerticalAlignment="Bottom" Tap="HelperGrid_Tap" d:IsHidden="True">
+                <TextBlock Tap="HelperGrid_Tap" x:Name="UnfocusEMP" Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox x:Name="NameBox" Tag="0" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <TextBlock Tap="HelperGrid_Tap" Text="{Binding Path=LocalizedResources.BA, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox x:Name="BABox" Tag="1" InputScope="Number" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <Grid d:IsHidden="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="CreateNewEmployee" Grid.Column="0" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployee_Click" d:IsHidden="True" />
+                    <Button x:Name="CreateNewEmployeeBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click" d:IsHidden="True"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Tap="HelperGrid_Tap" Visibility="Collapsed" x:Name="AddBarIndicator" VerticalAlignment="Bottom" Margin="0,150,0,0" Height="545" d:IsHidden="True">
+            <StackPanel  Background="Black" VerticalAlignment="Bottom" Tap="HelperGrid_Tap" d:IsHidden="True">
+                <TextBlock Tap="HelperGrid_Tap" x:Name="UnfocusIND" Margin="0,0,0,0" Text="{Binding Path=LocalizedResources.Pav, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox Tag="0"  x:Name="PavBoxIND" FontSize="20" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <TextBlock Tap="HelperGrid_Tap" Text="{Binding Path=LocalizedResources.BR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox Tag="1"  x:Name="BRBox" InputScope="Number" FontSize="20" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <TextBlock Tap="HelperGrid_Tap" Text="{Binding Path=LocalizedResources.TR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox Tag="2"  x:Name="TRBox" InputScope="Number" FontSize="20" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <TextBlock Tap="HelperGrid_Tap" Text="{Binding Path=LocalizedResources.FR, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox Tag="3"  x:Name="FRBox" InputScope="Number" FontSize="20" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <TextBlock Tap="HelperGrid_Tap" Text="{Binding Path=LocalizedResources.MKD, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox Tag="4"  x:Name="MKDBox" InputScope="Number" FontSize="20" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <Grid d:IsHidden="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="CreateNewIndicator" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewIndicator_Click" d:IsHidden="True"/>
+                    <Button x:Name="CreateNewIndicatorBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click" d:IsHidden="True"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer x:Name="AddBarTask" VerticalAlignment="Bottom"  Margin="0,150,0,0" Height="380" Tap="HelperGrid_Tap" d:IsHidden="True">
+            <StackPanel VerticalAlignment="Bottom" Background="Black" Tap="HelperGrid_Tap" d:IsHidden="True">
+                <TextBlock Tap="HelperGrid_Tap" x:Name="UnfocusTSK" Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.EmployeeName, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox Tag="0" x:Name="PavBoxTSK" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <TextBlock Tap="HelperGrid_Tap" Text="{Binding Path=LocalizedResources.MaxIV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox Tag="1"  x:Name="MAXIVBox" InputScope="Number" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <TextBlock Tap="HelperGrid_Tap" Text="{Binding Path=LocalizedResources.IV, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+                <TextBox Tag="2" x:Name="IVBox" InputScope="Number" GotFocus="NameBox_GotFocus" Tap="NameBox_Tap" LostFocus="NameBox_LostFocus" d:IsHidden="True"/>
+                <Grid d:IsHidden="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="CreateNewTask" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="CreateNewTask_Click" d:IsHidden="True"/>
+                    <Button x:Name="CreateNewTaskBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click" d:IsHidden="True"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid x:Name="EditShowGrid" VerticalAlignment="Bottom" Background="Black" Visibility="Collapsed" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Edit" Content="{Binding Path=LocalizedResources.EDIT, Source={StaticResource LocalizedStrings}}" Click="Edit_Click" Background="Black" Grid.Column="0" Visibility="Collapsed"/>
-            <Button x:Name="Show" Content="{Binding Path=LocalizedResources.SHOW, Source={StaticResource LocalizedStrings}}" Click="Show_Click" Background="Black" Grid.Column="1" Visibility="Collapsed"/>
+            <Button x:Name="Edit" Content="{Binding Path=LocalizedResources.EDIT, Source={StaticResource LocalizedStrings}}" Click="Edit_Click" Background="Black" Grid.Column="0" Visibility="Collapsed" d:IsHidden="True"/>
+            <Button x:Name="Show" Content="{Binding Path=LocalizedResources.SHOW, Source={StaticResource LocalizedStrings}}" Click="Show_Click" Background="Black" Grid.Column="1" Visibility="Collapsed" d:IsHidden="True"/>
         </Grid>
-        <Grid x:Name="EmployeeDetailPanel" Margin="0,152,0,0" Background="Black" ShowGridLines="True" Visibility="Collapsed">
+        <Grid x:Name="EmployeeDetailPanel" Margin="0,152,0,0" Background="Black" ShowGridLines="True" Visibility="Collapsed" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
-            <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="0">
-                <StackPanel>
-                    <Border BorderBrush="White" BorderThickness="1">
-                        <TextBlock Text="{Binding Path=LocalizedResources.Employees, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="0" d:IsHidden="True">
+                <StackPanel d:IsHidden="True">
+                    <Border BorderBrush="White" BorderThickness="1" d:IsHidden="True">
+                        <TextBlock Text="{Binding Path=LocalizedResources.Employees, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextExtraLargeStyle}" d:IsHidden="True"/>
                     </Border>
-                    <StackPanel Tag="{Binding index}">
-                        <Border BorderBrush="White" BorderThickness="1">
-                            <Grid ShowGridLines="True">
+                    <StackPanel Tag="{Binding index}" d:IsHidden="True">
+                        <Border BorderBrush="White" BorderThickness="1" d:IsHidden="True">
+                            <Grid ShowGridLines="True" d:IsHidden="True">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="45"/>
                                     <RowDefinition Height="55"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" x:Name="ShowVAR" FontSize="30"/>
-                                <Grid Grid.Row="1" ShowGridLines="True">
+                                <TextBlock Grid.Row="0" x:Name="ShowVAR" FontSize="30" d:IsHidden="True"/>
+                                <Grid Grid.Row="1" ShowGridLines="True" d:IsHidden="True">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
@@ -254,22 +260,22 @@
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="30"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Path=LocalizedResources.BAT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0"/>
-                                    <TextBlock Text="{Binding Path=LocalizedResources.RODT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1"/>
-                                    <TextBlock Text="{Binding Path=LocalizedResources.UZDT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2"/>
-                                    <TextBlock Text="{Binding Path=LocalizedResources.VISOT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3"/>
-                                    <TextBlock x:Name="ShowBA" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1"/>
-                                    <TextBlock x:Name="ShowROD"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1"/>
-                                    <TextBlock x:Name="ShowUZD"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1"/>
-                                    <TextBlock x:Name="ShowViso"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.BAT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" d:IsHidden="True"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.RODT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" d:IsHidden="True"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.UZDT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" d:IsHidden="True"/>
+                                    <TextBlock Text="{Binding Path=LocalizedResources.VISOT, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" d:IsHidden="True"/>
+                                    <TextBlock x:Name="ShowBA" Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="0" Grid.Row="1" d:IsHidden="True"/>
+                                    <TextBlock x:Name="ShowROD"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="1" Grid.Row="1" d:IsHidden="True"/>
+                                    <TextBlock x:Name="ShowUZD"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="2" Grid.Row="1" d:IsHidden="True"/>
+                                    <TextBlock x:Name="ShowViso"  Style="{StaticResource PhoneTextSubtleStyle}" Grid.Column="3" Grid.Row="1" d:IsHidden="True"/>
                                 </Grid>
                             </Grid>
                         </Border>
                     </StackPanel>
-                    <Border BorderBrush="White" BorderThickness="1">
-                        <TextBlock Text="{Binding Path=LocalizedResources.Indicators, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                    <Border BorderBrush="White" BorderThickness="1" d:IsHidden="True">
+                        <TextBlock Text="{Binding Path=LocalizedResources.Indicators, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextExtraLargeStyle}" d:IsHidden="True"/>
                     </Border>
-                    <ListBox x:Name="ShowIndicators" ItemsSource="{Binding IndicatorsClass}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListBox x:Name="ShowIndicators" ItemsSource="{Binding IndicatorsClass}" ScrollViewer.VerticalScrollBarVisibility="Disabled" d:IsHidden="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Tag="{Binding index}">
@@ -308,10 +314,10 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Border BorderBrush="White" BorderThickness="1">
-                        <TextBlock Text="{Binding Path=LocalizedResources.Tasks, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                    <Border BorderBrush="White" BorderThickness="1" d:IsHidden="True">
+                        <TextBlock Text="{Binding Path=LocalizedResources.Tasks, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextExtraLargeStyle}" d:IsHidden="True"/>
                     </Border>
-                    <ListBox x:Name="ShowTasks" ItemsSource="{Binding TasksClass}" FontSize="50" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListBox x:Name="ShowTasks" ItemsSource="{Binding TasksClass}" FontSize="50" ScrollViewer.VerticalScrollBarVisibility="Disabled" d:IsHidden="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Tag="{Binding index}">
@@ -325,38 +331,38 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <StackPanel>
-                        <Border BorderBrush="White" BorderThickness="1">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Path=LocalizedResources.MAXKDP, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="SHowMAxKDP" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <StackPanel d:IsHidden="True">
+                        <Border BorderBrush="White" BorderThickness="1" d:IsHidden="True">
+                            <StackPanel d:IsHidden="True">
+                                <TextBlock Text="{Binding Path=LocalizedResources.MAXKDP, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Left" d:IsHidden="True"/>
+                                <TextBlock x:Name="SHowMAxKDP" Style="{StaticResource PhoneTextSubtleStyle}" d:IsHidden="True"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-            <Button x:Name="BackDetaiPanel" Grid.Row="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
+            <Button x:Name="BackDetaiPanel" Grid.Row="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click" d:IsHidden="True"/>
         </Grid>
-        <StackPanel x:Name="MAxKDPST" Margin="0,414,0,0" Background="Black" Visibility="Collapsed">
-            <TextBlock Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.MAXKDP, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center"/>
-            <TextBox x:Name="MAXKDPBox" InputScope="Number"/>
-            <Grid>
+        <StackPanel x:Name="MAxKDPST" Visibility="Collapsed" VerticalAlignment="Bottom" Background="Black" d:IsHidden="True" >
+            <TextBlock Margin="0,20,0,0" Text="{Binding Path=LocalizedResources.MAXKDP, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" HorizontalAlignment="Center" d:IsHidden="True"/>
+            <TextBox x:Name="MAXKDPBox" InputScope="Number" GotFocus="MAXKDPBox_GotFocus"  LostFocus="MAXKDPBox_LostFocus" d:IsHidden="True"/>
+            <Grid d:IsHidden="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="MAXKDPBoxOk" Grid.Column="0" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="MAXKDPBoxOk_Click"/>
-                <Button x:Name="MAXKDPBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click"/>
+                <Button x:Name="MAXKDPBoxOk" Grid.Column="0" Content="{Binding Path=LocalizedResources.Done, Source={StaticResource LocalizedStrings}}" Click="MAXKDPBoxOk_Click" d:IsHidden="True"/>
+                <Button x:Name="MAXKDPBack" Grid.Column="1" Content="{Binding Path=LocalizedResources.LanguageBarBack, Source={StaticResource LocalizedStrings}}" Click="CreateNewEmployeeBack_Click" d:IsHidden="True"/>
             </Grid>
+            <StackPanel x:Name="Spacing" Height="0" d:IsHidden="True"/>
         </StackPanel>
-        
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="Add"       IconUri="/Resources/add.png"              Text="Test"       Click="ApplicationBarIconButton_Click_2"/>
-            <shell:ApplicationBarIconButton x:Name="Meniu"     IconUri="/Resources/feature.settings.png" Text="Test"      Click="ApplicationBarIconButton_Click"/>
-            <shell:ApplicationBarIconButton x:Name="Save"      IconUri="/Resources/save.png"             Text="Test"      Click="ApplicationBarIconButton_Click_1"/>
-            <shell:ApplicationBarIconButton x:Name="Calculate" IconUri="/Resources/check.png"            Text="Test"    Click="ApplicationBarIconButton_Click_3"/>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" d:IsHidden="True">
+            <shell:ApplicationBarIconButton x:Name="Add"       IconUri="/Resources/add.png"              Text="Test"       Click="ApplicationBarIconButton_Click_2" d:IsHidden="True"/>
+            <shell:ApplicationBarIconButton x:Name="Meniu"     IconUri="/Resources/feature.settings.png" Text="Test"      Click="ApplicationBarIconButton_Click" d:IsHidden="True"/>
+            <shell:ApplicationBarIconButton x:Name="Save"      IconUri="/Resources/save.png"             Text="Test"      Click="ApplicationBarIconButton_Click_1" d:IsHidden="True"/>
+            <shell:ApplicationBarIconButton x:Name="Calculate" IconUri="/Resources/calculator.png"       Text="Test"    Click="ApplicationBarIconButton_Click_3" d:IsHidden="True"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

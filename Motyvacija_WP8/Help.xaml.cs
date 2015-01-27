@@ -26,6 +26,10 @@ namespace Motyvacija_WP8
                 EN4.Visibility = System.Windows.Visibility.Visible;
                 EN5.Visibility = System.Windows.Visibility.Visible;
                 EN6.Visibility = System.Windows.Visibility.Visible;
+                EN7.Visibility = System.Windows.Visibility.Visible;
+                EN8.Visibility = System.Windows.Visibility.Visible;
+                EN9.Visibility = System.Windows.Visibility.Visible;
+                EN10.Visibility = System.Windows.Visibility.Visible;
             }
             else if (kalba == "lt-LT")
             {
@@ -35,6 +39,10 @@ namespace Motyvacija_WP8
                 LT4.Visibility = System.Windows.Visibility.Visible;
                 LT5.Visibility = System.Windows.Visibility.Visible;
                 LT6.Visibility = System.Windows.Visibility.Visible;
+                LT7.Visibility = System.Windows.Visibility.Visible;
+                LT8.Visibility = System.Windows.Visibility.Visible;
+                LT9.Visibility = System.Windows.Visibility.Visible;
+                LT10.Visibility = System.Windows.Visibility.Visible;
             }
             else if (kalba == "ru-RU")
             {
@@ -44,6 +52,10 @@ namespace Motyvacija_WP8
                 RU4.Visibility = System.Windows.Visibility.Visible;
                 RU5.Visibility = System.Windows.Visibility.Visible;
                 RU6.Visibility = System.Windows.Visibility.Visible;
+                RU7.Visibility = System.Windows.Visibility.Visible;
+                RU8.Visibility = System.Windows.Visibility.Visible;
+                RU9.Visibility = System.Windows.Visibility.Visible;
+                RU10.Visibility = System.Windows.Visibility.Visible;
             }
         }
         private void KillAllImages()
@@ -54,18 +66,30 @@ namespace Motyvacija_WP8
             EN4.Visibility = System.Windows.Visibility.Collapsed;
             EN5.Visibility = System.Windows.Visibility.Collapsed;
             EN6.Visibility = System.Windows.Visibility.Collapsed;
+            EN7.Visibility = System.Windows.Visibility.Collapsed;
+            EN8.Visibility = System.Windows.Visibility.Collapsed;
+            EN9.Visibility = System.Windows.Visibility.Collapsed;
+            EN10.Visibility = System.Windows.Visibility.Collapsed;
             LT1.Visibility = System.Windows.Visibility.Collapsed;
             LT2.Visibility = System.Windows.Visibility.Collapsed;
             LT3.Visibility = System.Windows.Visibility.Collapsed;
             LT4.Visibility = System.Windows.Visibility.Collapsed;
             LT5.Visibility = System.Windows.Visibility.Collapsed;
             LT6.Visibility = System.Windows.Visibility.Collapsed;
+            LT7.Visibility = System.Windows.Visibility.Collapsed;
+            LT8.Visibility = System.Windows.Visibility.Collapsed;
+            LT9.Visibility = System.Windows.Visibility.Collapsed;
+            LT10.Visibility = System.Windows.Visibility.Collapsed;
             RU1.Visibility = System.Windows.Visibility.Collapsed;
             RU2.Visibility = System.Windows.Visibility.Collapsed;
             RU3.Visibility = System.Windows.Visibility.Collapsed;
             RU4.Visibility = System.Windows.Visibility.Collapsed;
             RU5.Visibility = System.Windows.Visibility.Collapsed;
             RU6.Visibility = System.Windows.Visibility.Collapsed;
+            RU7.Visibility = System.Windows.Visibility.Collapsed;
+            RU8.Visibility = System.Windows.Visibility.Collapsed;
+            RU9.Visibility = System.Windows.Visibility.Collapsed;
+            RU10.Visibility = System.Windows.Visibility.Collapsed;
         }
         private void ChangePivotItemText()
         {

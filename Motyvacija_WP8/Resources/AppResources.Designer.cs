@@ -83,6 +83,15 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In the archive, you can view the employee&apos;s archived salaries..
+        /// </summary>
+        public static string AchiveDetailsText {
+            get {
+                return ResourceManager.GetString("AchiveDetailsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] add {
@@ -102,7 +111,7 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Goals, Results, Salary    V: 1.1.
+        ///   Looks up a localized string similar to Goals, Results, Salary    V: 2.1.
         /// </summary>
         public static string ApplicationTitle {
             get {
@@ -167,6 +176,25 @@ namespace Motyvacija_WP8.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] calculator {
+            get {
+                object obj = ResourceManager.GetObject("calculator", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here you can change the language..
+        /// </summary>
+        public static string ChangeLanguageText {
+            get {
+                return ResourceManager.GetString("ChangeLanguageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] check {
             get {
                 object obj = ResourceManager.GetObject("check", resourceCulture);
@@ -184,7 +212,7 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ok.
+        ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Done {
             get {
@@ -202,7 +230,7 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To archive an employee, you have to mark the employee’s check box and press the “save” button. Also, pressing the „save“ button saves all the application&apos;s data..
+        ///   Looks up a localized string similar to To archive an employee, you have to mark the employee’s check box and press the “save” button, then choose &quot;Save&quot;. If you want to export in excel format, choose &quot;Export to Excel&quot;. Also, pressing the „save“ button saves all the application&apos;s data. Pressing the &quot;X&quot; button clears the Excel file..
         /// </summary>
         public static string EmployeeAddToArchive {
             get {
@@ -211,7 +239,7 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To evaluate an employee, you need to mark the employee’s check box, mark the indicators and tasks by which you evaluate the employee, and press the “calculate” button (marked with a tick)..
+        ///   Looks up a localized string similar to To evaluate an employee, you need to mark the employee’s check box, mark the indicators and tasks by which you evaluate the employee, and press the “calculate” button (marked with a calculator)..
         /// </summary>
         public static string EmployeeCalculate {
             get {
@@ -225,6 +253,15 @@ namespace Motyvacija_WP8.Resources {
         public static string EmployeeDelete {
             get {
                 return ResourceManager.GetString("EmployeeDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here you see the summary of the salary..
+        /// </summary>
+        public static string EmployeeDetailsText {
+            get {
+                return ResourceManager.GetString("EmployeeDetailsText", resourceCulture);
             }
         }
         
@@ -261,6 +298,204 @@ namespace Motyvacija_WP8.Resources {
         public static string Employees {
             get {
                 return ResourceManager.GetString("Employees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculated result cannot be a negative number, please check your indicators and task values!.
+        /// </summary>
+        public static string error_bad_result_value {
+            get {
+                return ResourceManager.GetString("error_bad_result_value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter baseline value.
+        /// </summary>
+        public static string error_br_empty {
+            get {
+                return ResourceManager.GetString("error_br_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using not allowed symbols.
+        /// </summary>
+        public static string error_br_number {
+            get {
+                return ResourceManager.GetString("error_br_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Baseline value can&apos;t be equal to target value.
+        /// </summary>
+        public static string error_BR_TR {
+            get {
+                return ResourceManager.GetString("error_BR_TR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter employee name.
+        /// </summary>
+        public static string error_employee_name_empty {
+            get {
+                return ResourceManager.GetString("error_employee_name_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter actual outcome.
+        /// </summary>
+        public static string error_fr_empty {
+            get {
+                return ResourceManager.GetString("error_fr_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using not allowed symbols.
+        /// </summary>
+        public static string error_fr_number {
+            get {
+                return ResourceManager.GetString("error_fr_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter indicator title.
+        /// </summary>
+        public static string error_indicator_title_empty {
+            get {
+                return ResourceManager.GetString("error_indicator_title_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter maximum variable part.
+        /// </summary>
+        public static string error_maxKd_empty {
+            get {
+                return ResourceManager.GetString("error_maxKd_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using not allowed symbols.
+        /// </summary>
+        public static string error_maxKd_number {
+            get {
+                return ResourceManager.GetString("error_maxKd_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter maxVPT.
+        /// </summary>
+        public static string error_maxkdu_empty {
+            get {
+                return ResourceManager.GetString("error_maxkdu_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using not allowed symbols.
+        /// </summary>
+        public static string error_maxkdu_number {
+            get {
+                return ResourceManager.GetString("error_maxkdu_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evaluation higher than maximum evaluation.
+        /// </summary>
+        public static string error_result_bigger_than_value {
+            get {
+                return ResourceManager.GetString("error_result_bigger_than_value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter basic salary.
+        /// </summary>
+        public static string error_salary_empty {
+            get {
+                return ResourceManager.GetString("error_salary_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using not allowed symbols.
+        /// </summary>
+        public static string error_salary_number {
+            get {
+                return ResourceManager.GetString("error_salary_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter task evaluation.
+        /// </summary>
+        public static string error_task_result_empty {
+            get {
+                return ResourceManager.GetString("error_task_result_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using not allowed symbols.
+        /// </summary>
+        public static string error_task_result_number {
+            get {
+                return ResourceManager.GetString("error_task_result_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter task title.
+        /// </summary>
+        public static string error_task_title_empty {
+            get {
+                return ResourceManager.GetString("error_task_title_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter task maximum evaluation.
+        /// </summary>
+        public static string error_task_value_empty {
+            get {
+                return ResourceManager.GetString("error_task_value_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using not allowed symbols.
+        /// </summary>
+        public static string error_task_value_number {
+            get {
+                return ResourceManager.GetString("error_task_value_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter target value.
+        /// </summary>
+        public static string error_tr_empty {
+            get {
+                return ResourceManager.GetString("error_tr_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using not allowed symbols.
+        /// </summary>
+        public static string error_tr_number {
+            get {
+                return ResourceManager.GetString("error_tr_number", resourceCulture);
             }
         }
         
@@ -320,7 +555,7 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select language.
+        ///   Looks up a localized string similar to Change language.
         /// </summary>
         public static string Language {
             get {
@@ -329,7 +564,7 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string LanguageBarBack {
             get {
@@ -338,7 +573,7 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Max evaluation.
+        ///   Looks up a localized string similar to Maximum evaluation.
         /// </summary>
         public static string MaxIV {
             get {
@@ -352,6 +587,15 @@ namespace Motyvacija_WP8.Resources {
         public static string MAXKDP {
             get {
                 return ResourceManager.GetString("MAXKDP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter maximum task-related variable part to evaluate an employee according to the tasks..
+        /// </summary>
+        public static string MAXKDPText {
+            get {
+                return ResourceManager.GetString("MAXKDPText", resourceCulture);
             }
         }
         
@@ -474,6 +718,15 @@ namespace Motyvacija_WP8.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export to Excel.
+        /// </summary>
+        public static string Share {
+            get {
+                return ResourceManager.GetString("Share", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show.
         /// </summary>
         public static string SHOW {
@@ -488,6 +741,48 @@ namespace Motyvacija_WP8.Resources {
         public static string Tasks {
             get {
                 return ResourceManager.GetString("Tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Template {
+            get {
+                object obj = ResourceManager.GetObject("Template", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Labas,,Gerai
+        ///1,2,3
+        ///4,5,6
+        ///.
+        /// </summary>
+        public static string test {
+            get {
+                return ResourceManager.GetString("test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;?mso-application progid=&quot;Excel.Sheet&quot;?&gt;
+        ///&lt;Workbook xmlns=&quot;urn:schemas-microsoft-com:office:spreadsheet&quot; 
+        ///xmlns:o=&quot;urn:schemas-microsoft-com:office&quot;
+        ///xmlns:x=&quot;urn:schemas-microsoft-com:excel&quot;
+        ///xmlns:ss=&quot;urn:schemas-microsoft-com:spreadsheet&quot;&gt;
+        ///	&lt;Worksheet ss:Name=&quot;Sheet1&quot;&gt;
+        ///		&lt;Table ss:DefaultRowHeight=&quot;15&quot;&gt;
+        ///			&lt;Row ss:AutoFitHeight=&apos;0&apos;&gt;
+        ///				&lt;Cell&gt;&lt;Data ss:Type=&apos;String&apos;&gt; as &lt;/Data&gt;&lt;/Cell&gt;
+        ///				&lt;Cell&gt;&lt;Data ss:Type=&apos;String&apos;&gt; esu &lt;/Data&gt;&lt;/Cell&gt;
+        ///				&lt;Cell&gt;&lt;Data ss:Type=&apos;String&apos;&gt; Excel [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string test2 {
+            get {
+                return ResourceManager.GetString("test2", resourceCulture);
             }
         }
         

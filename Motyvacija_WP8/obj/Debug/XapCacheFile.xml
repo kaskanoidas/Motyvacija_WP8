@@ -1,39 +1,54 @@
-﻿<xapCache source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\Motyvacija_WP8_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="25/07/2014 00:04:37">
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\Motyvacija.dll" archivePath="Motyvacija.dll" lastWriteTime="25/07/2014 00:04:36" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\en\Motyvacija.resources.dll" archivePath="en\Motyvacija.resources.dll" lastWriteTime="25/07/2014 00:04:36" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\lt-LT\Motyvacija.resources.dll" archivePath="lt-LT\Motyvacija.resources.dll" lastWriteTime="25/07/2014 00:04:36" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\obj\Debug\ru-RU\Motyvacija.resources.dll" archivePath="ru-RU\Motyvacija.resources.dll" lastWriteTime="25/07/2014 00:04:36" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeMakeEN.png" archivePath="Resources\EmployeeMakeEN.png" lastWriteTime="06/07/2014 14:15:17" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeMakeLT.png" archivePath="Resources\EmployeeMakeLT.png" lastWriteTime="06/07/2014 14:16:36" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="19/06/2014 11:49:06" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="19/06/2014 11:49:06" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Assets\Tiles\FlipCycleTileLarge.png" archivePath="Assets\Tiles\FlipCycleTileLarge.png" lastWriteTime="19/06/2014 11:49:06" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Assets\Tiles\FlipCycleTileSmall.png" archivePath="Assets\Tiles\FlipCycleTileSmall.png" lastWriteTime="19/06/2014 11:49:06" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Assets\Tiles\IconicTileMediumLarge.png" archivePath="Assets\Tiles\IconicTileMediumLarge.png" lastWriteTime="19/06/2014 11:49:06" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Assets\Tiles\IconicTileSmall.png" archivePath="Assets\Tiles\IconicTileSmall.png" lastWriteTime="19/06/2014 11:49:06" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\check.png" archivePath="Resources\check.png" lastWriteTime="19/06/2014 13:50:56" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeAddToArchiveEN.png" archivePath="Resources\EmployeeAddToArchiveEN.png" lastWriteTime="06/07/2014 20:23:07" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeAddToArchiveLT.png" archivePath="Resources\EmployeeAddToArchiveLT.png" lastWriteTime="06/07/2014 20:22:46" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeAddToArchiveRU.png" archivePath="Resources\EmployeeAddToArchiveRU.png" lastWriteTime="06/07/2014 20:23:29" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeCalculateEN.png" archivePath="Resources\EmployeeCalculateEN.png" lastWriteTime="06/07/2014 20:23:07" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeCalculateLT.png" archivePath="Resources\EmployeeCalculateLT.png" lastWriteTime="06/07/2014 20:22:46" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeCalculateRU.png" archivePath="Resources\EmployeeCalculateRU.png" lastWriteTime="06/07/2014 20:23:29" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeDeleteEN.png" archivePath="Resources\EmployeeDeleteEN.png" lastWriteTime="06/07/2014 20:23:07" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeDeleteLT.png" archivePath="Resources\EmployeeDeleteLT.png" lastWriteTime="06/07/2014 20:22:46" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeDeleteRU.png" archivePath="Resources\EmployeeDeleteRU.png" lastWriteTime="06/07/2014 20:23:29" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeEditEN.png" archivePath="Resources\EmployeeEditEN.png" lastWriteTime="06/07/2014 20:23:07" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeEditLT.png" archivePath="Resources\EmployeeEditLT.png" lastWriteTime="06/07/2014 20:22:46" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeEditRU.png" archivePath="Resources\EmployeeEditRU.png" lastWriteTime="06/07/2014 20:23:29" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\EmployeeMakeRU.png" archivePath="Resources\EmployeeMakeRU.png" lastWriteTime="06/07/2014 20:23:29" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\feature.settings.png" archivePath="Resources\feature.settings.png" lastWriteTime="19/06/2014 12:32:49" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\MeniuEN.png" archivePath="Resources\MeniuEN.png" lastWriteTime="06/07/2014 20:23:07" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\MeniuLT.png" archivePath="Resources\MeniuLT.png" lastWriteTime="06/07/2014 20:22:46" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\MeniuRU.png" archivePath="Resources\MeniuRU.png" lastWriteTime="06/07/2014 20:23:29" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\save.png" archivePath="Resources\save.png" lastWriteTime="19/06/2014 12:31:26" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Resources\add.png" archivePath="Resources\add.png" lastWriteTime="19/06/2014 12:30:05" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="24/07/2014 23:52:20" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="19/06/2014 11:49:06" />
+﻿<xapCache source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Bin\Debug\Motyvacija_WP8_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="16/01/2015 10:28:40">
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\obj\Debug\Motyvacija.dll" archivePath="Motyvacija.dll" lastWriteTime="16/01/2015 10:28:39" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\obj\Debug\en\Motyvacija.resources.dll" archivePath="en\Motyvacija.resources.dll" lastWriteTime="16/01/2015 10:28:39" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\obj\Debug\lt-LT\Motyvacija.resources.dll" archivePath="lt-LT\Motyvacija.resources.dll" lastWriteTime="16/01/2015 10:28:39" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\obj\Debug\ru-RU\Motyvacija.resources.dll" archivePath="ru-RU\Motyvacija.resources.dll" lastWriteTime="16/01/2015 10:28:39" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\ArchiveEN.png" archivePath="Resources\ArchiveEN.png" lastWriteTime="30/09/2014 12:09:08" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\ArchiveLT.png" archivePath="Resources\ArchiveLT.png" lastWriteTime="30/09/2014 14:11:19" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\ArchiveRU.png" archivePath="Resources\ArchiveRU.png" lastWriteTime="30/09/2014 12:15:27" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\calculator.png" archivePath="Resources\calculator.png" lastWriteTime="11/01/2015 00:18:49" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeInformationEN.png" archivePath="Resources\EmployeeInformationEN.png" lastWriteTime="15/01/2015 12:45:43" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeInformationLT.png" archivePath="Resources\EmployeeInformationLT.png" lastWriteTime="15/01/2015 12:45:54" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeInformationRU.png" archivePath="Resources\EmployeeInformationRU.png" lastWriteTime="15/01/2015 12:46:06" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeMakeEN.png" archivePath="Resources\EmployeeMakeEN.png" lastWriteTime="15/01/2015 12:46:19" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeMakeLT.png" archivePath="Resources\EmployeeMakeLT.png" lastWriteTime="15/01/2015 12:46:29" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="19/06/2014 11:49:06" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="19/06/2014 11:49:06" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Assets\Tiles\FlipCycleTileLarge.png" archivePath="Assets\Tiles\FlipCycleTileLarge.png" lastWriteTime="19/06/2014 11:49:06" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="19/06/2014 11:49:06" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Assets\Tiles\FlipCycleTileSmall.png" archivePath="Assets\Tiles\FlipCycleTileSmall.png" lastWriteTime="19/06/2014 11:49:06" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Assets\Tiles\IconicTileMediumLarge.png" archivePath="Assets\Tiles\IconicTileMediumLarge.png" lastWriteTime="19/06/2014 11:49:06" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Assets\Tiles\IconicTileSmall.png" archivePath="Assets\Tiles\IconicTileSmall.png" lastWriteTime="19/06/2014 11:49:06" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\check.png" archivePath="Resources\check.png" lastWriteTime="19/06/2014 13:50:56" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeAddToArchiveEN.png" archivePath="Resources\EmployeeAddToArchiveEN.png" lastWriteTime="15/01/2015 13:01:35" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeAddToArchiveLT.png" archivePath="Resources\EmployeeAddToArchiveLT.png" lastWriteTime="15/01/2015 12:58:02" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeAddToArchiveRU.png" archivePath="Resources\EmployeeAddToArchiveRU.png" lastWriteTime="15/01/2015 13:00:14" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeCalculateEN.png" archivePath="Resources\EmployeeCalculateEN.png" lastWriteTime="15/01/2015 12:43:56" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeCalculateLT.png" archivePath="Resources\EmployeeCalculateLT.png" lastWriteTime="15/01/2015 12:44:07" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeCalculateRU.png" archivePath="Resources\EmployeeCalculateRU.png" lastWriteTime="15/01/2015 12:44:17" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeDeleteEN.png" archivePath="Resources\EmployeeDeleteEN.png" lastWriteTime="15/01/2015 12:44:37" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeDeleteLT.png" archivePath="Resources\EmployeeDeleteLT.png" lastWriteTime="15/01/2015 12:44:48" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeDeleteRU.png" archivePath="Resources\EmployeeDeleteRU.png" lastWriteTime="15/01/2015 12:45:00" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeEditEN.png" archivePath="Resources\EmployeeEditEN.png" lastWriteTime="15/01/2015 12:45:11" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeEditLT.png" archivePath="Resources\EmployeeEditLT.png" lastWriteTime="15/01/2015 12:45:23" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeEditRU.png" archivePath="Resources\EmployeeEditRU.png" lastWriteTime="15/01/2015 12:45:34" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\EmployeeMakeRU.png" archivePath="Resources\EmployeeMakeRU.png" lastWriteTime="15/01/2015 12:46:38" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\feature.settings.png" archivePath="Resources\feature.settings.png" lastWriteTime="19/06/2014 12:32:49" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\MeniuEN.png" archivePath="Resources\MeniuEN.png" lastWriteTime="15/01/2015 12:46:52" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\MeniuLT.png" archivePath="Resources\MeniuLT.png" lastWriteTime="15/01/2015 12:47:00" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\MeniuRU.png" archivePath="Resources\MeniuRU.png" lastWriteTime="15/01/2015 12:47:12" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\MeniuSelectLanguageEN.png" archivePath="Resources\MeniuSelectLanguageEN.png" lastWriteTime="15/01/2015 12:47:21" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\MeniuSelectLanguageLT.png" archivePath="Resources\MeniuSelectLanguageLT.png" lastWriteTime="15/01/2015 12:47:31" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\MeniuSelectLanguageRU.png" archivePath="Resources\MeniuSelectLanguageRU.png" lastWriteTime="15/01/2015 12:47:40" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\MKDEN.png" archivePath="Resources\MKDEN.png" lastWriteTime="15/01/2015 12:47:49" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\MKDLT.png" archivePath="Resources\MKDLT.png" lastWriteTime="15/01/2015 12:48:03" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\MKDRU.png" archivePath="Resources\MKDRU.png" lastWriteTime="15/01/2015 12:48:12" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\save.png" archivePath="Resources\save.png" lastWriteTime="19/06/2014 12:31:26" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Resources\add.png" archivePath="Resources\add.png" lastWriteTime="19/06/2014 12:30:05" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="16/01/2015 10:28:35" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Windows Phone\v8.0\Libraries\Microsoft.Phone.Controls.dll" archivePath="Microsoft.Phone.Controls.dll" lastWriteTime="02/01/2013 04:57:00" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\ic_launcher6.png" archivePath="ic_launcher6.png" lastWriteTime="16/06/2014 09:56:35" />
-  <file source="C:\Users\Rolandas\Desktop\Apps\Motyvacija_WP8\Motyvacija_WP8\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="24/07/2014 23:52:20" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\OpenXML.Silverlight.Spreadsheet.WP8.dll" archivePath="OpenXML.Silverlight.Spreadsheet.WP8.dll" lastWriteTime="30/12/2012 21:20:14" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\SharpZipLib.dll" archivePath="SharpZipLib.dll" lastWriteTime="30/12/2012 16:10:42" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\ic_launcher6.png" archivePath="ic_launcher6.png" lastWriteTime="16/06/2014 09:56:35" />
+  <file source="C:\Users\Rolandas\Desktop\BackUp\Apps\Motyvacija_WP8 - no scrool\Motyvacija_WP8\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="16/01/2015 10:28:35" />
 </xapCache>

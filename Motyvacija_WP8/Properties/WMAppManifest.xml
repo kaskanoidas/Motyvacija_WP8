@@ -6,7 +6,7 @@
     <Language code="en" />
     <Language code="ru-RU" />
   </Languages>
-  <App xmlns="" ProductID="{f74d6246-1cf6-42f3-88ea-bc87210a4b17}" Title="Motyvacija" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Motyvacija_WP8 author" Description="Sample description" Publisher="Gludis" PublisherID="{cde349f3-9e6d-4662-b2d7-84b3472a02cc}">
+  <App xmlns="" ProductID="{f74d6246-1cf6-42f3-88ea-bc87210a4b17}" Title="Goals, Results, Salary" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Motyvacija_WP8 author" Description="" Publisher="Gludis" PublisherID="{cde349f3-9e6d-4662-b2d7-84b3472a02cc}">
     <IconPath IsRelative="true" IsResource="false">ic_launcher6.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -21,15 +21,20 @@
     <Tokens>
       <PrimaryToken TokenID="Motyvacija_WP8Token" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">ic_launcher6.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>Motyvacija</Title>
-          <BackContent></BackContent>
-          <BackBackgroundImageURI></BackBackgroundImageURI>
-          <BackTitle></BackTitle>
-          <DeviceLockImageURI></DeviceLockImageURI>
-          <HasLarge></HasLarge>
+          <BackgroundImageURI IsRelative="true" IsResource="false">ic_launcher6.png</BackgroundImageURI>
+          <Title>Goals, Results, Salary</Title>
+          <BackContent>
+          </BackContent>
+          <BackBackgroundImageURI>
+          </BackBackgroundImageURI>
+          <BackTitle>
+          </BackTitle>
+          <DeviceLockImageURI>
+          </DeviceLockImageURI>
+          <HasLarge>
+          </HasLarge>
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>

@@ -2,6 +2,8 @@
   <Deployment.Parts>
     <AssemblyPart x:Name="Motyvacija" Source="Motyvacija.dll" />
     <AssemblyPart x:Name="Microsoft.Phone.Controls" Source="Microsoft.Phone.Controls.dll" />
+    <AssemblyPart x:Name="OpenXML.Silverlight.Spreadsheet.WP8" Source="OpenXML.Silverlight.Spreadsheet.WP8.dll" />
+    <AssemblyPart x:Name="SharpZipLib" Source="SharpZipLib.dll" />
     <AssemblyPart Source="en/Motyvacija.resources.dll" />
     <AssemblyPart Source="lt-LT/Motyvacija.resources.dll" />
     <AssemblyPart Source="ru-RU/Motyvacija.resources.dll" />

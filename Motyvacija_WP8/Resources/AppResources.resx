@@ -126,7 +126,7 @@
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>Goals, Results, Salary    V: 1.1</value>
+    <value>Goals, Results, Salary    V: 2.1</value>
   </data>
   <data name="SampleProperty" xml:space="preserve">
     <value>Sample Runtime Property Value</value>
@@ -175,10 +175,10 @@
     <value>Indicators</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Select language</value>
+    <value>Change language</value>
   </data>
   <data name="LanguageBarBack" xml:space="preserve">
-    <value>Back</value>
+    <value>Cancel</value>
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
@@ -205,7 +205,7 @@
     <value>Sum</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Ok</value>
+    <value>Save</value>
   </data>
   <data name="EDIT" xml:space="preserve">
     <value>Edit</value>
@@ -217,7 +217,7 @@
     <value>Evaluation</value>
   </data>
   <data name="MaxIV" xml:space="preserve">
-    <value>Max evaluation</value>
+    <value>Maximum evaluation</value>
   </data>
   <data name="Pav" xml:space="preserve">
     <value>Title</value>
@@ -328,10 +328,10 @@ He could earn maximum SALARY of 3700.</value>
     <value>Sum</value>
   </data>
   <data name="EmployeeAddToArchive" xml:space="preserve">
-    <value>To archive an employee, you have to mark the employee’s check box and press the “save” button. Also, pressing the „save“ button saves all the application's data.</value>
+    <value>To archive an employee, you have to mark the employee’s check box and press the “save” button, then choose "Save". If you want to export in excel format, choose "Export to Excel". Also, pressing the „save“ button saves all the application's data. Pressing the "X" button clears the Excel file.</value>
   </data>
   <data name="EmployeeCalculate" xml:space="preserve">
-    <value>To evaluate an employee, you need to mark the employee’s check box, mark the indicators and tasks by which you evaluate the employee, and press the “calculate” button (marked with a tick).</value>
+    <value>To evaluate an employee, you need to mark the employee’s check box, mark the indicators and tasks by which you evaluate the employee, and press the “calculate” button (marked with a calculator).</value>
   </data>
   <data name="EmployeeDelete" xml:space="preserve">
     <value>To delete an employee, indicator, or task, swipe it to the right.</value>
@@ -344,5 +344,98 @@ He could earn maximum SALARY of 3700.</value>
   </data>
   <data name="MeniuText" xml:space="preserve">
     <value>To view the archived employees, information about the program, or change the language, press the button “menu”.</value>
+  </data>
+  <data name="error_br_empty" xml:space="preserve">
+    <value>Enter baseline value</value>
+  </data>
+  <data name="error_br_number" xml:space="preserve">
+    <value>You are using not allowed symbols</value>
+  </data>
+  <data name="error_employee_name_empty" xml:space="preserve">
+    <value>Enter employee name</value>
+  </data>
+  <data name="error_fr_empty" xml:space="preserve">
+    <value>Enter actual outcome</value>
+  </data>
+  <data name="error_fr_number" xml:space="preserve">
+    <value>You are using not allowed symbols</value>
+  </data>
+  <data name="error_indicator_title_empty" xml:space="preserve">
+    <value>Enter indicator title</value>
+  </data>
+  <data name="error_maxkdu_empty" xml:space="preserve">
+    <value>Enter maxVPT</value>
+  </data>
+  <data name="error_maxkdu_number" xml:space="preserve">
+    <value>You are using not allowed symbols</value>
+  </data>
+  <data name="error_maxKd_empty" xml:space="preserve">
+    <value>Enter maximum variable part</value>
+  </data>
+  <data name="error_maxKd_number" xml:space="preserve">
+    <value>You are using not allowed symbols</value>
+  </data>
+  <data name="error_result_bigger_than_value" xml:space="preserve">
+    <value>Evaluation higher than maximum evaluation</value>
+  </data>
+  <data name="error_salary_empty" xml:space="preserve">
+    <value>Enter basic salary</value>
+  </data>
+  <data name="error_salary_number" xml:space="preserve">
+    <value>You are using not allowed symbols</value>
+  </data>
+  <data name="error_task_result_empty" xml:space="preserve">
+    <value>Enter task evaluation</value>
+  </data>
+  <data name="error_task_result_number" xml:space="preserve">
+    <value>You are using not allowed symbols</value>
+  </data>
+  <data name="error_task_title_empty" xml:space="preserve">
+    <value>Enter task title</value>
+  </data>
+  <data name="error_task_value_empty" xml:space="preserve">
+    <value>Enter task maximum evaluation</value>
+  </data>
+  <data name="error_task_value_number" xml:space="preserve">
+    <value>You are using not allowed symbols</value>
+  </data>
+  <data name="error_tr_empty" xml:space="preserve">
+    <value>Enter target value</value>
+  </data>
+  <data name="error_tr_number" xml:space="preserve">
+    <value>You are using not allowed symbols</value>
+  </data>
+  <data name="error_BR_TR" xml:space="preserve">
+    <value>Baseline value can't be equal to target value</value>
+  </data>
+  <data name="error_bad_result_value" xml:space="preserve">
+    <value>Calculated result cannot be a negative number, please check your indicators and task values!</value>
+  </data>
+  <data name="AchiveDetailsText" xml:space="preserve">
+    <value>In the archive, you can view the employee's archived salaries.</value>
+  </data>
+  <data name="ChangeLanguageText" xml:space="preserve">
+    <value>Here you can change the language.</value>
+  </data>
+  <data name="EmployeeDetailsText" xml:space="preserve">
+    <value>Here you see the summary of the salary.</value>
+  </data>
+  <data name="MAXKDPText" xml:space="preserve">
+    <value>Enter maximum task-related variable part to evaluate an employee according to the tasks.</value>
+  </data>
+  <data name="Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Template.xlsx;System.Byte[], mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e</value>
+  </data>
+  <data name="test2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>test2.xml;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;Windows-1252</value>
+  </data>
+  <data name="test" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>test.csv;System.String, mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e;Windows-1252</value>
+  </data>
+  <data name="calculator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>calculator.png;System.Byte[], mscorlib, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Export to Excel</value>
   </data>
 </root>

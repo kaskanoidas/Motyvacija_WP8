@@ -126,13 +126,10 @@
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>Goals, Results, Salary    V: 1.1</value>
+    <value>Goals, Results, Salary    V: 2.1</value>
   </data>
   <data name="SampleProperty" xml:space="preserve">
     <value>Sample Runtime Property Value</value>
-  </data>
-  <data name="About" xml:space="preserve">
-    <value>Apie</value>
   </data>
   <data name="AddNew" xml:space="preserve">
     <value>Dėti</value>
@@ -162,10 +159,10 @@
     <value>Rodikliai</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Pasirinkti kalbą</value>
+    <value>Keisti kalbą</value>
   </data>
   <data name="LanguageBarBack" xml:space="preserve">
-    <value>Atgal</value>
+    <value>Atšaukti</value>
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Meniu</value>
@@ -192,7 +189,7 @@
     <value>Viso</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Gerai</value>
+    <value>Išsaugoti</value>
   </data>
   <data name="EDIT" xml:space="preserve">
     <value>Redaguoti</value>
@@ -204,7 +201,7 @@
     <value>Įvertinimas</value>
   </data>
   <data name="MaxIV" xml:space="preserve">
-    <value>Maks. įvertinimas</value>
+    <value>Maksimalus įvertinimas</value>
   </data>
   <data name="Pav" xml:space="preserve">
     <value>Pavadinimas</value>
@@ -306,10 +303,10 @@ Maksimaliai galėjo uždirbti 3700.</value>
     <value>Viso</value>
   </data>
   <data name="EmployeeAddToArchive" xml:space="preserve">
-    <value>Norint suarchyvuoti darbuotoją, jį reikia pažymėti varnele ir paspausti mygtuką „saugoti“. Taip pat, paspaudus mygtuką „saugoti“, yra išsaugomi visi programos duomenys.</value>
+    <value>Norint suarchyvuoti darbuotoją, jį reikia pažymėti varnele ir paspausti mygtuką „saugoti“, tada pasirinkti "Saugoti". Norint išsaugoti excel formatu, pasirinkti "Eksportuoti į Excel". Taip pat, paspaudus mygtuką „saugoti“, yra išsaugomi visi programos duomenys. Paspaudus mygtuką "X", išvalomas Excel failas.</value>
   </data>
   <data name="EmployeeCalculate" xml:space="preserve">
-    <value>Norint įvertinti darbuotoją, reikia jį pažymėti varnele, sužymėti rodiklius ir užduotis, pagal kuriuos jį vertinsite, ir paspausti mygtuką „skaičiuoti“ (pažymėtą varnele).</value>
+    <value>Norint įvertinti darbuotoją, reikia jį pažymėti varnele, sužymėti rodiklius ir užduotis, pagal kuriuos jį vertinsite, ir paspausti mygtuką „skaičiuoti“ (pažymėtą skaičiuotuvu).</value>
   </data>
   <data name="EmployeeDelete" xml:space="preserve">
     <value>Norint ištrinti darbuotoją, rodiklį arba užduotį, reikia jį pastumti į dešinę.</value>
@@ -322,5 +319,89 @@ Maksimaliai galėjo uždirbti 3700.</value>
   </data>
   <data name="MeniuText" xml:space="preserve">
     <value>Norint peržiūrėti išsaugotus darbuotojus, informaciją apie programą, keisti kalbą, paspauskite mygtuką "meniu".</value>
+  </data>
+  <data name="error_br_empty" xml:space="preserve">
+    <value>Neįvesta bazinė reikšmė</value>
+  </data>
+  <data name="error_br_number" xml:space="preserve">
+    <value>Neteisingas bazinės reikšmės skaičius</value>
+  </data>
+  <data name="error_fr_empty" xml:space="preserve">
+    <value>Neįvesta faktinė reikšmė</value>
+  </data>
+  <data name="error_fr_number" xml:space="preserve">
+    <value>Neteisingas faktinės reikšmės skaičius</value>
+  </data>
+  <data name="error_indicator_title_empty" xml:space="preserve">
+    <value>Neįvestas indikatoriaus pavadinimas</value>
+  </data>
+  <data name="error_maxkdu_empty" xml:space="preserve">
+    <value>Neįvestas maxKdu</value>
+  </data>
+  <data name="error_maxkdu_number" xml:space="preserve">
+    <value>Neteisingas maksKDU skaičius</value>
+  </data>
+  <data name="error_maxKd_empty" xml:space="preserve">
+    <value>Neįvesta maksimali kintama dalis</value>
+  </data>
+  <data name="error_maxKd_number" xml:space="preserve">
+    <value>Neteisingas kintamos reikšmės skaičius</value>
+  </data>
+  <data name="error_salary_empty" xml:space="preserve">
+    <value>Neįvestas atlyginimas</value>
+  </data>
+  <data name="error_salary_number" xml:space="preserve">
+    <value>Neteisingas atlyginimas</value>
+  </data>
+  <data name="error_task_result_empty" xml:space="preserve">
+    <value>Neįvestas užduoties įvertinimas</value>
+  </data>
+  <data name="error_task_result_number" xml:space="preserve">
+    <value>Neteisingas užduoties įvertinimo skaičius</value>
+  </data>
+  <data name="error_task_title_empty" xml:space="preserve">
+    <value>Neįvestas užduoties pavadinimas</value>
+  </data>
+  <data name="error_task_value_empty" xml:space="preserve">
+    <value>Neįvestas užduoties maksimalus įvertinimas</value>
+  </data>
+  <data name="error_task_value_number" xml:space="preserve">
+    <value>Neteisingas maksimalaus įvertinimo skaičius</value>
+  </data>
+  <data name="error_tr_empty" xml:space="preserve">
+    <value>Neįvesta tikslinė reikšmė</value>
+  </data>
+  <data name="error_tr_number" xml:space="preserve">
+    <value>Neteisingas tikslinės reikšmės skaičius</value>
+  </data>
+  <data name="error_employee_name_empty" xml:space="preserve">
+    <value>Neįvestas darbuotojo vardas</value>
+  </data>
+  <data name="error_result_bigger_than_value" xml:space="preserve">
+    <value>Įvertinimas didesnis nei maksimalus įvertinimas</value>
+  </data>
+  <data name="error_BR_TR" xml:space="preserve">
+    <value>Bazinė reikšmė negali būti lygi tikslinei reikšmei</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Apie</value>
+  </data>
+  <data name="error_bad_result_value" xml:space="preserve">
+    <value>Apskaičiuotas rezultatas negali būti neigiamas skaičius, patikrinkite rodiklių ir užduočių reikšmes!</value>
+  </data>
+  <data name="AchiveDetailsText" xml:space="preserve">
+    <value>Archyvavimo lange galima pažiūrėti suarchyvuotus darbuotojų atlyginimus.</value>
+  </data>
+  <data name="ChangeLanguageText" xml:space="preserve">
+    <value>Šiame lange galima pakeisti kalbą.</value>
+  </data>
+  <data name="EmployeeDetailsText" xml:space="preserve">
+    <value>Taip atrodo atlyginimo suvestinė.</value>
+  </data>
+  <data name="MAXKDPText" xml:space="preserve">
+    <value>Norint darbuotoją įvertinti pagal užduotis, reikia nustatyti maksimalų kintamos dalies pagal užduotis dydį.</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Eksportuoti į Excel</value>
   </data>
 </root>

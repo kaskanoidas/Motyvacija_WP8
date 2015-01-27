@@ -122,25 +122,25 @@ namespace Motyvacija_WP8
             StackPanel st = (StackPanel)sender;
             if (x < x2 && x2 - x > 200 && scrolLock == true)
             {
-                //MessageBoxResult msgrez = new MessageBoxResult();
-                //if (App.RootFrame.Language.IetfLanguageTag == "lt-lt") // PAKEISTI CUSTUM LENTELE arba DOWN MSGBOX source + change text
-                //{
-                //    msgrez = MessageBox.Show("Ar tikrai norite ištrinti šį darbuotoją?", "Patvirtinimas", MessageBoxButton.OKCancel);
-                //}
-                //else if (App.RootFrame.Language.IetfLanguageTag == "en")
-                //{
-                //    msgrez = MessageBox.Show("Do you want to delete this employee?", "Confirmation", MessageBoxButton.OKCancel);
-                //}
-                //else if (App.RootFrame.Language.IetfLanguageTag == "ru-rU")
-                //{
-                //    msgrez = MessageBox.Show("Вы действительно хотите удалить этот сотрудникa?", "Подтверждение", MessageBoxButton.OKCancel);
-                //}
-                //else
-                //{
-                //    msgrez = MessageBox.Show("Do you want to delete this employee?", "Confirmation", MessageBoxButton.OKCancel);
-                //}
-                //if (msgrez == MessageBoxResult.OK)
-                //{
+                MessageBoxResult msgrez = new MessageBoxResult();
+                if (App.RootFrame.Language.IetfLanguageTag == "lt-lt") // PAKEISTI CUSTUM LENTELE arba DOWN MSGBOX source + change text
+                {
+                    msgrez = MessageBox.Show("Ar tikrai norite ištrinti šį darbuotoją?", "Patvirtinimas", MessageBoxButton.OKCancel);
+                }
+                else if (App.RootFrame.Language.IetfLanguageTag == "en")
+                {
+                    msgrez = MessageBox.Show("Do you want to delete this employee?", "Confirmation", MessageBoxButton.OKCancel);
+                }
+                else if (App.RootFrame.Language.IetfLanguageTag == "ru-rU")
+                {
+                    msgrez = MessageBox.Show("Вы действительно хотите удалить этот сотрудникa?", "Подтверждение", MessageBoxButton.OKCancel);
+                }
+                else
+                {
+                    msgrez = MessageBox.Show("Do you want to delete this employee?", "Confirmation", MessageBoxButton.OKCancel);
+                }
+                if (msgrez == MessageBoxResult.OK)
+                {
                 int index = int.Parse(st.Tag.ToString());
                 for (int i = index + 1; i < ArchivedEmployees.Items.Count; i++)
                 {
@@ -149,13 +149,13 @@ namespace Motyvacija_WP8
                     ArchivedEmployees.Items[i] = emp;
                 }
                 ArchivedEmployees.Items.RemoveAt(index);
-                //}
-                //else
-                //{
-                //    TranslateTransform tr = new TranslateTransform();
-                //    tr.X = 0;
-                //    st.RenderTransform = tr;
-                //}
+                }
+                else
+                {
+                    TranslateTransform tr = new TranslateTransform();
+                    tr.X = 0;
+                    st.RenderTransform = tr;
+                }
             }
             else
             {

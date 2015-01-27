@@ -57,12 +57,12 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
                         <Grid>
-                            <Image x:Name="EN3" Stretch="Fill" Source="/Resources/MeniuEN.png" Visibility="Visible"/>
-                            <Image x:Name="LT3" Stretch="Fill" Source="/Resources/MeniuLT.png"  Visibility="Collapsed"/>
-                            <Image x:Name="RU3" Stretch="Fill" Source="/Resources/MeniuRU.png"  Visibility="Collapsed"/>
+                            <Image x:Name="EN3" Stretch="Fill" Source="/Resources/EmployeeCalculateEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT3" Stretch="Fill" Source="/Resources/EmployeeCalculateLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU3" Stretch="Fill" Source="/Resources/EmployeeCalculateRU.png"  Visibility="Collapsed"/>
                         </Grid>
                     </Border>
-                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.MeniuText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeCalculate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
                 </Grid>
             </phone:PivotItem>
             <phone:PivotItem Header="item4">
@@ -73,12 +73,12 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
                         <Grid>
-                            <Image x:Name="EN4" Stretch="Fill" Source="/Resources/EmployeeDeleteEN.png" Visibility="Visible"/>
-                            <Image x:Name="LT4" Stretch="Fill" Source="/Resources/EmployeeDeleteLT.png"  Visibility="Collapsed"/>
-                            <Image x:Name="RU4" Stretch="Fill" Source="/Resources/EmployeeDeleteRU.png"  Visibility="Collapsed"/>
+                            <Image x:Name="EN4" Stretch="Fill" Source="/Resources/MKDEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT4" Stretch="Fill" Source="/Resources/MKDLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU4" Stretch="Fill" Source="/Resources/MKDRU.png"  Visibility="Collapsed"/>
                         </Grid>
                     </Border>
-                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeDelete, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.MAXKDPText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
                 </Grid>
             </phone:PivotItem>
             <phone:PivotItem Header="item5">
@@ -89,12 +89,12 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
                         <Grid>
-                            <Image x:Name="EN5" Stretch="Fill" Source="/Resources/EmployeeCalculateEN.png" Visibility="Visible"/>
-                            <Image x:Name="LT5" Stretch="Fill" Source="/Resources/EmployeeCalculateLT.png"  Visibility="Collapsed"/>
-                            <Image x:Name="RU5" Stretch="Fill" Source="/Resources/EmployeeCalculateRU.png"  Visibility="Collapsed"/>
+                            <Image x:Name="EN5" Stretch="Fill" Source="/Resources/EmployeeDeleteEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT5" Stretch="Fill" Source="/Resources/EmployeeDeleteLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU5" Stretch="Fill" Source="/Resources/EmployeeDeleteRU.png"  Visibility="Collapsed"/>
                         </Grid>
                     </Border>
-                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeCalculate, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeDelete, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
                 </Grid>
             </phone:PivotItem>
             <phone:PivotItem Header="item6">
@@ -105,12 +105,76 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
                         <Grid>
-                            <Image x:Name="EN6" Stretch="Fill" Source="/Resources/EmployeeAddToArchiveEN.png" Visibility="Visible"/>
-                            <Image x:Name="LT6" Stretch="Fill" Source="/Resources/EmployeeAddToArchiveLT.png"  Visibility="Collapsed"/>
-                            <Image x:Name="RU6" Stretch="Fill" Source="/Resources/EmployeeAddToArchiveRU.png"  Visibility="Collapsed"/>
+                            <Image x:Name="EN6" Stretch="Fill" Source="/Resources/MeniuEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT6" Stretch="Fill" Source="/Resources/MeniuLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU6" Stretch="Fill" Source="/Resources/MeniuRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.MeniuText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="item7">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN7" Stretch="Fill" Source="/Resources/EmployeeAddToArchiveEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT7" Stretch="Fill" Source="/Resources/EmployeeAddToArchiveLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU7" Stretch="Fill" Source="/Resources/EmployeeAddToArchiveRU.png"  Visibility="Collapsed"/>
                         </Grid>
                     </Border>
                     <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeAddToArchive, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="item8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN8" Stretch="Fill" Source="/Resources/MeniuSelectLanguageEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT8" Stretch="Fill" Source="/Resources/MeniuSelectLanguageLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU8" Stretch="Fill" Source="/Resources/MeniuSelectLanguageRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.ChangeLanguageText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="item9">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN9" Stretch="Fill" Source="/Resources/EmployeeInformationEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT9" Stretch="Fill" Source="/Resources/EmployeeInformationLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU9" Stretch="Fill" Source="/Resources/EmployeeInformationRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.EmployeeDetailsText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </Grid>
+            </phone:PivotItem>
+            <phone:PivotItem Header="item10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderThickness="1" BorderBrush="White">
+                        <Grid>
+                            <Image x:Name="EN10" Stretch="Fill" Source="/Resources/ArchiveEN.png" Visibility="Visible"/>
+                            <Image x:Name="LT10" Stretch="Fill" Source="/Resources/ArchiveLT.png"  Visibility="Collapsed"/>
+                            <Image x:Name="RU10" Stretch="Fill" Source="/Resources/ArchiveRU.png"  Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.AchiveDetailsText, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>

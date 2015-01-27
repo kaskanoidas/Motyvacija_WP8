@@ -150,12 +150,24 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\test.csv" />
+    <None Include="Resources\test2.xml" />
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Resources\ArchiveEN.png" />
+    <Content Include="Resources\ArchiveLT.png" />
+    <Content Include="Resources\ArchiveRU.png" />
+    <Content Include="Resources\calculator.png" />
+    <Content Include="Resources\EmployeeInformationEN.png" />
+    <Content Include="Resources\EmployeeInformationLT.png" />
+    <Content Include="Resources\EmployeeInformationRU.png" />
     <Content Include="Resources\EmployeeMakeEN.png" />
     <Content Include="Resources\EmployeeMakeLT.png" />
+    <None Include="Resources\Template.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
@@ -197,6 +209,12 @@
     <Content Include="Resources\MeniuEN.png" />
     <Content Include="Resources\MeniuLT.png" />
     <Content Include="Resources\MeniuRU.png" />
+    <Content Include="Resources\MeniuSelectLanguageEN.png" />
+    <Content Include="Resources\MeniuSelectLanguageLT.png" />
+    <Content Include="Resources\MeniuSelectLanguageRU.png" />
+    <Content Include="Resources\MKDEN.png" />
+    <Content Include="Resources\MKDLT.png" />
+    <Content Include="Resources\MKDRU.png" />
     <Content Include="Resources\save.png" />
     <Content Include="Resources\add.png" />
   </ItemGroup>
@@ -220,6 +238,17 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="OpenXML.Silverlight.Spreadsheet.WP8, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\OpenXML.Silverlight.Spreadsheet.WP8.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpZipLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\SharpZipLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

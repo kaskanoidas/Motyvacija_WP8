@@ -14,6 +14,13 @@ using System.Globalization;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
+using Microsoft.Phone.Tasks;
+using Windows.Storage;
+using System.Threading.Tasks;
+using System.IO;
+using OpenXML.Silverlight.Spreadsheet;
+using OpenXML.Silverlight.Spreadsheet.Parts;
+using FiftyNine.Ag.OpenXML.Common.Storage;
 
 namespace Motyvacija_WP8
 {
@@ -24,9 +31,11 @@ namespace Motyvacija_WP8
         Boolean scrolLock;
         Boolean AddNewItem;
         List<ArchyvedEmployeeClass> AEC;
-        Boolean InAddPanel;
-        Boolean PanelTaped;
+        Boolean TextboxInFocus;
+        Boolean DoubleClickOnTextbox;
+        TextBox LastSelectedTextbox;
         Boolean CanExit;
+        char Skirtukas = '&';
         public MainPage()
         {
             InitializeComponent();
@@ -38,8 +47,9 @@ namespace Motyvacija_WP8
             lastEmployeeChecked = -1; AddNewItem = false;
             x = 0; x2 = 0; y = 0; y2 = 0; scrolLock = false;
             CanExit = true;
-            InAddPanel = false;
-            PanelTaped = false;
+            TextboxInFocus = false;
+            DoubleClickOnTextbox = false;
+            LastSelectedTextbox = new TextBox();
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -58,16 +68,50 @@ namespace Motyvacija_WP8
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            lastEmployeeChecked = -1;
+            SaveAll();
             PhoneApplicationService.Current.State["AEC"] = AEC;
             base.OnNavigatedFrom(e);
         }
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
-        {   
+        {
             base.OnBackKeyPress(e);
             e.Cancel = true;
-            SaveAll();
-            SaveKalba(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
-            Application.Current.Terminate();
+            if(MeniuBar.Visibility == System.Windows.Visibility.Visible)
+            {
+                MeniuBar.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else if (LanguageBar.Visibility == System.Windows.Visibility.Visible)
+            {
+                LanguageBar.Visibility = System.Windows.Visibility.Collapsed;
+                MeniuBar.Visibility = System.Windows.Visibility.Visible;
+            }
+            else if (AddBarEmployee.Visibility == System.Windows.Visibility.Visible)
+            {
+                AddBarEmployee.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else if (AddBarIndicator.Visibility == System.Windows.Visibility.Visible)
+            {
+                AddBarIndicator.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else if (AddBarTask.Visibility == System.Windows.Visibility.Visible)
+            {
+                AddBarTask.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else if (MAxKDPST.Visibility == System.Windows.Visibility.Visible)
+            {
+                MAxKDPST.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else if (EmployeeDetailPanel.Visibility == System.Windows.Visibility.Visible)
+            {
+                EmployeeDetailPanel.Visibility = System.Windows.Visibility.Collapsed;
+            } 
+            else
+            {
+                SaveAll();
+                SaveKalba(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
+                Application.Current.Terminate();
+            }
         }
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
@@ -144,37 +188,39 @@ namespace Motyvacija_WP8
             {
                 AEC.Clear();
             }
+            Boolean NeraTuscias = false;
             while (file.EndOfStream != true)
             {
+                NeraTuscias = true;
                 string eilute = file.ReadLine();
                 if (eilute == "Darbuotoju lentele:")
                 {
                     int index = Convert.ToInt32(file.ReadLine());
                     for (int i = 0; i < index; i++)
                     {
-                        string[] reiksmes = file.ReadLine().Split(',');
+                        string[] reiksmes = file.ReadLine().Split(Skirtukas);
                         EmployeeClass EC = new EmployeeClass();
-                        EC.NameLine = reiksmes[0]; EC.BALine = Convert.ToDouble(reiksmes[1]); EC.RODLine = Convert.ToDouble(reiksmes[2]); EC.UZDLine = Convert.ToDouble(reiksmes[3]); EC.VisoLine = Convert.ToDouble(reiksmes[4]); EC.IsChecked = false;
+                        EC.NameLine = reiksmes[0]; EC.BALine = ParseDouble(reiksmes[1]); EC.RODLine = ParseDouble(reiksmes[2]); EC.UZDLine = ParseDouble(reiksmes[3]); EC.VisoLine = ParseDouble(reiksmes[4]); EC.IsChecked = false;
                         EC.index = i;
-                        reiksmes = file.ReadLine().Split(',');
+                        reiksmes = file.ReadLine().Split(Skirtukas);
                         int rod = Convert.ToInt32(reiksmes[0]);
                         int uzd = Convert.ToInt32(reiksmes[1]);
-                        EC.MaxKDP = Convert.ToDouble(reiksmes[2]);
+                        EC.MaxKDP = ParseDouble(reiksmes[2]);
                         EC.RodList = new List<IndicatorsClass>();
                         EC.UzdList = new List<TasksClass>();
                         for (int j = 0; j < rod; j++)
                         {
-                            reiksmes = file.ReadLine().Split(',');
+                            reiksmes = file.ReadLine().Split(Skirtukas);
                             IndicatorsClass ind = new IndicatorsClass();
-                            ind.INDPAVLine = reiksmes[0]; ind.BRLine = Convert.ToDouble(reiksmes[1]); ind.FRLine = Convert.ToDouble(reiksmes[2]); ind.TRLine = Convert.ToDouble(reiksmes[3]); ind.MKDLine = Convert.ToDouble(reiksmes[4]); ind.IsChecked = false;
+                            ind.INDPAVLine = reiksmes[0]; ind.BRLine = ParseDouble(reiksmes[1]); ind.FRLine = ParseDouble(reiksmes[2]); ind.TRLine = ParseDouble(reiksmes[3]); ind.MKDLine = ParseDouble(reiksmes[4]); ind.IsChecked = false;
                             ind.index = j;
                             EC.RodList.Add(ind);
                         }
                         for (int j = 0; j < uzd; j++)
                         {
-                            reiksmes = file.ReadLine().Split(',');
+                            reiksmes = file.ReadLine().Split(Skirtukas);
                             TasksClass tsk = new TasksClass();
-                            tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = Convert.ToDouble(reiksmes[1]); tsk.Ivert = Convert.ToDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
+                            tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = ParseDouble(reiksmes[1]); tsk.Ivert = ParseDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
                             tsk.index = j;
                             EC.UzdList.Add(tsk);
                         }
@@ -186,9 +232,9 @@ namespace Motyvacija_WP8
                     int index = Convert.ToInt32(file.ReadLine());
                     for (int i = 0; i < index; i++)
                     {
-                        string[] reiksmes = file.ReadLine().Split(',');
+                        string[] reiksmes = file.ReadLine().Split(Skirtukas);
                         IndicatorsClass ind = new IndicatorsClass();
-                        ind.INDPAVLine = reiksmes[0]; ind.BRLine = Convert.ToDouble(reiksmes[1]); ind.FRLine = Convert.ToDouble(reiksmes[2]); ind.TRLine = Convert.ToDouble(reiksmes[3]); ind.MKDLine = Convert.ToDouble(reiksmes[4]); ind.IsChecked = false;
+                        ind.INDPAVLine = reiksmes[0]; ind.BRLine = ParseDouble(reiksmes[1]); ind.FRLine = ParseDouble(reiksmes[2]); ind.TRLine = ParseDouble(reiksmes[3]); ind.MKDLine = ParseDouble(reiksmes[4]); ind.IsChecked = false;
                         ind.index = i;
                         Indicators.Items.Add(ind);
                     }
@@ -198,9 +244,9 @@ namespace Motyvacija_WP8
                     int index = Convert.ToInt32(file.ReadLine());
                     for (int i = 0; i < index; i++)
                     {
-                        string[] reiksmes = file.ReadLine().Split(',');
+                        string[] reiksmes = file.ReadLine().Split(Skirtukas);
                         TasksClass tsk = new TasksClass();
-                        tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = Convert.ToDouble(reiksmes[1]); tsk.Ivert = Convert.ToDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
+                        tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = ParseDouble(reiksmes[1]); tsk.Ivert = ParseDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
                         tsk.index = i;
                         Tasks.Items.Add(tsk);
                     }
@@ -211,29 +257,29 @@ namespace Motyvacija_WP8
                     AEC = new List<ArchyvedEmployeeClass>();
                     for (int i = 0; i < index; i++)
                     {
-                        string[] reiksmes = file.ReadLine().Split(',');
+                        string[] reiksmes = file.ReadLine().Split(Skirtukas);
                         ArchyvedEmployeeClass EC = new ArchyvedEmployeeClass();
-                        EC.NameLine = reiksmes[0]; EC.BALine = Convert.ToDouble(reiksmes[1]); EC.RODLine = Convert.ToDouble(reiksmes[2]); EC.UZDLine = Convert.ToDouble(reiksmes[3]); EC.VisoLine = Convert.ToDouble(reiksmes[4]); EC.Date = reiksmes[5]; EC.IsChecked = false;
+                        EC.NameLine = reiksmes[0]; EC.BALine = ParseDouble(reiksmes[1]); EC.RODLine = ParseDouble(reiksmes[2]); EC.UZDLine = ParseDouble(reiksmes[3]); EC.VisoLine = ParseDouble(reiksmes[4]); EC.Date = reiksmes[5]; EC.IsChecked = false;
                         EC.index = i;
-                        reiksmes = file.ReadLine().Split(',');
+                        reiksmes = file.ReadLine().Split(Skirtukas);
                         int rod = Convert.ToInt32(reiksmes[0]);
                         int uzd = Convert.ToInt32(reiksmes[1]);
-                        EC.MaxKDP = Convert.ToDouble(reiksmes[2]);
+                        EC.MaxKDP = ParseDouble(reiksmes[2]);
                         EC.RodList = new List<IndicatorsClass>();
                         EC.UzdList = new List<TasksClass>();
                         for (int j = 0; j < rod; j++)
                         {
-                            reiksmes = file.ReadLine().Split(',');
+                            reiksmes = file.ReadLine().Split(Skirtukas);
                             IndicatorsClass ind = new IndicatorsClass();
-                            ind.INDPAVLine = reiksmes[0]; ind.BRLine = Convert.ToDouble(reiksmes[1]); ind.FRLine = Convert.ToDouble(reiksmes[2]); ind.TRLine = Convert.ToDouble(reiksmes[3]); ind.MKDLine = Convert.ToDouble(reiksmes[4]); ind.IsChecked = false;
+                            ind.INDPAVLine = reiksmes[0]; ind.BRLine = ParseDouble(reiksmes[1]); ind.FRLine = ParseDouble(reiksmes[2]); ind.TRLine = ParseDouble(reiksmes[3]); ind.MKDLine = ParseDouble(reiksmes[4]); ind.IsChecked = false;
                             ind.index = j;
                             EC.RodList.Add(ind);
                         }
                         for (int j = 0; j < uzd; j++)
                         {
-                            reiksmes = file.ReadLine().Split(',');
+                            reiksmes = file.ReadLine().Split(Skirtukas);
                             TasksClass tsk = new TasksClass();
-                            tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = Convert.ToDouble(reiksmes[1]); tsk.Ivert = Convert.ToDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
+                            tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = ParseDouble(reiksmes[1]); tsk.Ivert = ParseDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
                             tsk.index = j;
                             EC.UzdList.Add(tsk);
                         }
@@ -242,6 +288,100 @@ namespace Motyvacija_WP8
                 }
             }
             file.Close();
+            if (Employees.Items.Count == 0 && Tasks.Items.Count == 0 && Indicators.Items.Count == 0 && AEC.Count == 0 && NeraTuscias == false)
+            {
+                EmployeeClass EC = new EmployeeClass();
+                EC.index = 0; EC.IsChecked = false; EC.NameLine = "Marko"; EC.BALine = 1000.00; EC.RODLine = 0; EC.UZDLine = 0;
+                EC.VisoLine = 1000.00; EC.MaxKDP = 0; EC.RodList = new List<IndicatorsClass>() { }; EC.UzdList = new List<TasksClass>() { };
+                Employees.Items.Add(EC);
+
+                EC = new EmployeeClass();
+                EC.index = 1; EC.IsChecked = false; EC.NameLine = "Employee 2"; EC.BALine = 2000.00; EC.RODLine = 0; EC.UZDLine = 0;
+                EC.VisoLine = 2000.00; EC.MaxKDP = 0; EC.RodList = new List<IndicatorsClass>() { }; EC.UzdList = new List<TasksClass>() { };
+                Employees.Items.Add(EC);
+
+                EC = new EmployeeClass();
+                EC.index = 2; EC.IsChecked = false; EC.NameLine = "Employee 3"; EC.BALine = 3000.00; EC.RODLine = 0; EC.UZDLine = 0;
+                EC.VisoLine = 3000.00; EC.MaxKDP = 0; EC.RodList = new List<IndicatorsClass>() { }; EC.UzdList = new List<TasksClass>() { };
+                Employees.Items.Add(EC);
+
+                IndicatorsClass ind = new IndicatorsClass();
+                ind.INDPAVLine = "PROFIT"; ind.BRLine = 100000.0; ind.FRLine = 121000.0;
+                ind.TRLine = 130000.00; ind.MKDLine = 1200.0; ind.IsChecked = false; ind.index = 0;
+                Indicators.Items.Add(ind);
+
+                ind = new IndicatorsClass();
+                ind.INDPAVLine = "COSTS"; ind.BRLine = 500000.0; ind.FRLine = 480000.0; 
+                ind.TRLine = 450000.00; ind.MKDLine = 800.0; ind.IsChecked = false; ind.index = 1;
+                Indicators.Items.Add(ind);
+
+                ind = new IndicatorsClass();
+                ind.INDPAVLine = "Indicator 3"; ind.BRLine = 2.0; ind.FRLine = 2.4;
+                ind.TRLine = 4.0; ind.MKDLine = 2.0; ind.IsChecked = false; ind.index = 2;
+                Indicators.Items.Add(ind);
+
+                ind = new IndicatorsClass();
+                ind.INDPAVLine = "Indicator 4"; ind.BRLine = 3.00; ind.FRLine = 3.6;
+                ind.TRLine = 6.00; ind.MKDLine = 3.00; ind.IsChecked = false; ind.index = 3;
+                Indicators.Items.Add(ind);
+
+                TasksClass tsk = new TasksClass();
+                tsk.UZDPAVLine = "RELATIONSHIP WITH..."; tsk.MaxIvert = 11.0; tsk.Ivert = 9.0;
+                tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false; tsk.index = 0;
+                Tasks.Items.Add(tsk);
+
+                tsk = new TasksClass();
+                tsk.UZDPAVLine = "CUTTING ON THE RET..."; tsk.MaxIvert = 9.0; tsk.Ivert = 5.0;
+                tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false; tsk.index = 1;
+                Tasks.Items.Add(tsk);
+
+                tsk = new TasksClass();
+                tsk.UZDPAVLine = "IMPROVING PROFESS..."; tsk.MaxIvert = 7.0; tsk.Ivert = 6.0;
+                tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false; tsk.index = 2;
+                Tasks.Items.Add(tsk);
+
+                tsk = new TasksClass();
+                tsk.UZDPAVLine = "TASK 4"; tsk.MaxIvert = 8.0; tsk.Ivert = 7.0;
+                tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false; tsk.index = 3;
+                Tasks.Items.Add(tsk);
+
+                tsk = new TasksClass();
+                tsk.UZDPAVLine = "TASK 5"; tsk.MaxIvert = 9.0; tsk.Ivert = 8.0;
+                tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false; tsk.index = 3;
+                Tasks.Items.Add(tsk);
+
+                AEC.Clear();
+                ArchyvedEmployeeClass ECA = new ArchyvedEmployeeClass();
+                ECA.NameLine = "Marko"; ECA.BALine = 1000.00; ECA.RODLine = 0; ECA.UZDLine = 0; ECA.VisoLine = 1000.00; ECA.Date = "2014.06.16";
+                ECA.IsChecked = false; ECA.index = 0; ECA.RodList = new List<IndicatorsClass>() { }; ECA.UzdList = new List<TasksClass>() { };
+                AEC.Add(ECA);
+
+                ECA = new ArchyvedEmployeeClass();
+                ECA.NameLine = "Employee 2"; ECA.BALine = 2000.00; ECA.RODLine = 0; ECA.UZDLine = 0; ECA.VisoLine = 2000.00; ECA.Date = "2014.06.16";
+                ECA.IsChecked = false; ECA.index = 1; ECA.RodList = new List<IndicatorsClass>() { }; ECA.UzdList = new List<TasksClass>() { };
+                AEC.Add(ECA);
+
+                ECA = new ArchyvedEmployeeClass();
+                ECA.NameLine = "Employee 3"; ECA.BALine = 3000.00; ECA.RODLine = 0; ECA.UZDLine = 0; ECA.VisoLine = 3000.00; ECA.Date = "2014.06.16";
+                ECA.IsChecked = false; ECA.index = 2; ECA.RodList = new List<IndicatorsClass>() { }; ECA.UzdList = new List<TasksClass>() { };
+                AEC.Add(ECA);
+            }
+        }
+        private double ParseDouble(string value)
+        {
+            double ValueOut = 0.0;
+            if(double.TryParse(value,out ValueOut) == false)
+            {
+                if (value.Contains("."))
+                {
+                    double.TryParse(value.Replace(".", ","), out ValueOut);
+                }
+            }
+            if (value.Contains(",") && CultureInfo.CurrentCulture.ToString() == "en")
+            {
+                double.TryParse(value.Replace(",", "."), out ValueOut);
+            }
+            return ValueOut;
         }
         private void SaveAll()
         {
@@ -251,7 +391,7 @@ namespace Motyvacija_WP8
             for (int i = 0; i < Employees.Items.Count; i++)
             {
                 EmployeeClass emp = (EmployeeClass)Employees.Items[i];
-                file.WriteLine(emp.NameLine + "," + emp.BALine.ToString() + "," + emp.RODLine.ToString() + "," + emp.UZDLine.ToString() + "," + emp.VisoLine.ToString());
+                file.WriteLine(emp.NameLine + Skirtukas + emp.BALine.ToString() + Skirtukas + emp.RODLine.ToString() + Skirtukas + emp.UZDLine.ToString() + Skirtukas + emp.VisoLine.ToString());
                 if (emp.RodList == null)
                 {
                     emp.RodList = new List<IndicatorsClass>();
@@ -260,14 +400,14 @@ namespace Motyvacija_WP8
                 {
                     emp.UzdList = new List<TasksClass>();
                 }
-                file.WriteLine(emp.RodList.Count.ToString() + "," + emp.UzdList.Count.ToString() + "," + emp.MaxKDP.ToString());
+                file.WriteLine(emp.RodList.Count.ToString() + Skirtukas + emp.UzdList.Count.ToString() + Skirtukas + emp.MaxKDP.ToString());
                 for (int j = 0; j < emp.RodList.Count; j++)
                 {
-                    file.WriteLine(emp.RodList[j].INDPAVLine + "," + emp.RodList[j].BRLine.ToString() + "," + emp.RodList[j].FRLine.ToString() + "," + emp.RodList[j].TRLine.ToString() + "," + emp.RodList[j].MKDLine.ToString());
+                    file.WriteLine(emp.RodList[j].INDPAVLine + Skirtukas + emp.RodList[j].BRLine.ToString() + Skirtukas + emp.RodList[j].FRLine.ToString() + Skirtukas + emp.RodList[j].TRLine.ToString() + Skirtukas + emp.RodList[j].MKDLine.ToString());
                 }
                 for (int j = 0; j < emp.UzdList.Count; j++)
                 {
-                    file.WriteLine(emp.UzdList[j].UZDPAVLine + "," + emp.UzdList[j].MaxIvert.ToString() + "," + emp.UzdList[j].Ivert.ToString());
+                    file.WriteLine(emp.UzdList[j].UZDPAVLine + Skirtukas + emp.UzdList[j].MaxIvert.ToString() + Skirtukas + emp.UzdList[j].Ivert.ToString());
                 }
             }
 
@@ -276,7 +416,7 @@ namespace Motyvacija_WP8
             for (int i = 0; i < Indicators.Items.Count; i++)
             {
                 IndicatorsClass ind = (IndicatorsClass)Indicators.Items[i];
-                file.WriteLine(ind.INDPAVLine + "," + ind.BRLine.ToString() + "," + ind.FRLine.ToString() + "," + ind.TRLine.ToString() + "," + ind.MKDLine.ToString());
+                file.WriteLine(ind.INDPAVLine + Skirtukas + ind.BRLine.ToString() + Skirtukas + ind.FRLine.ToString() + Skirtukas + ind.TRLine.ToString() + Skirtukas + ind.MKDLine.ToString());
             }
 
             file.WriteLine("Uzduociu lentele:");
@@ -284,7 +424,7 @@ namespace Motyvacija_WP8
             for (int i = 0; i < Tasks.Items.Count; i++)
             {
                 TasksClass tsk = (TasksClass)Tasks.Items[i];
-                file.WriteLine(tsk.UZDPAVLine + "," + tsk.MaxIvert.ToString() + "," + tsk.Ivert.ToString());
+                file.WriteLine(tsk.UZDPAVLine + Skirtukas + tsk.MaxIvert.ToString() + Skirtukas + tsk.Ivert.ToString());
             }
             if (AEC == null)
             {
@@ -294,7 +434,7 @@ namespace Motyvacija_WP8
             file.WriteLine(AEC.Count);
             for (int i = 0; i < AEC.Count; i++)
             {
-                file.WriteLine(AEC[i].NameLine + "," + AEC[i].BALine.ToString() + "," + AEC[i].RODLine.ToString() + "," + AEC[i].UZDLine.ToString() + "," + AEC[i].VisoLine.ToString() + "," + AEC[i].Date);
+                file.WriteLine(AEC[i].NameLine + Skirtukas + AEC[i].BALine.ToString() + Skirtukas + AEC[i].RODLine.ToString() + Skirtukas + AEC[i].UZDLine.ToString() + Skirtukas + AEC[i].VisoLine.ToString() + Skirtukas + AEC[i].Date);
                 if (AEC[i].RodList == null)
                 {
                     AEC[i].RodList = new List<IndicatorsClass>();
@@ -303,14 +443,14 @@ namespace Motyvacija_WP8
                 {
                     AEC[i].UzdList = new List<TasksClass>();
                 }
-                file.WriteLine(AEC[i].RodList.Count.ToString() + "," + AEC[i].UzdList.Count.ToString() + "," + AEC[i].MaxKDP.ToString());
+                file.WriteLine(AEC[i].RodList.Count.ToString() + Skirtukas + AEC[i].UzdList.Count.ToString() + Skirtukas + AEC[i].MaxKDP.ToString());
                 for (int j = 0; j < AEC[i].RodList.Count; j++)
                 {
-                    file.WriteLine(AEC[i].RodList[j].INDPAVLine + "," + AEC[i].RodList[j].BRLine.ToString() + "," + AEC[i].RodList[j].FRLine.ToString() + "," + AEC[i].RodList[j].TRLine.ToString() + "," + AEC[i].RodList[j].MKDLine.ToString());
+                    file.WriteLine(AEC[i].RodList[j].INDPAVLine + Skirtukas + AEC[i].RodList[j].BRLine.ToString() + Skirtukas + AEC[i].RodList[j].FRLine.ToString() + Skirtukas + AEC[i].RodList[j].TRLine.ToString() + Skirtukas + AEC[i].RodList[j].MKDLine.ToString());
                 }
                 for (int j = 0; j < AEC[i].UzdList.Count; j++)
                 {
-                    file.WriteLine(AEC[i].UzdList[j].UZDPAVLine + "," + AEC[i].UzdList[j].MaxIvert.ToString() + "," + AEC[i].UzdList[j].Ivert.ToString());
+                    file.WriteLine(AEC[i].UzdList[j].UZDPAVLine + Skirtukas + AEC[i].UzdList[j].MaxIvert.ToString() + Skirtukas + AEC[i].UzdList[j].Ivert.ToString());
                 }
             }
             file.Close();
@@ -319,11 +459,11 @@ namespace Motyvacija_WP8
         private void KillAll()
         {
             MeniuBar.Visibility = System.Windows.Visibility.Collapsed;
+            SaveBar.Visibility = System.Windows.Visibility.Collapsed;
             LanguageBar.Visibility = System.Windows.Visibility.Collapsed;
             AddBarEmployee.Visibility = System.Windows.Visibility.Collapsed;
             AddBarIndicator.Visibility = System.Windows.Visibility.Collapsed;
             AddBarTask.Visibility = System.Windows.Visibility.Collapsed;
-            HelperGrid.Visibility = System.Windows.Visibility.Collapsed;
             MAxKDPST.Visibility = System.Windows.Visibility.Collapsed;
             EditShowGrid.Visibility = System.Windows.Visibility.Collapsed;
             Edit.Visibility = System.Windows.Visibility.Collapsed;
@@ -335,18 +475,20 @@ namespace Motyvacija_WP8
             PavBoxTSK.Text = ""; IVBox.Text = ""; MAXIVBox.Text = "";
             MAXKDPBox.Text = "";
 
-            SpacingGrid.Height = 0;
-            SpacingGridInd.Height = 0;
-            SpacingGridTSK.Height = 0;
-            InAddPanel = false;
-            AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-            AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-            AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+            TextboxInFocus = false;
+            DoubleClickOnTextbox = false;
+            LastSelectedTextbox = new TextBox();
+            AddBarEmployee.Height = 280;
+            AddBarIndicator.Height = 545;
+            AddBarTask.Height = 380;
+            AddBarEmployee.VerticalAlignment = AddBarIndicator.VerticalAlignment = AddBarTask.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+            AddBarEmployee.ScrollToVerticalOffset(0);
+            AddBarIndicator.ScrollToVerticalOffset(0);
+            AddBarTask.ScrollToVerticalOffset(0);
             this.Focus();
         }
         private void ApplicationBarIconButton_Click(object sender, EventArgs e) // Meniu
         {
-
             if (MeniuBar.Visibility == System.Windows.Visibility.Collapsed)
             {
                 KillAll();
@@ -358,6 +500,52 @@ namespace Motyvacija_WP8
             }
         }
         private void ApplicationBarIconButton_Click_1(object sender, EventArgs e) // Save
+        {
+            if (SaveBar.Visibility == System.Windows.Visibility.Collapsed)
+            {
+                KillAll();
+                SaveBar.Visibility = System.Windows.Visibility.Visible;
+                if (CheckForExcel() == false) ExcelClear.Visibility = System.Windows.Visibility.Collapsed;
+                else ExcelClear.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                SaveBar.Visibility = System.Windows.Visibility.Collapsed;
+            }
+        }
+        private bool CheckForExcel()
+        {
+            using (var isoStore = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                if (isoStore.FileExists("Excel.txt")) return true;
+                else return false;
+            }
+        }
+        private void ExcelClear_Click(object sender, RoutedEventArgs e) // Share reset
+        {
+            using (var isoStore = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                if (isoStore.FileExists("Excel.txt"))
+                {
+                    MessageBoxResult msgrez = new MessageBoxResult();
+                    if (System.Threading.Thread.CurrentThread.CurrentUICulture.ToString().Equals("lt-LT"))
+                    {
+                        msgrez = MessageBox.Show("Ar tikrai norite ištrinti Excel failą?", "Patvirtinimas", MessageBoxButton.OKCancel);
+                    }
+                    else if (System.Threading.Thread.CurrentThread.CurrentUICulture.ToString().Equals("ru-RU"))
+                    {
+                        msgrez = MessageBox.Show("Вы уверены, что хотите удалить Excel файл?", "Подтверждение", MessageBoxButton.OKCancel);
+                    }
+                    else
+                    {
+                        msgrez = MessageBox.Show("Do you want to delete the Excel file?", "Confirmation", MessageBoxButton.OKCancel);
+                    }
+                    if (msgrez == MessageBoxResult.OK) isoStore.DeleteFile("Excel.txt");
+                }
+                KillAll();
+            }
+        }
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < Employees.Items.Count; i++)
             {
@@ -407,6 +595,322 @@ namespace Motyvacija_WP8
             SaveAll();
             SaveKalba(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
         }
+        private async void Share_Click(object sender, RoutedEventArgs e) // Share
+        {
+            bool ReadOnly = true;
+            for (int i = 0; i < Employees.Items.Count; i++)
+            {
+                EmployeeClass emp = (EmployeeClass)Employees.Items[i];
+                List<ArchyvedEmployeeClass> EC = new List<ArchyvedEmployeeClass>(){};
+                if (emp.IsChecked == true)
+                {
+                    ReadOnly = false;
+                    SpreadsheetDocument doc = new SpreadsheetDocument();
+                    doc.ApplicationName = "Goals_Results_Salary";
+                    Create_Header(ref doc);
+                    Read_Workers(ref EC, emp);
+                    Create_Workers(ref doc, EC);
+                    using (var isoStore = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
+                    {
+                        if (isoStore.FileExists("Goals_Results_Salary.xlsx")) isoStore.DeleteFile("Goals_Results_Salary.xlsx");
+                        using (var s = isoStore.CreateFile("Goals_Results_Salary.xlsx"))
+                        using (IStreamProvider storage = new ZipStreamProvider(s))
+                            doc.Save(storage);
+                        await Windows.System.Launcher.LaunchFileAsync(await ApplicationData.Current.LocalFolder.GetFileAsync("Goals_Results_Salary.xlsx"));
+                    }
+                }
+            }
+            if (ReadOnly == true)
+            {
+                List<ArchyvedEmployeeClass> EC = new List<ArchyvedEmployeeClass>() { };
+                SpreadsheetDocument doc = new SpreadsheetDocument();
+                doc.ApplicationName = "Goals_Results_Salary";
+                Create_Header(ref doc);
+                Read_Workers(ref EC);
+                Create_Workers(ref doc, EC);
+                using (var isoStore = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (isoStore.FileExists("Goals_Results_Salary.xlsx")) isoStore.DeleteFile("Goals_Results_Salary.xlsx");
+                    using (var s = isoStore.CreateFile("Goals_Results_Salary.xlsx"))
+                    using (IStreamProvider storage = new ZipStreamProvider(s))
+                        doc.Save(storage);
+                    await Windows.System.Launcher.LaunchFileAsync(await ApplicationData.Current.LocalFolder.GetFileAsync("Goals_Results_Salary.xlsx"));
+                }
+            }
+            KillAll();
+            SaveAll();
+            SaveKalba(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
+        }
+        private void Create_Header(ref SpreadsheetDocument doc)
+        {
+            List<SharedStringDefinition> str = new List<SharedStringDefinition>() { };
+            if (System.Threading.Thread.CurrentThread.CurrentUICulture.ToString().Equals("lt-LT"))
+            {
+                str = new List<SharedStringDefinition>()
+                {
+                    doc.Workbook.SharedStrings.AddString("Darbuotojas"), doc.Workbook.SharedStrings.AddString(""),
+                    doc.Workbook.SharedStrings.AddString("Rodikliai"),
+                    doc.Workbook.SharedStrings.AddString("Maksimali kintama\ndalis pagal\nrodiklius"),
+                    doc.Workbook.SharedStrings.AddString("Bazinė reikšmė"),
+                    doc.Workbook.SharedStrings.AddString("Tikslinė reikšmė"),
+                    doc.Workbook.SharedStrings.AddString("Faktinė reikšmė"),
+                    doc.Workbook.SharedStrings.AddString("Užduotys"),
+                    doc.Workbook.SharedStrings.AddString("Maksimali kintama\ndalis pagal\nužduotis"),
+                    doc.Workbook.SharedStrings.AddString("Maksimalus\nįvertinimas"),
+                    doc.Workbook.SharedStrings.AddString("Įvertinimas") 
+                };
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(0, 0, 23);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(1, 2, 10);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(3, 3, 15);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(4, 6, 13);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(7, 7, 10);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(8, 10, 15);
+                doc.Workbook.Sheets[0].Sheet.Rows[0].Height = 40;
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentUICulture.ToString().Equals("ru-RU"))
+            {
+                str = new List<SharedStringDefinition>()
+                {
+                    doc.Workbook.SharedStrings.AddString("Сотрудники"), doc.Workbook.SharedStrings.AddString(""),
+                    doc.Workbook.SharedStrings.AddString("Показатели"),
+                    doc.Workbook.SharedStrings.AddString("Max. Часть\nотносительно\nпоказателей"),
+                    doc.Workbook.SharedStrings.AddString("Базовое\nзначение"),
+                    doc.Workbook.SharedStrings.AddString("Целевое\nзначение"),
+                    doc.Workbook.SharedStrings.AddString("Фактическое\nзначение"),
+                    doc.Workbook.SharedStrings.AddString("Задании"),
+                    doc.Workbook.SharedStrings.AddString("Max. Часть в\nсоответствии\nс заданиями"),
+                    doc.Workbook.SharedStrings.AddString("Mаксимальная\nоценка"),
+                    doc.Workbook.SharedStrings.AddString("Оценка")
+                };
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(0, 0, 23);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(1, 2, 10);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(3, 3, 15);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(4, 6, 13);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(7, 7, 10);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(8, 10, 15);
+                doc.Workbook.Sheets[0].Sheet.Rows[0].Height = 40;
+            }
+            else
+            {
+                str = new List<SharedStringDefinition>()
+                {
+                    doc.Workbook.SharedStrings.AddString("Employee"), doc.Workbook.SharedStrings.AddString(""),
+                    doc.Workbook.SharedStrings.AddString("Indicators"),
+                    doc.Workbook.SharedStrings.AddString("Max. Indicators\nrelated variable\npart"),
+                    doc.Workbook.SharedStrings.AddString("Baseline value"),
+                    doc.Workbook.SharedStrings.AddString("Target value"),
+                    doc.Workbook.SharedStrings.AddString("Actual outcome"),
+                    doc.Workbook.SharedStrings.AddString("Tasks"),
+                    doc.Workbook.SharedStrings.AddString("Max. tasks\nrelated variable\npart"),
+                    doc.Workbook.SharedStrings.AddString("Maximum\nevaluation"),
+                    doc.Workbook.SharedStrings.AddString("Evaluation")
+                };
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(0, 0, 23);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(1, 2, 10);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(3, 3, 15);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(4, 6, 13);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(7, 7, 10);
+                doc.Workbook.Sheets[0].Sheet.AddColumnSizeDefinition(8, 10, 15);
+                doc.Workbook.Sheets[0].Sheet.Rows[0].Height = 40;
+            }
+            for (int i = 0; i < str.Count; i++) doc.Workbook.Sheets[0].Sheet.Rows[0].Cells[i].SetValue(str[i]);
+        }
+        private void Read_Workers(ref List<ArchyvedEmployeeClass> ECC, EmployeeClass emp)
+        {
+            int i = 0;
+            System.IO.StreamReader file = new System.IO.StreamReader(new System.IO.IsolatedStorage.IsolatedStorageFileStream("Excel.txt", System.IO.FileMode.OpenOrCreate, System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication()));
+            while (file.EndOfStream != true)
+            {
+                i = Convert.ToInt32(file.ReadLine());
+                ECC = new List<ArchyvedEmployeeClass>();
+                for (int n = 0; n < i; n++)
+                {
+                    string[] reiksmes = file.ReadLine().Split(Skirtukas);
+                    ArchyvedEmployeeClass EC = new ArchyvedEmployeeClass();
+                    EC.NameLine = reiksmes[0]; EC.BALine = ParseDouble(reiksmes[1]); EC.RODLine = ParseDouble(reiksmes[2]); EC.UZDLine = ParseDouble(reiksmes[3]); EC.VisoLine = ParseDouble(reiksmes[4]); EC.Date = reiksmes[5]; EC.IsChecked = false;
+                    EC.index = n;
+                    reiksmes = file.ReadLine().Split(Skirtukas);
+                    int rod = Convert.ToInt32(reiksmes[0]);
+                    int uzd = Convert.ToInt32(reiksmes[1]);
+                    EC.MaxKDP = ParseDouble(reiksmes[2]);
+                    EC.RodList = new List<IndicatorsClass>();
+                    EC.UzdList = new List<TasksClass>();
+                    for (int j = 0; j < rod; j++)
+                    {
+                        reiksmes = file.ReadLine().Split(Skirtukas);
+                        IndicatorsClass ind = new IndicatorsClass();
+                        ind.INDPAVLine = reiksmes[0]; ind.BRLine = ParseDouble(reiksmes[1]); ind.FRLine = ParseDouble(reiksmes[2]); ind.TRLine = ParseDouble(reiksmes[3]); ind.MKDLine = ParseDouble(reiksmes[4]); ind.IsChecked = false;
+                        ind.index = j;
+                        EC.RodList.Add(ind);
+                    }
+                    for (int j = 0; j < uzd; j++)
+                    {
+                        reiksmes = file.ReadLine().Split(Skirtukas);
+                        TasksClass tsk = new TasksClass();
+                        tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = ParseDouble(reiksmes[1]); tsk.Ivert = ParseDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
+                        tsk.index = j;
+                        EC.UzdList.Add(tsk);
+                    }
+                    ECC.Add(EC);
+                }
+            }
+            file.Close();
+
+            ArchyvedEmployeeClass empp = new ArchyvedEmployeeClass();
+            empp.BALine = emp.BALine;
+            empp.Date = DateTime.UtcNow.Date.ToString("yyyy.MM.dd");
+            empp.index = i;
+            empp.IsChecked = false;
+            empp.MaxKDP = emp.MaxKDP;
+            empp.NameLine = emp.NameLine;
+            empp.RODLine = emp.RODLine;
+            empp.RodList = new List<IndicatorsClass>(emp.RodList);
+            empp.UZDLine = emp.UZDLine;
+            empp.UzdList = new List<TasksClass>(emp.UzdList);
+            empp.VisoLine = emp.VisoLine;
+            ECC.Add(empp);
+
+            ArchyvedEmployeeClass em = new ArchyvedEmployeeClass();
+            em.BALine = emp.BALine;
+            em.Date = DateTime.UtcNow.Date.ToString("yyyy.MM.dd");
+            em.index = AEC.Count;
+            em.IsChecked = false;
+            em.MaxKDP = emp.MaxKDP;
+            em.NameLine = emp.NameLine;
+            em.RODLine = emp.RODLine;
+            em.RodList = new List<IndicatorsClass>(emp.RodList);
+            em.UZDLine = emp.UZDLine;
+            em.UzdList = new List<TasksClass>(emp.UzdList);
+            em.VisoLine = emp.VisoLine;
+            AEC.Add(em);
+
+            System.IO.StreamWriter fileW = new System.IO.StreamWriter(new System.IO.IsolatedStorage.IsolatedStorageFileStream("Excel.txt", System.IO.FileMode.Create, System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication()));
+            fileW.WriteLine(ECC.Count);
+            for (int n = 0; n < ECC.Count; n++)
+            {
+                fileW.WriteLine(ECC[n].NameLine + Skirtukas + ECC[n].BALine.ToString() + Skirtukas + ECC[n].RODLine.ToString() + Skirtukas + ECC[n].UZDLine.ToString() + Skirtukas + ECC[n].VisoLine.ToString() + Skirtukas + ECC[n].Date);
+                if (ECC[n].RodList == null)
+                {
+                    ECC[n].RodList = new List<IndicatorsClass>();
+                }
+                if (ECC[n].UzdList == null)
+                {
+                    ECC[n].UzdList = new List<TasksClass>();
+                }
+                fileW.WriteLine(ECC[n].RodList.Count.ToString() + Skirtukas + ECC[n].UzdList.Count.ToString() + Skirtukas + ECC[n].MaxKDP.ToString());
+                for (int j = 0; j < ECC[n].RodList.Count; j++)
+                {
+                    fileW.WriteLine(ECC[n].RodList[j].INDPAVLine + Skirtukas + ECC[n].RodList[j].BRLine.ToString() + Skirtukas + ECC[n].RodList[j].FRLine.ToString() + Skirtukas + ECC[n].RodList[j].TRLine.ToString() + Skirtukas + ECC[n].RodList[j].MKDLine.ToString());
+                }
+                for (int j = 0; j < ECC[n].UzdList.Count; j++)
+                {
+                    fileW.WriteLine(ECC[n].UzdList[j].UZDPAVLine + Skirtukas + ECC[n].UzdList[j].MaxIvert.ToString() + Skirtukas + ECC[n].UzdList[j].Ivert.ToString());
+                }
+            }
+            fileW.Close();
+        }
+        private void Read_Workers(ref List<ArchyvedEmployeeClass> ECC)
+        {
+            int i = 0;
+            System.IO.StreamReader file = new System.IO.StreamReader(new System.IO.IsolatedStorage.IsolatedStorageFileStream("Excel.txt", System.IO.FileMode.OpenOrCreate, System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication()));
+            while (file.EndOfStream != true)
+            {
+                i = Convert.ToInt32(file.ReadLine());
+                ECC = new List<ArchyvedEmployeeClass>();
+                for (int n = 0; n < i; n++)
+                {
+                    string[] reiksmes = file.ReadLine().Split(Skirtukas);
+                    ArchyvedEmployeeClass EC = new ArchyvedEmployeeClass();
+                    EC.NameLine = reiksmes[0]; EC.BALine = ParseDouble(reiksmes[1]); EC.RODLine = ParseDouble(reiksmes[2]); EC.UZDLine = ParseDouble(reiksmes[3]); EC.VisoLine = ParseDouble(reiksmes[4]); EC.Date = reiksmes[5]; EC.IsChecked = false;
+                    EC.index = n;
+                    reiksmes = file.ReadLine().Split(Skirtukas);
+                    int rod = Convert.ToInt32(reiksmes[0]);
+                    int uzd = Convert.ToInt32(reiksmes[1]);
+                    EC.MaxKDP = ParseDouble(reiksmes[2]);
+                    EC.RodList = new List<IndicatorsClass>();
+                    EC.UzdList = new List<TasksClass>();
+                    for (int j = 0; j < rod; j++)
+                    {
+                        reiksmes = file.ReadLine().Split(Skirtukas);
+                        IndicatorsClass ind = new IndicatorsClass();
+                        ind.INDPAVLine = reiksmes[0]; ind.BRLine = ParseDouble(reiksmes[1]); ind.FRLine = ParseDouble(reiksmes[2]); ind.TRLine = ParseDouble(reiksmes[3]); ind.MKDLine = ParseDouble(reiksmes[4]); ind.IsChecked = false;
+                        ind.index = j;
+                        EC.RodList.Add(ind);
+                    }
+                    for (int j = 0; j < uzd; j++)
+                    {
+                        reiksmes = file.ReadLine().Split(Skirtukas);
+                        TasksClass tsk = new TasksClass();
+                        tsk.UZDPAVLine = reiksmes[0]; tsk.MaxIvert = ParseDouble(reiksmes[1]); tsk.Ivert = ParseDouble(reiksmes[2]); tsk.IVERTLine = (tsk.Ivert + " / " + tsk.MaxIvert).ToString(); tsk.IsChecked = false;
+                        tsk.index = j;
+                        EC.UzdList.Add(tsk);
+                    }
+                    ECC.Add(EC);
+                }
+            }
+            file.Close();
+        }
+        private void Create_Workers(ref SpreadsheetDocument doc, List<ArchyvedEmployeeClass> EC)
+        {
+            int y = 1;
+            for (int n = 0; n < EC.Count; n++)
+            {
+                ArchyvedEmployeeClass emp = EC[n];
+                doc.Workbook.Sheets[0].Sheet.Rows[y].Cells[0].SetValue(emp.NameLine);
+                doc.Workbook.Sheets[0].Sheet.Rows[y].Cells[1].SetValue(emp.Date);
+                if (System.Threading.Thread.CurrentThread.CurrentUICulture.ToString().Equals("lt-LT"))
+                {
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 1].Cells[0].SetValue("Bazinis atlyginimas");
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 2].Cells[0].SetValue("Kintama dalis pagal rodiklius");
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 3].Cells[0].SetValue("Kintama dalis pagal užduotis");
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 4].Cells[0].SetValue("Viso");
+                }
+                else if (System.Threading.Thread.CurrentThread.CurrentUICulture.ToString().Equals("ru-RU"))
+                {
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 1].Cells[0].SetValue("Баз. Зарплата");
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 2].Cells[0].SetValue("Перем. Часть-показатели");
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 3].Cells[0].SetValue("Перем. Часть-задании");
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 4].Cells[0].SetValue("Итого");
+                }
+                else
+                {
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 1].Cells[0].SetValue("Basic salary");
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 2].Cells[0].SetValue("Indicators related part");
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 3].Cells[0].SetValue("Tasks related part");
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + 4].Cells[0].SetValue("Total");
+                }
+                doc.Workbook.Sheets[0].Sheet.Rows[y + 1].Cells[1].SetValue(emp.BALine.ToString());
+                doc.Workbook.Sheets[0].Sheet.Rows[y + 2].Cells[1].SetValue(emp.RODLine.ToString());
+                doc.Workbook.Sheets[0].Sheet.Rows[y + 3].Cells[1].SetValue(emp.UZDLine.ToString());
+                doc.Workbook.Sheets[0].Sheet.Rows[y + 4].Cells[1].SetValue(emp.VisoLine.ToString());
+                if (emp.RodList == null)
+                {
+                    emp.RodList = new List<IndicatorsClass>();
+                }
+                if (emp.UzdList == null)
+                {
+                    emp.UzdList = new List<TasksClass>();
+                }
+                for (int i = 0; i < emp.RodList.Count; i++)
+                {
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + i].Cells[2].SetValue(emp.RodList[i].INDPAVLine);
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + i].Cells[3].SetValue(emp.RodList[i].MKDLine.ToString());
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + i].Cells[4].SetValue(emp.RodList[i].BRLine.ToString());
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + i].Cells[5].SetValue(emp.RodList[i].TRLine.ToString());
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + i].Cells[6].SetValue(emp.RodList[i].FRLine.ToString());
+                }
+                doc.Workbook.Sheets[0].Sheet.Rows[y].Cells[8].SetValue(emp.MaxKDP.ToString());
+                for (int i = 0; i < emp.UzdList.Count; i++)
+                {
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + i].Cells[7].SetValue(emp.UzdList[i].UZDPAVLine);
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + i].Cells[9].SetValue(emp.UzdList[i].MaxIvert.ToString());
+                    doc.Workbook.Sheets[0].Sheet.Rows[y + i].Cells[10].SetValue(emp.UzdList[i].Ivert.ToString());
+                }
+                int max = Math.Max(emp.RodList.Count, emp.UzdList.Count); max = Math.Max(max,5);
+                //TablePart table = doc.Workbook.Sheets[0].Sheet.AddTable(emp.NameLine + " " + emp.Date.Replace('.', '_'), emp.NameLine + " " + emp.Date.Replace('.', '_'), doc.Workbook.Sheets[0].Sheet.Rows[y].Cells[0], doc.Workbook.Sheets[0].Sheet.Rows[y + max - 2].Cells[9]);
+                y += max;
+            }
+        }
         private void ApplicationBarIconButton_Click_2(object sender, EventArgs e) // Add
         {
             int index = PIVOT.SelectedIndex;
@@ -421,7 +925,6 @@ namespace Motyvacija_WP8
                 {
                     KillAll();
                     AddBarEmployee.Visibility = System.Windows.Visibility.Visible;
-                    HelperGrid.Visibility = System.Windows.Visibility.Visible;
                 }
             }
             else if (index == 1)
@@ -434,7 +937,6 @@ namespace Motyvacija_WP8
                 {
                     KillAll();
                     AddBarIndicator.Visibility = System.Windows.Visibility.Visible;
-                    HelperGrid.Visibility = System.Windows.Visibility.Visible;
                 }
             }
             else if (index == 2) // tasks
@@ -448,7 +950,6 @@ namespace Motyvacija_WP8
                 {
                     KillAll();
                     AddBarTask.Visibility = System.Windows.Visibility.Visible;
-                    HelperGrid.Visibility = System.Windows.Visibility.Visible;
                 }
             }
         }
@@ -461,25 +962,42 @@ namespace Motyvacija_WP8
             else
             {
                 KillAll();
-                MAxKDPST.Visibility = System.Windows.Visibility.Visible;
+                Boolean radoIndicator = false; 
+                Boolean ArPasirinktasTask = false;
+
+                for (int i = 0; i < Indicators.Items.Count; i++)
+                {
+                    IndicatorsClass tsk = (IndicatorsClass)Indicators.Items[i];
+                    if (tsk.IsChecked == true)
+                    {
+                        radoIndicator = true;
+                    }
+                }
+                for (int i = 0; i < Tasks.Items.Count; i++)
+                {
+                    TasksClass tsk = (TasksClass)Tasks.Items[i];
+                    if (tsk.IsChecked == true)
+                    {
+                        ArPasirinktasTask = true;
+                    }
+                }
+                if (radoIndicator == true && ArPasirinktasTask == false)
+                {
+                    MAXKDPBox.Text = "0";
+                    Calc_Method();
+                    PIVOT.SelectedIndex = 0;
+                }
+                else if (ArPasirinktasTask == true)
+                {
+                    MAxKDPST.Visibility = System.Windows.Visibility.Visible;
+                }
             }
         }
         private Boolean TikrintiArPazymeti()
         {
             int kiekRado = 0;
-
-            double rezult;
-            try
-            {
-                rezult = double.Parse(MAXKDPBox.Text);
-            }
-            catch (Exception)
-            {
-                MAXKDPBox.Text = "0";
-            }
-
             Boolean rado = false;
-
+            Boolean ArPasirinktasTask = false;
             for (int i = 0; i < Employees.Items.Count; i++)
             {
                 EmployeeClass emp = (EmployeeClass)Employees.Items[i];
@@ -514,6 +1032,7 @@ namespace Motyvacija_WP8
                 if (tsk.IsChecked == true)
                 {
                     rado = true;
+                    ArPasirinktasTask = true;
                 }
             }
             if (rado == true)
@@ -523,6 +1042,44 @@ namespace Motyvacija_WP8
 
             if (kiekRado > 0)
             {
+                if (ArPasirinktasTask == true)
+                {
+                    if (MAXKDPBox.Text == "")
+                    {
+                        MessageBox.Show(AppResources.error_maxkdu_empty);
+                        return false;
+                    }
+                    else
+                    {
+                        double rezult;
+                        try
+                        {
+                            rezult = double.Parse(MAXKDPBox.Text);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show(AppResources.error_maxkdu_number);
+                            return false;
+                        }
+                    }
+                    if (double.Parse(MAXKDPBox.Text) < 0)
+                    {
+                        MessageBox.Show(AppResources.error_maxkdu_number);
+                        return false;
+                    }
+                }
+                else
+                {
+                    double rezult;
+                    try
+                    {
+                        rezult = double.Parse(MAXKDPBox.Text);
+                    }
+                    catch (Exception)
+                    {
+                        MAXKDPBox.Text = "0.0";
+                    }
+                }
                 return true;
             }
             else
@@ -713,25 +1270,25 @@ namespace Motyvacija_WP8
             PIVOT.IsLocked = false;
             if (x < x2 && x2 - x > 200 && scrolLock == true)
             {
-                //MessageBoxResult msgrez = new MessageBoxResult();
-                //if (App.RootFrame.Language.IetfLanguageTag == "lt-lt") // PAKEISTI CUSTUM LENTELE arba DOWN MSGBOX source + change text
-                //{
-                //    msgrez = MessageBox.Show("Ar tikrai norite ištrinti šį darbuotoją?", "Patvirtinimas", MessageBoxButton.OKCancel);
-                //}
-                //else if (App.RootFrame.Language.IetfLanguageTag == "en")
-                //{
-                //    msgrez = MessageBox.Show("Do you want to delete this employee?", "Confirmation", MessageBoxButton.OKCancel);
-                //}
-                //else if (App.RootFrame.Language.IetfLanguageTag == "ru-rU")
-                //{
-                //    msgrez = MessageBox.Show("Вы действительно хотите удалить этот сотрудникa?", "Подтверждение", MessageBoxButton.OKCancel);
-                //}
-                //else
-                //{
-                //    msgrez = MessageBox.Show("Do you want to delete this employee?", "Confirmation", MessageBoxButton.OKCancel);
-                //}
-                //if (msgrez == MessageBoxResult.OK)
-                //{
+                MessageBoxResult msgrez = new MessageBoxResult();
+                if (App.RootFrame.Language.IetfLanguageTag == "lt-lt")
+                {
+                    msgrez = MessageBox.Show("Ar tikrai norite ištrinti šį darbuotoją?", "Patvirtinimas", MessageBoxButton.OKCancel);
+                }
+                else if (App.RootFrame.Language.IetfLanguageTag == "en")
+                {
+                    msgrez = MessageBox.Show("Do you want to delete this employee?", "Confirmation", MessageBoxButton.OKCancel);
+                }
+                else if (App.RootFrame.Language.IetfLanguageTag == "ru-rU")
+                {
+                    msgrez = MessageBox.Show("Вы действительно хотите удалить этот сотрудникa?", "Подтверждение", MessageBoxButton.OKCancel);
+                }
+                else
+                {
+                    msgrez = MessageBox.Show("Do you want to delete this employee?", "Confirmation", MessageBoxButton.OKCancel);
+                }
+                if (msgrez == MessageBoxResult.OK)
+                {
                     int index = int.Parse(st.Tag.ToString());
                     for (int i = index + 1; i < Employees.Items.Count; i++)
                     {
@@ -740,13 +1297,13 @@ namespace Motyvacija_WP8
                         Employees.Items[i] = emp;
                     }
                     Employees.Items.RemoveAt(index);
-                //}
-                //else
-                //{
-                //    TranslateTransform tr = new TranslateTransform();
-                //    tr.X = 0;
-                //    st.RenderTransform = tr;
-                //}
+                }
+                else
+                {
+                    TranslateTransform tr = new TranslateTransform();
+                    tr.X = 0;
+                    st.RenderTransform = tr;
+                }
             }
             else
             {
@@ -798,14 +1355,40 @@ namespace Motyvacija_WP8
             PIVOT.IsLocked = false;
             if (x < x2 && x2 - x > 200 && scrolLock == true)
             {
-                int index = int.Parse(st.Tag.ToString());
-                for (int i = index + 1; i < Indicators.Items.Count; i++)
+                 MessageBoxResult msgrez = new MessageBoxResult();
+                if (App.RootFrame.Language.IetfLanguageTag == "lt-lt")
                 {
-                    IndicatorsClass ind = (IndicatorsClass)Indicators.Items[i];
-                    ind.index = i - 1;
-                    Indicators.Items[i] = ind;
+                    msgrez = MessageBox.Show("Ar tikrai norite ištrinti šį rodiklį?", "Patvirtinimas", MessageBoxButton.OKCancel);
                 }
-                Indicators.Items.RemoveAt(index);
+                else if (App.RootFrame.Language.IetfLanguageTag == "en")
+                {
+                    msgrez = MessageBox.Show("Do you want to delete this indicator?", "Confirmation", MessageBoxButton.OKCancel);
+                }
+                else if (App.RootFrame.Language.IetfLanguageTag == "ru-rU")
+                {
+                    msgrez = MessageBox.Show("Вы действительно хотите удалить этот показатель?", "Подтверждение", MessageBoxButton.OKCancel);
+                }
+                else
+                {
+                    msgrez = MessageBox.Show("Do you want to delete this indicator?", "Confirmation", MessageBoxButton.OKCancel);
+                }
+                if (msgrez == MessageBoxResult.OK)
+                {
+                    int index = int.Parse(st.Tag.ToString());
+                    for (int i = index + 1; i < Indicators.Items.Count; i++)
+                    {
+                        IndicatorsClass ind = (IndicatorsClass)Indicators.Items[i];
+                        ind.index = i - 1;
+                        Indicators.Items[i] = ind;
+                    }
+                    Indicators.Items.RemoveAt(index);
+                }
+                else
+                {
+                    TranslateTransform tr = new TranslateTransform();
+                    tr.X = 0;
+                    st.RenderTransform = tr;
+                }
             }
             else
             {
@@ -857,14 +1440,34 @@ namespace Motyvacija_WP8
             PIVOT.IsLocked = false;
             if (x < x2 && x2 - x > 200 && scrolLock == true)
             {
-                int index = int.Parse(st.Tag.ToString());
-                for (int i = index + 1; i < Tasks.Items.Count; i++)
+                 MessageBoxResult msgrez = new MessageBoxResult();
+                if (App.RootFrame.Language.IetfLanguageTag == "lt-lt") // PAKEISTI CUSTUM LENTELE arba DOWN MSGBOX source + change text
                 {
-                    TasksClass tsk = (TasksClass)Tasks.Items[i];
-                    tsk.index = i - 1;
-                    Tasks.Items[i] = tsk;
+                    msgrez = MessageBox.Show("Ar tikrai norite ištrinti šią užduotį?", "Patvirtinimas", MessageBoxButton.OKCancel);
                 }
-                Tasks.Items.RemoveAt(index);
+                else if (App.RootFrame.Language.IetfLanguageTag == "en")
+                {
+                    msgrez = MessageBox.Show("Do you want to delete this task?", "Confirmation", MessageBoxButton.OKCancel);
+                }
+                else if (App.RootFrame.Language.IetfLanguageTag == "ru-rU")
+                {
+                    msgrez = MessageBox.Show("Вы действительно хотите удалить этот задачу?", "Подтверждение", MessageBoxButton.OKCancel);
+                }
+                else
+                {
+                    msgrez = MessageBox.Show("Do you want to delete this task?", "Confirmation", MessageBoxButton.OKCancel);
+                }
+                if (msgrez == MessageBoxResult.OK)
+                {
+                    int index = int.Parse(st.Tag.ToString());
+                    for (int i = index + 1; i < Tasks.Items.Count; i++)
+                    {
+                        TasksClass tsk = (TasksClass)Tasks.Items[i];
+                        tsk.index = i - 1;
+                        Tasks.Items[i] = tsk;
+                    }
+                    Tasks.Items.RemoveAt(index);
+                }
             }
             else
             {
@@ -875,156 +1478,292 @@ namespace Motyvacija_WP8
         }
         private void CreateNewEmployee_Click(object sender, RoutedEventArgs e)
         {
+            Boolean proceed = true;
+
+            this.Focus();
+            TextboxInFocus = false;
+            LastSelectedTextbox = new TextBox();
+            AddBarEmployee.Height = 280;
+            AddBarIndicator.Height = 545;
+            AddBarTask.Height = 380;
+            AddBarEmployee.VerticalAlignment = AddBarIndicator.VerticalAlignment = AddBarTask.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+            AddBarEmployee.ScrollToVerticalOffset(0);
+            AddBarIndicator.ScrollToVerticalOffset(0);
+            AddBarTask.ScrollToVerticalOffset(0);
+            DoubleClickOnTextbox = false;
+
             if (NameBox.Text == "")
             {
-                NameBox.Text = "*";
+                MessageBox.Show(AppResources.error_employee_name_empty);
+                proceed = false;
             }
-            if (BABox.Text == "")
+            else if (BABox.Text == "")
             {
-                BABox.Text = "0";
-            }
-            double rezult = 0;
-            try
-            {
-                rezult = double.Parse(BABox.Text);
-            }
-            catch (Exception)
-            {
-                BABox.Text = "0";
-            }
-            if (AddNewItem == true)
-            {
-                EmployeeClass EC = new EmployeeClass();
-                EC.NameLine = NameBox.Text; EC.BALine = double.Parse(BABox.Text); EC.RODLine = 0; EC.UZDLine = 0; EC.VisoLine = EC.BALine + EC.RODLine + EC.UZDLine; EC.IsChecked = false;
-                EC.index = Employees.Items.Count;
-                Employees.Items.Add(EC);
+                MessageBox.Show(AppResources.error_salary_empty);
+                proceed = false;
             }
             else
             {
-                EmployeeClass EC = (EmployeeClass)Employees.Items[Employees.SelectedIndex];
-                EC.NameLine = NameBox.Text; EC.BALine = double.Parse(BABox.Text); EC.VisoLine = EC.BALine + EC.RODLine + EC.UZDLine;
-                Employees.Items[Employees.SelectedIndex] = EC;
+                double rezult = 0;
+                try
+                {
+                    rezult = double.Parse(BABox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(AppResources.error_salary_number);
+                    proceed = false;
+                }
             }
-            KillAll();
-            NameBox.Text = ""; BABox.Text = "";
+            if (proceed == true)
+            {
+                if(double.Parse(BABox.Text) < 0)
+                {
+                    MessageBox.Show(AppResources.error_salary_number);
+                    proceed = false;
+                }
+            }
+            if(proceed == true)
+            {
+                if (AddNewItem == true)
+                {
+                    EmployeeClass EC = new EmployeeClass();
+                    EC.NameLine = NameBox.Text; EC.BALine = double.Parse(BABox.Text); EC.RODLine = 0; EC.UZDLine = 0; EC.VisoLine = EC.BALine + EC.RODLine + EC.UZDLine; EC.IsChecked = false;
+                    EC.index = Employees.Items.Count;
+                    Employees.Items.Add(EC);
+                }
+                else
+                {
+                    EmployeeClass EC = (EmployeeClass)Employees.Items[Employees.SelectedIndex];
+                    EC.NameLine = NameBox.Text; EC.BALine = double.Parse(BABox.Text); EC.VisoLine = EC.BALine + EC.RODLine + EC.UZDLine;
+                    Employees.Items[Employees.SelectedIndex] = EC;
+                }
+                KillAll();
+                NameBox.Text = ""; BABox.Text = "";
+            } 
         }
         private void CreateNewIndicator_Click(object sender, RoutedEventArgs e)
         {
+            double rezult = 0;
+            Boolean resume = true;
+
+            this.Focus();
+            TextboxInFocus = false;
+            LastSelectedTextbox = new TextBox();
+            AddBarEmployee.Height = 280;
+            AddBarIndicator.Height = 545;
+            AddBarTask.Height = 380;
+            AddBarEmployee.VerticalAlignment = AddBarIndicator.VerticalAlignment = AddBarTask.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+            AddBarEmployee.ScrollToVerticalOffset(0);
+            AddBarIndicator.ScrollToVerticalOffset(0);
+            AddBarTask.ScrollToVerticalOffset(0);
+            DoubleClickOnTextbox = false;
+
             if (PavBoxIND.Text == "")
             {
-                PavBoxIND.Text = "*";
+                MessageBox.Show(AppResources.error_indicator_title_empty);
+                resume = false;
             }
-            if (BRBox.Text == "")
+            if (BRBox.Text == "" && resume == true)
             {
-                BRBox.Text = "0";
+                MessageBox.Show(AppResources.error_br_empty);
+                resume = false;
             }
-            double rezult = 0;
-            try
+            if (BRBox.Text != "" && resume == true)
             {
-                rezult = double.Parse(BRBox.Text);
+                try
+                {
+                    rezult = double.Parse(BRBox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(AppResources.error_br_number);
+                    resume = false;
+                }
             }
-            catch (Exception)
+            if (TRBox.Text == "" && resume == true)
             {
-                BRBox.Text = "0";
+                MessageBox.Show(AppResources.error_tr_empty);
+                resume = false;
             }
-            if (TRBox.Text == "")
+            if (TRBox.Text != "" && resume == true)
             {
-                TRBox.Text = "0";
+                try
+                {
+                    rezult = double.Parse(TRBox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(AppResources.error_tr_number);
+                    resume = false;
+                }
             }
-            try
+            if (resume == true)
             {
-                rezult = double.Parse(TRBox.Text);
+                if (double.Parse(TRBox.Text) == double.Parse(BRBox.Text))
+                {
+                    MessageBox.Show(AppResources.error_BR_TR);
+                    resume = false;
+                }
             }
-            catch (Exception)
+            if (FRBox.Text == "" && resume == true)
             {
-                TRBox.Text = "0";
+                MessageBox.Show(AppResources.error_fr_empty);
+                resume = false;
             }
-            if (FRBox.Text == "")
+            if (FRBox.Text != "" && resume == true)
             {
-                FRBox.Text = "0";
+                try
+                {
+                    rezult = double.Parse(FRBox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(AppResources.error_fr_number);
+                    resume = false;
+                }
             }
-            try
+            if (MKDBox.Text == "" && resume == true)
             {
-                rezult = double.Parse(FRBox.Text);
+                MessageBox.Show(AppResources.error_maxKd_empty);
+                resume = false;
             }
-            catch (Exception)
+            if (MKDBox.Text != "" && resume == true)
             {
-                FRBox.Text = "0";
+                try
+                {
+                    rezult = double.Parse(MKDBox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(AppResources.error_maxKd_number);
+                    resume = false;
+                }
             }
-            if (MKDBox.Text == "")
+            if (resume == true)
             {
-                MKDBox.Text = "0";
+                if (double.Parse(MKDBox.Text) < 0)
+                {
+                    MessageBox.Show(AppResources.error_maxKd_number);
+                    resume = false;
+                }
             }
-            try
+            if(resume == true)
             {
-                rezult = double.Parse(MKDBox.Text);
-            }
-            catch (Exception)
-            {
-                MKDBox.Text = "0";
-            }
-            if (AddNewItem == true)
-            {
-                IndicatorsClass IC = new IndicatorsClass();
-                IC.INDPAVLine = PavBoxIND.Text; IC.BRLine = double.Parse(BRBox.Text); IC.TRLine = double.Parse(TRBox.Text); IC.FRLine = double.Parse(FRBox.Text); IC.MKDLine = double.Parse(MKDBox.Text); IC.IsChecked = false;
-                IC.index = Indicators.Items.Count;
-                Indicators.Items.Add(IC);
-            }
-            else
-            {
-                IndicatorsClass IC = (IndicatorsClass)Indicators.Items[Indicators.SelectedIndex];
-                IC.INDPAVLine = PavBoxIND.Text; IC.BRLine = double.Parse(BRBox.Text); IC.TRLine = double.Parse(TRBox.Text); IC.FRLine = double.Parse(FRBox.Text); IC.MKDLine = double.Parse(MKDBox.Text);
-                Indicators.Items[Indicators.SelectedIndex] = IC;
-            }
-            KillAll();
-            PavBoxIND.Text = ""; BRBox.Text = ""; TRBox.Text = ""; FRBox.Text = ""; MKDBox.Text = "";
+                if (AddNewItem == true)
+                {
+                    IndicatorsClass IC = new IndicatorsClass();
+                    IC.INDPAVLine = PavBoxIND.Text; IC.BRLine = double.Parse(BRBox.Text); IC.TRLine = double.Parse(TRBox.Text); IC.FRLine = double.Parse(FRBox.Text); IC.MKDLine = double.Parse(MKDBox.Text); IC.IsChecked = false;
+                    IC.index = Indicators.Items.Count;
+                    Indicators.Items.Add(IC);
+                }
+                else
+                {
+                    IndicatorsClass IC = (IndicatorsClass)Indicators.Items[Indicators.SelectedIndex];
+                    IC.INDPAVLine = PavBoxIND.Text; IC.BRLine = double.Parse(BRBox.Text); IC.TRLine = double.Parse(TRBox.Text); IC.FRLine = double.Parse(FRBox.Text); IC.MKDLine = double.Parse(MKDBox.Text);
+                    Indicators.Items[Indicators.SelectedIndex] = IC;
+                }
+                KillAll();
+                PavBoxIND.Text = ""; BRBox.Text = ""; TRBox.Text = ""; FRBox.Text = ""; MKDBox.Text = "";
+            }  
         }
         private void CreateNewTask_Click(object sender, RoutedEventArgs e)
         {
+            double rezult = 0;
+            Boolean resume = true;
+
+            this.Focus();
+            TextboxInFocus = false;
+            LastSelectedTextbox = new TextBox();
+            AddBarEmployee.Height = 280;
+            AddBarIndicator.Height = 545;
+            AddBarTask.Height = 380;
+            AddBarEmployee.VerticalAlignment = AddBarIndicator.VerticalAlignment = AddBarTask.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+            AddBarEmployee.ScrollToVerticalOffset(0);
+            AddBarIndicator.ScrollToVerticalOffset(0);
+            AddBarTask.ScrollToVerticalOffset(0);
+            DoubleClickOnTextbox = false;
+
             if (PavBoxTSK.Text == "")
             {
-                PavBoxTSK.Text = "*";
+                MessageBox.Show(AppResources.error_task_title_empty);
+                resume = false;
             }
-            if (IVBox.Text == "")
+            if (MAXIVBox.Text == "" && resume == true)
             {
-                IVBox.Text = "0";
+                MessageBox.Show(AppResources.error_task_value_empty);
+                resume = false;
             }
-            double rezult = 0;
-            try
+            if (MAXIVBox.Text != "" && resume == true)
             {
-                rezult = double.Parse(IVBox.Text);
+                try
+                {
+                    rezult = double.Parse(MAXIVBox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(AppResources.error_task_value_number);
+                    resume = false;
+                }
             }
-            catch (Exception)
+            if (resume == true)
             {
-                IVBox.Text = "0";
+                if (double.Parse(MAXIVBox.Text) < 0)
+                {
+                    MessageBox.Show(AppResources.error_task_value_number);
+                    resume = false;
+                }
             }
-            if (MAXIVBox.Text == "")
+            if (IVBox.Text == "" && resume == true)
             {
-                MAXIVBox.Text = "0";
+                MessageBox.Show(AppResources.error_task_result_empty);
+                resume = false;
             }
-            try
+            if (IVBox.Text == "" && resume == true)
             {
-                rezult = double.Parse(MAXIVBox.Text);
+                try
+                {
+                    rezult = double.Parse(IVBox.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(AppResources.error_task_result_number);
+                    resume = false;
+                }
             }
-            catch (Exception)
+            if (resume == true)
             {
-                MAXIVBox.Text = "0";
+                if (double.Parse(IVBox.Text) < 0)
+                {
+                    MessageBox.Show(AppResources.error_task_result_number);
+                    resume = false;
+                }
             }
-            if (AddNewItem == true)
+            if (resume == true)
             {
-                TasksClass TC = new TasksClass();
-                TC.UZDPAVLine = PavBoxTSK.Text; TC.Ivert = double.Parse(IVBox.Text); TC.MaxIvert = double.Parse(MAXIVBox.Text); TC.IVERTLine = (TC.Ivert + " / " + TC.MaxIvert).ToString(); TC.IsChecked = false;
-                TC.index = Tasks.Items.Count;
-                Tasks.Items.Add(TC);
+                if (double.Parse(IVBox.Text) > double.Parse(MAXIVBox.Text))
+                {
+                    MessageBox.Show(AppResources.error_result_bigger_than_value);
+                }
+                else
+                {
+                    if (AddNewItem == true)
+                    {
+                        TasksClass TC = new TasksClass();
+                        TC.UZDPAVLine = PavBoxTSK.Text; TC.Ivert = double.Parse(IVBox.Text); TC.MaxIvert = double.Parse(MAXIVBox.Text); TC.IVERTLine = (TC.Ivert + " / " + TC.MaxIvert).ToString(); TC.IsChecked = false;
+                        TC.index = Tasks.Items.Count;
+                        Tasks.Items.Add(TC);
+                    }
+                    else
+                    {
+                        TasksClass TC = (TasksClass)Tasks.Items[Tasks.SelectedIndex];
+                        TC.UZDPAVLine = PavBoxTSK.Text; TC.Ivert = double.Parse(IVBox.Text); TC.MaxIvert = double.Parse(MAXIVBox.Text); TC.IVERTLine = (TC.Ivert + " / " + TC.MaxIvert).ToString();
+                        Tasks.Items[Tasks.SelectedIndex] = TC;
+                    }
+                    KillAll();
+                    PavBoxTSK.Text = ""; IVBox.Text = ""; MAXIVBox.Text = "";
+                }
             }
-            else
-            {
-                TasksClass TC = (TasksClass)Tasks.Items[Tasks.SelectedIndex];
-                TC.UZDPAVLine = PavBoxTSK.Text; TC.Ivert = double.Parse(IVBox.Text); TC.MaxIvert = double.Parse(MAXIVBox.Text); TC.IVERTLine = (TC.Ivert + " / " + TC.MaxIvert).ToString();
-                Tasks.Items[Tasks.SelectedIndex] = TC;
-            }
-            KillAll();
-            PavBoxTSK.Text = ""; IVBox.Text = ""; MAXIVBox.Text = "";
         }
         private void PIVOT_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1035,6 +1774,7 @@ namespace Motyvacija_WP8
         }
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            AddBarEmployee.Height = 545;
             int index = PIVOT.SelectedIndex;
             AddNewItem = false;
             if (index == 0)
@@ -1111,9 +1851,26 @@ namespace Motyvacija_WP8
         }
         private void MAXKDPBoxOk_Click(object sender, RoutedEventArgs e)
         {
-            if (TikrintiArPazymeti() == true)
+            Boolean resume = true;
+            if (resume == true)
             {
-                Tuple<int, int> result = calculateSalary();
+                if (TikrintiArPazymeti() == true)
+                {
+                    Calc_Method();
+                }
+                KillAll();
+                PIVOT.SelectedIndex = 0;
+            }
+        }
+        private void Calc_Method()
+        {
+            Tuple<double, double> result = calculateSalary();
+            if (result.Item1 < 0 || result.Item2 < 0)
+            {
+                MessageBox.Show(AppResources.error_bad_result_value);
+            }
+            else
+            {
                 for (int i = 0; i < Employees.Items.Count; i++)
                 {
                     EmployeeClass emp = (EmployeeClass)Employees.Items[i];
@@ -1150,18 +1907,17 @@ namespace Motyvacija_WP8
                                 Tasks.Items[j] = tsk;
                             }
                         }
-                        emp.MaxKDP = Double.Parse(MAXKDPBox.Text);
+                        if (MAXKDPBox.Text.Equals("")) emp.MaxKDP = 0;
+                        else emp.MaxKDP = Double.Parse(MAXKDPBox.Text);
                         Employees.Items[i] = emp;
                     }
                 }
             }
-            KillAll();
-            PIVOT.SelectedIndex = 0;
         }
-        private Tuple<int, int> calculateSalary()
+        private Tuple<double, double> calculateSalary()
         {
-            int indicatorsSalary = 0;
-            int tasksSalary = 0;
+            double indicatorsSalary = 0;
+            double tasksSalary = 0;
             if (Indicators.Items.Count != 0)
             {
                 for (int i = 0; i < Indicators.Items.Count; i++)
@@ -1173,22 +1929,22 @@ namespace Motyvacija_WP8
                         {
                             if (ind.BRLine <= ind.FRLine && ind.FRLine <= ind.TRLine)
                             {
-                                indicatorsSalary += Convert.ToInt32(Math.Ceiling( (ind.FRLine - ind.BRLine) / (ind.TRLine - ind.BRLine) * ind.MKDLine ));
+                                indicatorsSalary += Math.Truncate(((ind.FRLine - ind.BRLine) / (ind.TRLine - ind.BRLine) * ind.MKDLine)*100)/100;
                             }
                             if (ind.FRLine > ind.TRLine)
                             {
-                                indicatorsSalary += Convert.ToInt32(Math.Ceiling(ind.MKDLine));
+                                indicatorsSalary += Math.Truncate((ind.MKDLine)*100)/100;
                             }
                         }
                         else if (ind.TRLine < ind.BRLine)
                         {
                             if (ind.TRLine <= ind.FRLine && ind.FRLine <= ind.BRLine)
                             {
-                                indicatorsSalary += Convert.ToInt32(Math.Ceiling((ind.FRLine - ind.BRLine) / (ind.TRLine - ind.BRLine) * ind.MKDLine));
+                                indicatorsSalary += Math.Truncate(((ind.FRLine - ind.BRLine) / (ind.TRLine - ind.BRLine) * ind.MKDLine) * 100) / 100;
                             }
                             if (ind.FRLine < ind.TRLine)
                             {
-                                indicatorsSalary += Convert.ToInt32(Math.Ceiling(ind.MKDLine));
+                                indicatorsSalary += Math.Truncate((ind.MKDLine) * 100) / 100;
                             }
                         }
                     }
@@ -1210,13 +1966,13 @@ namespace Motyvacija_WP8
             }
             if (sSum != 0)
             {
-                tasksSalary = Convert.ToInt32(Math.Ceiling((sfSum / sSum) * Convert.ToDouble(MAXKDPBox.Text)));
+                tasksSalary = Math.Truncate(((sfSum / sSum) * Convert.ToDouble(MAXKDPBox.Text))*100)/100;
             }
             else
             {
                 tasksSalary = 0;
             }
-            return new Tuple<int, int>(indicatorsSalary, tasksSalary);
+            return new Tuple<double, double>(indicatorsSalary, tasksSalary);
         }
         private void Show_Click(object sender, RoutedEventArgs e)
         {
@@ -1246,182 +2002,96 @@ namespace Motyvacija_WP8
             }
         }
 
-        private void NameBox_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void HelperGrid_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            PanelTaped = false;
-            if (InAddPanel == false)
+            if (TextboxInFocus == true && DoubleClickOnTextbox == false)
             {
-                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-                SpacingGrid.Height = AddBarEmployee.Height;
-                InAddPanel = true;
-                TextBox tb = (TextBox)sender;
-                GeneralTransform transform = tb.TransformToVisual(AddBarEmployee);
-                Point textBoxPosition = transform.Transform(new Point(0, -100));
-                AddBarEmployee.ScrollToVerticalOffset(textBoxPosition.Y);
-            }
-        }
-        private void NameBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            InAddPanel = false;
-            if (PanelTaped == true)
-            {
-                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGrid.Height = 0;
-                InAddPanel = false;
-            }
-            PanelTaped = false;
-        }
-        private void AddBarPanell_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            PanelTaped = true;
-            if (InAddPanel == false)
-            {
-                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGrid.Height = 0;
-                InAddPanel = false;
-            }
-        }
-        private void TextBlock_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            if (InAddPanel == false)
-            {
-                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGrid.Height = 0;
-                InAddPanel = false;
+                this.Focus();
+                TextboxInFocus = false;
+                AddBarEmployee.Height = 280; 
+                AddBarIndicator.Height = 545;
+                AddBarTask.Height = 380;
+                AddBarEmployee.VerticalAlignment = AddBarIndicator.VerticalAlignment = AddBarTask.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                AddBarEmployee.ScrollToVerticalOffset(0);
+                AddBarIndicator.ScrollToVerticalOffset(0);
+                AddBarTask.ScrollToVerticalOffset(0);
+                DoubleClickOnTextbox = false;
             }
         }
         private void NameBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            PanelTaped = false;
-            if (InAddPanel == false)
+            TextboxInFocus = true;
+            App.RootFrame.RenderTransform = new CompositeTransform();
+            TextBox textboxSender = (TextBox)sender;
+            AddBarEmployee.ScrollToVerticalOffset(Convert.ToDouble(textboxSender.Tag) * 90);
+            AddBarIndicator.ScrollToVerticalOffset(Convert.ToDouble(textboxSender.Tag) * 90);
+            AddBarTask.ScrollToVerticalOffset(Convert.ToDouble(textboxSender.Tag) * 90);
+            AddBarEmployee.Height = AddBarIndicator.Height = AddBarTask.Height = 215; 
+            AddBarEmployee.VerticalAlignment = AddBarIndicator.VerticalAlignment = AddBarTask.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+            if (DoubleClickOnTextbox == false)
             {
-                AddBarEmployee.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-                SpacingGrid.Height = AddBarEmployee.Height;
-                InAddPanel = true;
-                TextBox tb = (TextBox)sender;
-                GeneralTransform transform = tb.TransformToVisual(AddBarEmployee);
-                Point textBoxPosition = transform.Transform(new Point(0, -100));
-                AddBarEmployee.ScrollToVerticalOffset(textBoxPosition.Y);
+                DoubleClickOnTextbox = true;
+                TextBox text = (TextBox)sender;
+                //NameBox_GotFocus(sender, e);
+                ScrollToOfSet(Convert.ToDouble(textboxSender.Tag) * 90);
+            }
+            else
+            {
+                DoubleClickOnTextbox = false;
             }
         }
 
-        private void PavBoxIND_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        public async System.Threading.Tasks.Task ScrollToOfSet(double offset)
         {
-            PanelTaped = false;
-            if (InAddPanel == false)
-            {
-                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-                SpacingGridInd.Height = AddBarIndicator.Height;
-                InAddPanel = true;
-                TextBox tb = (TextBox)sender;
-                tb.Focus();
-                //GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
-                //Point textBoxPosition = transform.Transform(new Point(0, 0));
-                //AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
-            }
-        }
-        private void PavBoxIND_LostFocus(object sender, RoutedEventArgs e)
-        {
-            InAddPanel = false;
-            if (PanelTaped == true)
-            {
-                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGridInd.Height = 0;
-                InAddPanel = false;
-            }
-            PanelTaped = false;
-        }
-        private void StackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            PanelTaped = true;
-            if (InAddPanel == false)
-            {
-                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGridInd.Height = 0;
-                InAddPanel = false;
-            }
-        }
-        private void TextBlock_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            if (InAddPanel == false)
-            {
-                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGridInd.Height = 0;
-                InAddPanel = false;
-            }
-        }
-        private void PavBoxIND_GotFocus(object sender, RoutedEventArgs e)
-        {
-            PanelTaped = false;
-            if (InAddPanel == false)
-            {
-                AddBarIndicator.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-                SpacingGridInd.Height = AddBarIndicator.Height;
-                InAddPanel = true;
-                TextBox tb = (TextBox)sender;
-                GeneralTransform transform = tb.TransformToVisual(AddBarIndicator);
-                Point textBoxPosition = transform.Transform(new Point(0, 0));
-                AddBarIndicator.ScrollToVerticalOffset(textBoxPosition.Y);
-            }
+            System.Threading.Tasks.Task<int> Delay = DelayOperation();
+            int result = await Delay; 
+            AddBarEmployee.ScrollToVerticalOffset(offset);
+            AddBarIndicator.ScrollToVerticalOffset(offset);
+            AddBarTask.ScrollToVerticalOffset(offset);
         }
 
-        private void PavBoxTSK_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        public async System.Threading.Tasks.Task<int> DelayOperation()
         {
-            PanelTaped = false;
-            if (InAddPanel == false)
+            await System.Threading.Tasks.Task.Delay(350);
+            return 1;
+        }
+
+        private void NameBox_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            TextBox text = (TextBox)sender;
+            if (LastSelectedTextbox.Equals(text) == false)
             {
-                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-                SpacingGridTSK.Height = AddBarTask.Height;
-                InAddPanel = true;
-                TextBox tb = (TextBox)sender;
-                GeneralTransform transform = tb.TransformToVisual(AddBarTask);
-                Point textBoxPosition = transform.Transform(new Point(0, -100));
-                AddBarTask.ScrollToVerticalOffset(textBoxPosition.Y);
+                LastSelectedTextbox = text;
+                DoubleClickOnTextbox = false;
+                TextboxInFocus = false;
+                text.Focus();
+            }
+            else
+            {
+                DoubleClickOnTextbox = true;
             }
         }
-        private void PavBoxTSK_LostFocus(object sender, RoutedEventArgs e)
+        private void NameBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            InAddPanel = false;
-            if (PanelTaped == true)
+            if (TextboxInFocus == true)
             {
-                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGridTSK.Height = 0;
-                InAddPanel = false;
-            }
-            PanelTaped = false;
-        }
-        private void StackPanel_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            PanelTaped = true;
-            if (InAddPanel == false)
-            {
-                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGridTSK.Height = 0;
-                InAddPanel = false;
+                AddBarEmployee.Height = 280; //280 545 380;
+                AddBarIndicator.Height = 545;
+                AddBarTask.Height = 380;
+                AddBarEmployee.VerticalAlignment = AddBarIndicator.VerticalAlignment = AddBarTask.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                AddBarEmployee.ScrollToVerticalOffset(0);
+                AddBarIndicator.ScrollToVerticalOffset(0);
+                AddBarTask.ScrollToVerticalOffset(0);
+                DoubleClickOnTextbox = false;
             }
         }
-        private void TextBlock_Tap_2(object sender, System.Windows.Input.GestureEventArgs e)
+        private void MAXKDPBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (InAddPanel == false)
-            {
-                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                SpacingGridTSK.Height = 0;
-                InAddPanel = false;
-            }
+            Spacing.Height = 330;
         }
-        private void PavBoxTSK_GotFocus(object sender, RoutedEventArgs e)
+        private void MAXKDPBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            PanelTaped = false;
-            if (InAddPanel == false)
-            {
-                AddBarTask.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-                SpacingGridTSK.Height = AddBarTask.Height;
-                InAddPanel = true;
-                TextBox tb = (TextBox)sender;
-                GeneralTransform transform = tb.TransformToVisual(AddBarTask);
-                Point textBoxPosition = transform.Transform(new Point(0, -100));
-                AddBarTask.ScrollToVerticalOffset(textBoxPosition.Y);
-            }
+            Spacing.Height = 0;
         }
     }
     public class EmployeeClass

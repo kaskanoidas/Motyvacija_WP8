@@ -126,7 +126,7 @@
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>Goals, Results, Salary    V: 1.1</value>
+    <value>Goals, Results, Salary    V: 2.1</value>
   </data>
   <data name="SampleProperty" xml:space="preserve">
     <value>Sample Runtime Property Value</value>
@@ -162,10 +162,10 @@
     <value>Показатели</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Выберите язык</value>
+    <value>Поменять язык</value>
   </data>
   <data name="LanguageBarBack" xml:space="preserve">
-    <value>Назад</value>
+    <value>Отменить</value>
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Mеню</value>
@@ -192,7 +192,7 @@
     <value>Количество</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Ладно</value>
+    <value>Сохранить</value>
   </data>
   <data name="EDIT" xml:space="preserve">
     <value>Pедактировать</value>
@@ -204,7 +204,7 @@
     <value>Oценка</value>
   </data>
   <data name="MaxIV" xml:space="preserve">
-    <value>Макс. оценка</value>
+    <value>Максимальная оценка</value>
   </data>
   <data name="Pav" xml:space="preserve">
     <value>Название</value>
@@ -332,21 +332,102 @@ r</value>
     <value>Сумма</value>
   </data>
   <data name="EmployeeAddToArchive" xml:space="preserve">
-    <value>Для того чтобы архивировать сотрудника, нужно отмечать флажок работника и нажать на кнопку "сохранить". Кроме того, кнопкa „сохранить“ сохраняет все данные программы.</value>
+    <value>Для того чтобы архивировать информацию о сотруднике, нужно пометить его флажком и нажать кнопку “сохранить”, затем выберите “Сохранить”. Для того чтобы сохранить в формате Excel, вы должны нажать кнопку “Экспорт. в Excel”. При этом сохраняются все данные программы. Если вы нажмете "X", Excel файл будет удален.</value>
   </data>
   <data name="EmployeeCalculate" xml:space="preserve">
-    <value>Для того чтобы оценить сотрудника, нужно отмечать флажок работника, отмечать показатели и задачи которые Вы оцениваете сотрудника, и нажмите кнопку "Рассчитать" (cгалочкой).</value>
+    <value>Для оценки сотрудника относительно показателей или/и заданий нужно их пометить  и нажать кнопку “рассчитать” (калькулятор).</value>
   </data>
   <data name="EmployeeDelete" xml:space="preserve">
-    <value>Для удаления сотрудника, индикатор, или задачи, нужно передвинуть его вправо.</value>
+    <value>Для удаления записи проведите её в сторону.</value>
   </data>
   <data name="EmployeeEdit" xml:space="preserve">
-    <value>Для того чтобы оценить сотрудника, нужно пометить сотрудника и нажать кнопку „редактировать“. Для того чтобы просматривать информацию о сотруднике, нужно нажать кнопку „показывать“.</value>
+    <value>Для того, чтобы редактировать информацию о сотруднике, нужно пометить сотрудника и нажать кнопку “редактировать”. Для просмотра информации о сотруднике нажмите кнопку “показывать”.</value>
   </data>
   <data name="EmployeeMake" xml:space="preserve">
-    <value>Для того чтобы создать новый сотрудник, показатель или задачу, нажмите плюс.</value>
+    <value>Для  записи информации о новом сотруднике, новых показателей или заданий, нажмите плюс.</value>
   </data>
   <data name="MeniuText" xml:space="preserve">
-    <value>Для того чтобы просмотреть сохраненные сотрудников, информацию о программе, изменить язык, нужно нажать кнопку „меню“.</value>
+    <value>Нажав на “мeню” вы сможете просмотреть сохранённую в архиве информацию, описание программы, поменять язык, найти помощь.</value>
+  </data>
+  <data name="error_br_empty" xml:space="preserve">
+    <value>Введите базовое значение</value>
+  </data>
+  <data name="error_br_number" xml:space="preserve">
+    <value>Проверьте, используете ли допустимые символы</value>
+  </data>
+  <data name="error_employee_name_empty" xml:space="preserve">
+    <value>Введите имя сотрудника</value>
+  </data>
+  <data name="error_fr_empty" xml:space="preserve">
+    <value>Введите фактический результат</value>
+  </data>
+  <data name="error_fr_number" xml:space="preserve">
+    <value>Проверьте, используете ли допустимые символы</value>
+  </data>
+  <data name="error_indicator_title_empty" xml:space="preserve">
+    <value>Введите название показателя</value>
+  </data>
+  <data name="error_maxkdu_empty" xml:space="preserve">
+    <value>Введите МахПЧЗ</value>
+  </data>
+  <data name="error_maxkdu_number" xml:space="preserve">
+    <value>Проверьте, используете ли допустимые символы</value>
+  </data>
+  <data name="error_maxKd_empty" xml:space="preserve">
+    <value>Введите максимальную переменную часть</value>
+  </data>
+  <data name="error_maxKd_number" xml:space="preserve">
+    <value>Проверьте, используете ли допустимые символы</value>
+  </data>
+  <data name="error_result_bigger_than_value" xml:space="preserve">
+    <value>Оценка выше максимальной оценки</value>
+  </data>
+  <data name="error_salary_empty" xml:space="preserve">
+    <value>Введите базовую зарплату</value>
+  </data>
+  <data name="error_salary_number" xml:space="preserve">
+    <value>Проверьте, используете ли допустимые символы</value>
+  </data>
+  <data name="error_task_result_empty" xml:space="preserve">
+    <value>Введите оценку задания</value>
+  </data>
+  <data name="error_task_result_number" xml:space="preserve">
+    <value>Проверьте, используете ли допустимые символы</value>
+  </data>
+  <data name="error_task_title_empty" xml:space="preserve">
+    <value>Введите название задания</value>
+  </data>
+  <data name="error_task_value_empty" xml:space="preserve">
+    <value>Введите максимальное значение оценки задания</value>
+  </data>
+  <data name="error_task_value_number" xml:space="preserve">
+    <value>Проверьте, используете ли допустимые символы</value>
+  </data>
+  <data name="error_tr_empty" xml:space="preserve">
+    <value>Введите целевое значение</value>
+  </data>
+  <data name="error_tr_number" xml:space="preserve">
+    <value>Проверьте, используете ли допустимые символы</value>
+  </data>
+  <data name="error_BR_TR" xml:space="preserve">
+    <value>Базовое значение не может быть равным целевому значению.</value>
+  </data>
+  <data name="error_bad_result_value" xml:space="preserve">
+    <value>Рассчитано результат не может быть отрицательным числом, пожалуйста, проверьте показатели и значение задача!</value>
+  </data>
+  <data name="AchiveDetailsText" xml:space="preserve">
+    <value>В архиве найдёте историю о сотруднике, если сохранили её.</value>
+  </data>
+  <data name="ChangeLanguageText" xml:space="preserve">
+    <value>Здесь можете поменять язык.</value>
+  </data>
+  <data name="EmployeeDetailsText" xml:space="preserve">
+    <value>Так выглядит информация о зарплате.</value>
+  </data>
+  <data name="MAXKDPText" xml:space="preserve">
+    <value>При оценке сотрудника относительно заданий требуется ввести макцимальную переменную часть относительно заданий.</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Экспорт. в Excel</value>
   </data>
 </root>
